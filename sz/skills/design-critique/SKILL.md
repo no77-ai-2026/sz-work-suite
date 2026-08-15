@@ -1,0 +1,139 @@
+---
+name: design-critique
+description: |
+  구조화된 디자인 크리틱 — 사용성·위계·일관성 관점의 피드백을 제공합니다 트리거: "이 디자인 리뷰해줘", "목업 크리틱", "뭐가 어색한지 봐줘"
+version: 1.0.0
+uz: references/uz-design-critique.md
+origin: anthropics/knowledge-work-plugins@2cf4294 (design/design-critique, Apache-2.0)
+---
+
+# design-critique
+
+## 스킬 개요(상세)
+
+구조화된 디자인 크리틱 — 사용성·위계·일관성 관점의 피드백을 제공합니다. 한국 표준 + UZ 듀얼 컨텍스트를 적용합니다.
+
+**한국화 노트**: [경계] 개발 런타임 GAN 루프는 design-iteration-loop — 이 스킬은 단건 대화형 크리틱.
+
+**도구 일반화**: 원문의 미국 SaaS 연동은 방법론으로만 계승한다 — 한국 실무에서는 연결된 커넥터·업로드 문서·사용자 제공 정보를 소스로 쓴다.
+
+**UZ 컨텍스트**: UZ: 현지 신뢰 단서(전화번호·Telegram 버튼 노출 관습) 반영 여부를 크리틱 축에 추가. 상세는 `references/uz-design-critique.md`.
+
+---
+
+## 원문 방법론 (EN, knowledge-work-plugins)
+
+<!-- source: design/design-critique -->
+# /design-critique
+
+> If you see unfamiliar placeholders or need to check which tools are connected, see [CONNECTORS.md](../../CONNECTORS.md).
+
+Get structured design feedback across multiple dimensions.
+
+## Usage
+
+```
+/design-critique $ARGUMENTS
+```
+
+Review the design: @$1
+
+If a Figma URL is provided, pull the design from Figma. If a file is referenced, read it. Otherwise, ask the user to describe or share their design.
+
+## What I Need From You
+
+- **The design**: Figma URL, screenshot, or detailed description
+- **Context**: What is this? Who is it for? What stage (exploration, refinement, final)?
+- **Focus** (optional): "Focus on mobile" or "Focus on the onboarding flow"
+
+## Critique Framework
+
+### 1. First Impression (2 seconds)
+- What draws the eye first? Is that correct?
+- What's the emotional reaction?
+- Is the purpose immediately clear?
+
+### 2. Usability
+- Can the user accomplish their goal?
+- Is the navigation intuitive?
+- Are interactive elements obvious?
+- Are there unnecessary steps?
+
+### 3. Visual Hierarchy
+- Is there a clear reading order?
+- Are the right elements emphasized?
+- Is whitespace used effectively?
+- Is typography creating the right hierarchy?
+
+### 4. Consistency
+- Does it follow the design system?
+- Are spacing, colors, and typography consistent?
+- Do similar elements behave similarly?
+
+### 5. Accessibility
+- Color contrast ratios
+- Touch target sizes
+- Text readability
+- Alternative text for images
+
+## How to Give Feedback
+
+- **Be specific**: "The CTA competes with the navigation" not "the layout is confusing"
+- **Explain why**: Connect feedback to design principles or user needs
+- **Suggest alternatives**: Don't just identify problems, propose solutions
+- **Acknowledge what works**: Good feedback includes positive observations
+- **Match the stage**: Early exploration gets different feedback than final polish
+
+## Output
+
+```markdown
+## Design Critique: [Design Name]
+
+### Overall Impression
+[1-2 sentence first reaction — what works, what's the biggest opportunity]
+
+### Usability
+| Finding | Severity | Recommendation |
+|---------|----------|----------------|
+| [Issue] | 🔴 Critical / 🟡 Moderate / 🟢 Minor | [Fix] |
+
+### Visual Hierarchy
+- **What draws the eye first**: [Element] — [Is this correct?]
+- **Reading flow**: [How does the eye move through the layout?]
+- **Emphasis**: [Are the right things emphasized?]
+
+### Consistency
+| Element | Issue | Recommendation |
+|---------|-------|----------------|
+| [Typography/spacing/color] | [Inconsistency] | [Fix] |
+
+### Accessibility
+- **Color contrast**: [Pass/fail for key text]
+- **Touch targets**: [Adequate size?]
+- **Text readability**: [Font size, line height]
+
+### What Works Well
+- [Positive observation 1]
+- [Positive observation 2]
+
+### Priority Recommendations
+1. **[Most impactful change]** — [Why and how]
+2. **[Second priority]** — [Why and how]
+3. **[Third priority]** — [Why and how]
+```
+
+## If Connectors Available
+
+If **~~design tool** is connected:
+- Pull the design directly from Figma and inspect components, tokens, and layers
+- Compare against the existing design system for consistency
+
+If **~~user feedback** is connected:
+- Cross-reference design decisions with recent user feedback and support tickets
+
+## Tips
+
+1. **Share the context** — "This is a checkout flow for a B2B SaaS" helps me give relevant feedback.
+2. **Specify your stage** — Early exploration gets different feedback than final polish.
+3. **Ask me to focus** — "Just look at the navigation" gives you more depth on one area.
+

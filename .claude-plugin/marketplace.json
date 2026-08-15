@@ -1,0 +1,19 @@
+{
+  "name": "sz-plugins",
+  "owner": {
+    "name": "Caleb Roh",
+    "email": "no77show@gmail.com"
+  },
+  "metadata": {
+    "description": "SZ Work Suite - internal Claude Cowork plugin marketplace for SZ business & management support teams. 212 skills: strategy, finance, legal, HR, procurement/logistics, sales support, risk management, marketing, plus 6 SZ-specific skills (UZ research, risk radar, document formats, trade & customs, sample stocktaking, ISA sales verification). Korean + English. Based on GIL v2.2.0 bundles (Apache-2.0).",
+    "version": "1.0.0",
+    "language": "ko-en"
+  },
+  "plugins": [
+    {
+      "name": "sz",
+      "source": "./sz",
+      "description": "SZ Work Suite - 212 skills for HR/GA, Finance & Accounting, Legal & Compliance, Procurement/Logistics/Trade, Innovation, Sales Support, Sample Management and Risk Management teams. Responds in the user's language (KO/EN). Includes 6 SZ-specific skills: uz-research, risk-radar, doc-formats, trade-logistics, sample-log, sales-verify."
+    }
+  ]
+}

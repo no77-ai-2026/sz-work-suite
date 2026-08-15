@@ -1,0 +1,39 @@
+{
+  "mcpServers": {
+    "dart": {
+      "$comment": "OpenDART 전자공시 MCP (chrisryugj/korean-dart-mcp, MIT) — 83개 API를 15 도구로 압축. 공시·재무·지분·XBRL(markdown_full 전체 계정 + 계산 검증) + 애널리스트 프레임(insider_signal·disclosure_anomaly·buffett_quality_snapshot) + HWP/PDF 첨부 마크다운화(kordoc 엔진) + 90일 자동분할. 사전 설치: Node.js 20.19+. 회사명/종목코드/corp_code 자동 해결(SQLite FTS, 첫 기동 시 11.6만건 덤프 약 5-10초). 키 발급: opendart.fss.or.kr → 인증키 신청(무료, 일 20,000건). 구 dart(python dart_mcp_server)를 v2.0.0에서 교체. 라이브 스킬: gil:korean-stock-search·gil:public-data 연계.",
+      "command": "npx",
+      "args": [
+        "-y",
+        "korean-dart-mcp"
+      ],
+      "env": {
+        "DART_API_KEY": "${DART_API_KEY}"
+      }
+    },
+    "korean-law": {
+      "type": "http",
+      "url": "https://mcp.gomdori.app/law?oc=${KOREAN_LAW_OC}",
+      "$comment": "국가법령정보 MCP (chrisryugj/korean-law-mcp v4.4, MIT) — 법제처 42개 API → 9개 도구. 법령·판례·행정규칙·자치법규·조약·해석례 + 인용검증(legal_analysis verify_citations) + 판례 생사 확인(cite_check) + 행위시법 판단(applicable_law) + 조문 영향그래프(impact_map). v2.0.0에서 hosted 엔드포인트 https://mcp.gomdori.app/law 로 갱신(구 fly.dev 하위호환). 인증: 법제처 Open API OC 키(law.go.kr 무료, 사용자별 발급)."
+    },
+    "korean-stats": {
+      "$comment": "KOSIS 국가데이터처 통계 MCP (chrisryugj/korean-stats-mcp, MIT) — 14도구. 92 키워드 + 100+ 자연어 별칭, 17 시도 + 230+ 자치구 라우팅, 시계열 추세/순위, 출처(통계표 ID) 자동 인용. 공용키 탑재 remote 커넥터(URL만 등록, API 키 불필요). 라이브 스킬: gil:public-data(KOSIS 자연어 조회 우선 라우팅).",
+      "type": "http",
+      "url": "https://mcp.gomdori.app/stats"
+    },
+    "archhub": {
+      "$comment": "국토교통부 건축HUB MCP (chrisryugj/archhub-mcp, MIT) — 11도구. 건축물대장·건축인허가·주택인허가 + 법정동코드 + 한 필지 종합카드(building_profile)·층별 구성·노후건축물·철거멸실·공시가격 시계열. 공용키 탑재 remote 커넥터(URL만 등록). data.go.kr 공식 API 실측값, [NOT_FOUND] 환각방지. 라이브 스킬: gil:building-ledger-search.",
+      "type": "http",
+      "url": "https://archhub-mcp.fly.dev/mcp"
+    },
+    "kordoc": {
+      "$comment": "한국 공문서 파서 MCP (chrisryugj/kordoc, MIT) — HWP 3.0/5.x·HWPX·HWPML·PDF·XLSX·DOCX → Markdown. 8도구(parse_document·parse_table·parse_form·fill_form 등). DRM 배포용 복호화, 표 재현, 신구대조표, 양식 자동 채우기, OCR 연동. 사전 설치: Node.js 18+. 키 불필요. 라이브 스킬: gil:doc-reader. 포함 OSS: rhwp(MIT)·OpenDataLoader(Apache-2.0)·pdfjs(Apache-2.0)·cfb(Apache-2.0)·JSZip(MIT).",
+      "command": "npx",
+      "args": [
+        "-y",
+        "kordoc",
+        "mcp"
+      ]
+    }
+  }
+}
