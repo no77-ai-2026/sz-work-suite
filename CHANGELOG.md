@@ -12,3 +12,9 @@
 - 게이트: dir==name·kebab·예약어·버전 전 지점 1.0.0·끊긴 참조 0·gil/moai 잔존 0·비ASCII 0 — 전수 PASS
 - 라이선스: Apache-2.0 (LICENSE·LICENSE.MIT·NOTICE.md 보존 + 사내판 고지)
 - 확인 대기: problem-solving·research-verify 원자료(사내 교육자료) 이용 조건 — 배포 전 사용자 확인
+
+# sz v1.1.0 (2026-08-15)
+- Harness layer: sz:work entry orchestrator (routing map + output grade system draft/working/final) + references/common-rules.md (SSOT)
+- 21 coordinator agents ported from GIL (5 skipped: skills not present in sz) — namespace sz:, dangling refs cleaned
+- QA chain wiring: "final/submit/report" keywords trigger ai-slop-reviewer > humanize-korean > korean-spell-check + recalculation
+- 213 skills, all versions 1.1.0

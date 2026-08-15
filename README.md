@@ -1,6 +1,6 @@
 # SZ Work Suite (`sz`)
 
-Internal Claude Cowork plugin for SZ business & management support teams.
+Internal Claude Cowork plugin for SZ business & management support teams. v1.1.0 adds a harness layer: `sz:work` orchestrator, 21 coordinator agents, and an output grade system (draft/working/final QA chain).
 **212 skills** covering strategy & reporting, document production (Word/PPT/Excel/HWP/PDF), finance & accounting, legal & compliance, HR/GA, procurement & trade logistics, sales & CS, data analysis, research, marketing & design, and commerce operations — plus **6 SZ-specific skills**.
 
 > Private, internal use. Based on GIL v2.2.0 bundles (Apache-2.0 + MIT). See NOTICE.md.

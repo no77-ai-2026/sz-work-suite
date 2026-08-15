@@ -3,7 +3,7 @@ name: time-system
 description: |
   하루·한 주의 시간을 주도적으로 설계하도록 도와주는 시간관리 스킬입니다
 user-invocable: true
-version: 1.0.0
+version: 1.1.0
 ---
 ## 스킬 개요(상세)
 

@@ -3,7 +3,7 @@ name: data-explorer
 description: |
   CSV·Excel 데이터의 프로파일링·품질 보고서를 만들어 드립니다 트리거: "이 데이터 분석해줘", "CSV 요약해줘", "이상값 찾아줘"
 user-invocable: true
-version: 1.0.0
+version: 1.1.0
 ---
 ## 스킬 개요(상세)
 

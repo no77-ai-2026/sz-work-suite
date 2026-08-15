@@ -3,7 +3,7 @@ name: sales-playbook
 description: |
   타겟 기업·접근 전략·이의처리 시나리오·성공 지표까지 담은 실전 영업 플레이북(전략서)을 만들어 드립니다 트리거: "영업 플레이북 만들어줘", "세일즈 전략서 써줘", "B2B 영업 계획 세워줘"
 user-invocable: true
-version: 1.0.0
+version: 1.1.0
 ---
 ## 스킬 개요(상세)
 

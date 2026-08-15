@@ -1,7 +1,7 @@
 {
   "name": "sz",
-  "version": "1.0.0",
-  "description": "SZ Work Suite — 업무·경영지원 파트 공유 플러그인. 경영·재무·법무·HR·구매물류·영업·리스크·마케팅 212스킬 (GIL v2.2.0 기반 사내판 + SZ 특화 6종: uz-research·risk-radar·doc-formats·trade-logistics·sample-log·sales-verify)",
+  "version": "1.1.0",
+  "description": "SZ Work Suite — 업무·경영지원 파트 공유 플러그인. 경영·재무·법무·HR·구매물류·영업·리스크·마케팅 213스킬 (GIL v2.2.0 기반 사내판 + SZ 특화 6종: uz-research·risk-radar·doc-formats·trade-logistics·sample-log·sales-verify) + 하네스층(sz:work 오케스트레이터·코디네이터 에이전트 21·산출물 등급제)",
   "author": {
     "name": "gil"
   },

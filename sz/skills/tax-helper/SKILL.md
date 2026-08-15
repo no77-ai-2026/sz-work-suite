@@ -3,7 +3,7 @@ name: tax-helper
 description: |
   세금 관련 질문에 답해주는 스킬입니다
 user-invocable: true
-version: 1.0.0
+version: 1.1.0
 ---
 ## 스킬 개요(상세)
 

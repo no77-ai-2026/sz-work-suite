@@ -3,7 +3,7 @@ name: xlsx-creator
 description: |
   엑셀(.xlsx) 문서를 만들어 드립니다 트리거: "KPI 대시보드 엑셀로 만들어줘", "월간 매출 분석표 생성해줘", "프로젝트 일정 간트차트 엑셀로 작성해줘"
 user-invocable: true
-version: 1.0.0
+version: 1.1.0
 ---
 ## 스킬 개요(상세)
 

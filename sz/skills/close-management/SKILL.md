@@ -3,7 +3,7 @@ name: close-management
 description: |
   월말·분기·연간 결산을 도와주는 스킬입니다
 user-invocable: true
-version: 1.0.0
+version: 1.1.0
 ---
 ## 스킬 개요(상세)
 
