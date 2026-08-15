@@ -7,7 +7,7 @@ description: |
   from .moai/design/, DTCG token validation, and brand-context
   constitutional priority.
 user-invocable: false
-version: 1.1.0
+version: 1.1.1
 uz: n/a
 origin: moai-cowork@f1eb954
 ---

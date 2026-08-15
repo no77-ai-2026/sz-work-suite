@@ -3,7 +3,7 @@ name: sales-verify
 description: |
   ISA 판매 검증·세일즈 인센티브(세일즈서포트) — 판매이력 엑셀과 필드포스 IMEI/시리얼 사진 대조, Luhn 검증, 재촬영·중복 IMEI 부정 방지 플래그, 필드포스별 지급 근거 산출. 트리거: "ISA 판매 검증해줘", "세일즈 인센티브 정산", "IMEI 사진 대조"
   EN: ISA sales verification and sales incentive (Sales Support) — match sales history vs field-force IMEI/serial photos, Luhn check, screen-recapture and duplicate-IMEI fraud flags, per-field-force payout basis. Triggers: "verify ISA sales", "sales incentive settlement", "match IMEI photos"
-version: 1.1.0
+version: 1.1.1
 ---
 
 # sz:sales-verify — ISA 판매 검증·세일즈 인센티브 (세일즈서포트)
@@ -13,7 +13,7 @@ version: 1.1.0
 필드포스가 판매 시 촬영·업로드한 IMEI/시리얼 사진과 ISA 판매이력을 대조해 세일즈 보너스(세일즈 인센티브) 지급 근거를 만든다. 판독·매칭 규칙 정본: `references/photo-id-match.md` (sz:sample-log와 공유 — 수정 시 동기화)
 
 ## 언어 규칙
-요청 언어(KO/EN)로 응답.
+요청 언어(KO/EN/RU/UZ)로 응답.
 
 ## 입력 (사용자에게 요청)
 1. ISA 관리자화면에서 다운로드한 **판매이력 엑셀** — 컬럼 구조를 가정하지 않고 파일을 읽어 **IMEI/시리얼·필드포스·모델·판매일 컬럼을 사용자에게 확인**한다.

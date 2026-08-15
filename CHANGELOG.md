@@ -18,3 +18,8 @@
 - 21 coordinator agents ported from GIL (5 skipped: skills not present in sz) — namespace sz:, dangling refs cleaned
 - QA chain wiring: "final/submit/report" keywords trigger ai-slop-reviewer > humanize-korean > korean-spell-check + recalculation
 - 213 skills, all versions 1.1.0
+
+# sz v1.1.1 (2026-08-15)
+- Approval gate (HARD): file deliverables / multi-step chains require plan + explicit user approval before execution; no unsolicited deliverables
+- Project instruction files: read & obey AGENTS.md/CLAUDE.md first; propose evolution-log entry after each deliverable (opt-in); lightweight project setup mode (4-question interview -> AGENTS.md skeleton)
+- Language rule extended to KO/EN/RU/UZ across sz:work, common-rules and 6 SZ-specific skills; Korean-only QA steps skipped with notice for non-Korean outputs

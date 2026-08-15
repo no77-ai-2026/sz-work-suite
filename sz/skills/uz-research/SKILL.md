@@ -3,7 +3,7 @@ name: uz-research
 description: |
   우즈베키스탄 법규·정책·경제지표·시장 조사의 SZ 표준 엔진 — T1/T2/T3 소스 신뢰도, 인용 4분류, 원문 접근 상한, 조사 심도 3모드. 트리거: "우즈벡 규정 조사해줘", "UZ 시장 동향 확인", "이 정책 사실 확인"
   EN: SZ standard engine for researching Uzbekistan laws, policies, economy and markets — source tiers T1/T2/T3, 4-level citation tags, depth modes. Triggers: "research UZ regulation", "check this UZ policy", "UZ market trend"
-version: 1.1.0
+version: 1.1.1
 ---
 
 # sz:uz-research — 우즈베키스탄 조사 엔진 (SZ 정본)
@@ -44,4 +44,4 @@ SZ의 모든 UZ 관련 조사·검증의 표준 절차. `sz:risk-radar`·`sz:tra
 조사 결과 표: 항목 | 내용 | 출처(URL) | 발표일 | 검증등급. 말미에 미확인 항목과 후속 확인 방법 명시.
 
 ## English Summary
-Respond in the user's language (KO/EN). Follow source tiers (T1 official: cbu.uz, lex.uz, stat.uz, soliq.uz, customs.uz; T2 local media; T3 international), tag every item VERIFIED / SECONDARY / NOT_FOUND / MISMATCH, cap primary-source retries at 3 sources / 5 attempts, announce estimated time before tasks over 8 minutes, use official announcement dates, and separate research from report writing. Details: references/research-rules.md, references/uz-sources.md.
+Respond in the user's language (KO/EN/RU/UZ). Follow source tiers (T1 official: cbu.uz, lex.uz, stat.uz, soliq.uz, customs.uz; T2 local media; T3 international), tag every item VERIFIED / SECONDARY / NOT_FOUND / MISMATCH, cap primary-source retries at 3 sources / 5 attempts, announce estimated time before tasks over 8 minutes, use official announcement dates, and separate research from report writing. Details: references/research-rules.md, references/uz-sources.md.

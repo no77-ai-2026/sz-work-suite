@@ -3,7 +3,7 @@ name: youtube-podcast-planner
 description: |
   유튜브 영상과 팟캐스트 에피소드를 기획하고 대본·쇼노트까지 구성해주는 스킬입니다 트리거: "유튜브 영상 기획해줘", "팟캐스트 에피소드 구성해줘", "쇼노트 만들어줘"
 user-invocable: true
-version: 1.1.0
+version: 1.1.1
 ---
 ## 스킬 개요(상세)
 

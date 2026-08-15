@@ -3,7 +3,7 @@ name: gemini-3-image-prompt
 description: |
   Google Gemini 3 Pro Image (a.k.a 트리거: "Gemini 이미지 프롬프트 만들어줘", "나노바나나 프롬프트", "Nano Banana Pro 프롬프트"
 user-invocable: true
-version: 1.1.0
+version: 1.1.1
 ---
 ## 스킬 개요(상세)
 

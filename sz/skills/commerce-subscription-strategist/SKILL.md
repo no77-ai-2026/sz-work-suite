@@ -3,7 +3,7 @@ name: commerce-subscription-strategist
 description: |
   [책임 경계] 구독 비즈니스 모델 설계 전담 트리거: "구독 모델 설계", "구독 비즈니스 5가지 질문", "오이식스 구독"
 user-invocable: true
-version: 1.1.0
+version: 1.1.1
 ---
 ## 스킬 개요(상세)
 

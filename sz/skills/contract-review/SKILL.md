@@ -3,7 +3,7 @@ name: contract-review
 description: |
   계약서 검토, 이용약관, 개인정보처리방침 등 법률 문서를 분석하고 작성합니다
 user-invocable: true
-version: 1.1.0
+version: 1.1.1
 ---
 ## 스킬 개요(상세)
 

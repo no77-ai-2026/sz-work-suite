@@ -3,7 +3,7 @@ name: commerce-margin-calculator
 description: |
   [책임 경계] 상품별 마진·엔드 ROAS(본전 ROAS)·손익분기 광고비 자동 계산 전담 트리거: "마진 계산해줘", "엔드 ROAS 계산", "본전 ROAS 알려줘"
 user-invocable: true
-version: 1.1.0
+version: 1.1.1
 ---
 ## 스킬 개요(상세)
 

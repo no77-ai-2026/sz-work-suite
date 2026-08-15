@@ -3,7 +3,7 @@ name: gpt-image-2-prompt
 description: |
   OpenAI GPT-image-2 모델 전용 이미지 프롬프트 텍스트 빌더 트리거: "GPT 이미지 프롬프트 만들어줘", "ChatGPT 이미지 프롬프트", "GPT-image-2 프롬프트"
 user-invocable: true
-version: 1.1.0
+version: 1.1.1
 ---
 ## 스킬 개요(상세)
 

@@ -3,13 +3,13 @@ name: trade-logistics
 description: |
   UZ 통관·보세창고·수출입 문서 지원 — 제도 요지 참조, 수출입 서류 체크리스트, 최신 규정은 uz-research 체인으로 확인. 트리거: "통관 서류 체크해줘", "보세창고 규정 알려줘", "수출입 문서 초안"
   EN: UZ customs, bonded warehouse and import/export document support with checklists; current rules verified via sz:uz-research. Triggers: "customs document checklist", "bonded warehouse rules", "import paperwork draft"
-version: 1.1.0
+version: 1.1.1
 ---
 
 # sz:trade-logistics — 통관·보세창고·수출입 (구매·물류·수출입)
 
 ## 언어 규칙
-요청 언어(KO/EN)로 응답. 세관 제출 서류 항목명은 RU 병기 가능.
+요청 언어(KO/EN/RU/UZ)로 응답. 세관 제출 서류 항목명은 RU 병기 가능.
 
 ## 기능
 1. **제도 참조**: 보세창고·통관 제도 요지는 `references/uz-customs.md`. 단, 제도는 개정이 잦으므로 **모든 제도 답변에 "최종 확인일·출처" 병기**하고, 실무 적용 전 `sz:uz-research`(customs.uz T1)로 현행 여부를 확인하도록 안내한다.

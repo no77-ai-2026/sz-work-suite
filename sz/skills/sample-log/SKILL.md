@@ -3,13 +3,13 @@ name: sample-log
 description: |
   샘플 관리·재고실사(리스크 매니지먼트) — 기존 샘플 대장 기반 관리 + 실사 사진의 식별번호 판독·파일명 변경·대장 대조·폴더 분류·결과보고. 재촬영 의심 감지 포함. 트리거: "샘플 대장 정리해줘", "재고실사 사진 대조해줘", "실사 결과 보고서"
   EN: Sample ledger management and stocktaking photo reconciliation (Risk Management) — extract IDs from photos, rename files, match against ledger, sort into folders, report. Triggers: "reconcile stocktaking photos", "sample ledger update", "stock audit report"
-version: 1.1.0
+version: 1.1.1
 ---
 
 # sz:sample-log — 샘플 관리·재고실사 (리스크 매니지먼트)
 
 ## 언어 규칙
-요청 언어(KO/EN)로 응답.
+요청 언어(KO/EN/RU/UZ)로 응답.
 
 ## 모드 A — 대장 관리
 1. **기존 샘플 대장(사내 양식 xlsx) 업로드를 먼저 요청한다.** 표준 컬럼을 이 스킬이 강제하지 않는다 — 대장의 컬럼 구조를 읽고 **식별번호 컬럼만 사용자에게 확인**한다.

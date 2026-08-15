@@ -3,7 +3,7 @@ name: ticket-triage
 description: |
   고객 지원 티켓을 신속하게 분류하고 우선순위를 배정합니다 트리거: "이 문의를 어떻게 분류해야 하나요", "티켓 우선순위 정해줘", "고객 문의 긴급도 판단해줘"
 user-invocable: true
-version: 1.1.0
+version: 1.1.1
 ---
 ## 스킬 개요(상세)
 

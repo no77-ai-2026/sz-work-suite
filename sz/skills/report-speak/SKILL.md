@@ -3,7 +3,7 @@ name: report-speak
 description: |
   상사에게 보고하거나 누군가에게 무언가를 설명할 때 결론부터 명확하게 전달하도록 도와주는 스킬입니다
 user-invocable: true
-version: 1.1.0
+version: 1.1.1
 ---
 ## 스킬 개요(상세)
 

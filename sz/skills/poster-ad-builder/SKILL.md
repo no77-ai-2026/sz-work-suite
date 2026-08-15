@@ -10,7 +10,7 @@ description: |
   - "reklama afishasi" (광고 포스터, UZ)
   sz:creative-architect 설계를 입력으로 받아 image-bridge(미포함)로 배경을 렌더하고, 카피 오버레이 레이아웃을 산출합니다. 카드뉴스는 sz:card-news, 상세페이지는 sz:detail-page-image로 갈라집니다.
 user-invocable: true
-version: 1.1.0
+version: 1.1.1
 ---
 
 # 포스터/광고 빌더 (Poster & Ad Builder)
