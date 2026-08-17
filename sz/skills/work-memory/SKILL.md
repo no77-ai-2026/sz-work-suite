@@ -2,7 +2,7 @@
 name: work-memory
 description: |
   2계층 업무 메모리 — 약어·별칭·내부 용어를 학습해 조직 맥락을 이해하는 협업 메모리를 만듭니다 트리거: "우리 팀 용어 기억해줘", "업무 메모리 세팅", "약어 사전 만들어줘"
-version: 1.1.2
+version: 1.1.3
 uz: references/uz-work-memory.md
 origin: anthropics/knowledge-work-plugins@2cf4294 (productivity/memory-management, Apache-2.0)
 ---
@@ -13,7 +13,7 @@ origin: anthropics/knowledge-work-plugins@2cf4294 (productivity/memory-managemen
 
 2계층 업무 메모리 — 약어·별칭·내부 용어를 학습해 조직 맥락을 이해하는 협업 메모리를 만듭니다. 한국 표준 + UZ 듀얼 컨텍스트를 적용합니다.
 
-**한국화 노트**: 프로젝트 지침 2층 구조(.gil/refs)와 연동 — 용어 사전을 .gil/refs/glossary.md로 저장 권장.
+**한국화 노트**: 프로젝트 지침 2층 구조(.sz/refs)와 연동 — 용어 사전을 .sz/refs/glossary.md로 저장 권장.
 
 **도구 일반화**: 원문의 미국 SaaS 연동(QuickBooks·HubSpot·PayPal·Gusto 등)은 방법론으로만 계승한다 — 한국 실무에서는 스마트스토어·카페24 MCP(gil-commerce 설치 시), 엑셀/CSV 업로드, 사용자 제공 수치를 소스로 쓰고, 해당 커넥터가 연결된 경우에만 직접 조회한다.
 

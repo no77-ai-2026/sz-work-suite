@@ -3,7 +3,7 @@ name: design-logo
 description: |
   디자인 시스템에 맞는 로고를 생성합니다. 트리거: "로고 만들어 줘", "브랜드 마크 디자인", "워드마크"
 user-invocable: true
-version: 1.1.2
+version: 1.1.3
 origin: moai-cowork@f1eb954
 ---
 

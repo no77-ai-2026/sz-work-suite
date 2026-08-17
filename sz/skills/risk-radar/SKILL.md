@@ -3,7 +3,7 @@ name: risk-radar
 description: |
   UZ 사업 리스크 센싱·등급 판정·브리핑 — 10카테고리 프레임, 상태 3등급(위기/주의/정상), 임원 보고 산출. 트리거: "리스크 점검해줘", "이 이슈 리스크 등급은", "리스크 브리핑 만들어줘"
   EN: UZ business risk sensing and grading — 10 risk categories, 3 status levels (Crisis/Watch/Normal), executive briefing. Triggers: "check risk level", "risk briefing", "assess this issue"
-version: 1.1.2
+version: 1.1.3
 ---
 
 # sz:risk-radar — UZ 사업 리스크 센싱 (리스크 매니지먼트)

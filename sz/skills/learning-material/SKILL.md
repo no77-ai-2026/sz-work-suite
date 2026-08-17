@@ -3,7 +3,7 @@ name: learning-material
 description: |
   조사한 내용을 도식·차트·수식·코드 하이라이트가 들어간 단일 HTML 학습자료로 만들어 드립니다 트리거: "방금 조사한 내용으로 HTML 학습자료 만들어줘", "도식이랑 예제 들어간 공부 자료로 정리해줘", "mermaid 다이어그램으로 개념 정리해줘"
 user-invocable: true
-version: 1.1.2
+version: 1.1.3
 ---
 ## 스킬 개요(상세)
 

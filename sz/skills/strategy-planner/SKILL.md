@@ -3,7 +3,7 @@ name: strategy-planner
 description: |
   사업계획서·비즈니스 모델·신시장 진출 같은 전략 문서를 검증된 프레임워크(SWOT·린 캔버스·블루오션·OKR 등)로 정리해 만들어 드립니다 트리거: "사업계획서 써줘", "비즈니스 모델 만들어줘", "SWOT 분석해줘"
 user-invocable: true
-version: 1.1.2
+version: 1.1.3
 ---
 ## 스킬 개요(상세)
 

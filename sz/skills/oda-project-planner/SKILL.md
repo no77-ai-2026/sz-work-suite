@@ -3,7 +3,7 @@ name: oda-project-planner
 description: |
   ODA 사업을 기획합니다
 user-invocable: true
-version: 1.1.2
+version: 1.1.3
 ---
 ## 스킬 개요(상세)
 

@@ -2,7 +2,7 @@
 name: policy-lookup
 description: |
   사내 규정 조회 — 취업규칙·정책 문서를 찾아 쉬운 말로 답합니다 트리거: "연차 규정 알려줘", "재택 정책 어떻게 돼", "경조휴가 며칠이야"
-version: 1.1.2
+version: 1.1.3
 uz: references/uz-policy-lookup.md
 origin: anthropics/knowledge-work-plugins@2cf4294 (human-resources/policy-lookup, Apache-2.0)
 ---
@@ -13,7 +13,7 @@ origin: anthropics/knowledge-work-plugins@2cf4294 (human-resources/policy-lookup
 
 사내 규정 조회 — 취업규칙·정책 문서를 찾아 쉬운 말로 답합니다. 한국 표준 + UZ 듀얼 컨텍스트를 적용합니다.
 
-**한국화 노트**: 규정 문서(.gil/refs 또는 업로드) 기반 답변 + 근로기준법 최저 기준 대조(korean-law MCP). 규정 부재 시 법정 기준 안내.
+**한국화 노트**: 규정 문서(.sz/refs 또는 업로드) 기반 답변 + 근로기준법 최저 기준 대조(korean-law MCP). 규정 부재 시 법정 기준 안내.
 
 **도구 일반화**: 원문의 미국 SaaS 연동은 방법론으로만 계승한다 — 한국 실무에서는 연결된 커넥터·업로드 문서·사용자 제공 정보를 소스로 쓴다.
 

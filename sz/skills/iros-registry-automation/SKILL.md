@@ -3,7 +3,7 @@ name: iros-registry-automation
 description: |
   대법원 인터넷등기소(IROS, iros.go.kr)에서 법인·부동산 등기부등본(등기사항증명서)을 트리거: "법인등기부등본 100개 한번에 떼야 해", "회사 100개 등기부 정리해줘", "고객사 등기부등본 일괄 발급"
 user-invocable: true
-version: 1.1.2
+version: 1.1.3
 ---
 ## 스킬 개요(상세)
 

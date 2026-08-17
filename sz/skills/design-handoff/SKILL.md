@@ -6,7 +6,7 @@ description: |
   Design package (prompt, context, references, acceptance, checklist),
   brand-voice context, and paste-ready claude.com session bundles.
 user-invocable: false
-version: 1.1.2
+version: 1.1.3
 uz: n/a
 origin: moai-cowork@f1eb954
 ---

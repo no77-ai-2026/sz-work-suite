@@ -3,7 +3,7 @@ name: work
 description: |
   SZ Work Suite 진입 오케스트레이터 — 요청을 팀·스킬 체인·코디네이터로 라우팅, 산출물 등급제(⚡초안/◐작업본/◆최종본)와 승인 게이트 적용, 프로젝트 지침(AGENTS.md) 준수·갱신. 트리거: "이 업무 어떻게 처리해", "프로젝트 세팅해줘", "최종본으로 만들어줘", "/work"
   EN: Entry orchestrator for SZ Work Suite — routes requests to team skill chains and coordinators, applies output grades (draft/working/final), approval gates, and project instruction files (AGENTS.md). Triggers: "how should I handle this task", "set up this project", "make it final quality", "/work"
-version: 1.1.2
+version: 1.1.3
 ---
 
 # sz:work — SZ Work Suite 진입 오케스트레이터
@@ -34,6 +34,7 @@ version: 1.1.2
 ## 프로젝트 세팅 모드
 "프로젝트 세팅해줘" → ① 목적 ② 담당 팀·주 사용자 ③ 주요 산출물 유형 ④ 특수 규칙(익명화·양식 등) 4문항 인터뷰 → 승인 후 **두 파일을 반드시 함께 생성**한다:
 1. `AGENTS.md` (정본) — `references/templates/AGENTS.md.tmpl` 치환: 목적 / HARD 규칙 / 산출물 워크플로 / 언어 / evolution log 섹션.
+1-1. (선택) 참조 폴더 `.sz/refs/` — 긴 규칙·용어집·양식 상세는 AGENTS.md 본문 대신 여기 두고 1줄 참조한다.
 2. `CLAUDE.md` (포인터) — `references/templates/CLAUDE.md.tmpl`을 **그대로 복사**. 내용은 `@AGENTS.md` 한 줄 + 주석. **CLAUDE.md를 빈 파일로 두거나 임포트 줄을 백틱으로 감싸는 것 금지(HARD)** — 자동 로드가 조용히 실패해 새 세션에서 프로젝트 규칙이 무시된다.
 기존 CLAUDE.md에 별도 내용이 이미 있으면 덮어쓰지 말고 최상단에 `@AGENTS.md` 줄 추가를 제안한다.
 

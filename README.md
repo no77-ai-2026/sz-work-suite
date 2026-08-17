@@ -14,6 +14,26 @@ Internal Claude Cowork plugin for SZ business & management support teams. v1.1.0
 **Option B — file upload**
 Download `releases/sz.plugin` and upload it via Cowork plugin settings.
 
+## Getting started (first run)
+
+1. **Install**: Claude desktop app > Settings > Plugins > *Add marketplace* > enter `no77-ai-2026/sz-work-suite` > install **sz**. (Or upload `releases/sz.plugin` directly.)
+2. **Say what you need in plain language** — Korean, English, Russian or Uzbek. Examples:
+   - "이번 주 주간보고 만들어줘" / "Draft this week's report"
+   - "Проверь этот контракт" (contract review)
+   - "재고실사 사진 대조해줘" (upload ledger + photos)
+3. **Or start from the orchestrator**: type `/sz:work` or say "이 업무 어떻게 처리해?" — it routes your request to the right skill chain.
+4. **Working on a recurring project?** Say "프로젝트 세팅해줘" once in that project folder. After a 4-question interview it creates `AGENTS.md` (project rules) + `CLAUDE.md` (loader pointer) — from then on every session in that project follows your rules automatically.
+5. **Output quality levels**: default is a quick draft. Say "다듬어줘" for a polished working version, or "최종본으로" / "final" for the full QA chain (style review + spell check + number recheck).
+
+### 처음 사용하는 분께 (KO)
+설치 후 그냥 한국어로 업무를 요청하면 됩니다. 반복 업무가 있는 프로젝트 폴더에서는 "프로젝트 세팅해줘"를 한 번 실행해 두면 이후 세션이 규칙을 자동으로 따릅니다. "최종본으로"라고 하면 3중 검수를 거칩니다.
+
+## Known limitations (v1.1)
+
+- External image/video/audio generation (Higgsfield, image APIs), SNS auto-publishing (Instagram/Threads) and a few key-based connectors are **not included** — mentions of them inside some skills can be ignored; those steps are simply skipped.
+- `korean-law` MCP works better with a personal OC id (`KOREAN_LAW_OC` env var, free from open.law.go.kr); without it some law lookups fall back to web search.
+- Coordinator agents cover multi-step workflows; single-skill requests run directly without them.
+
 ## Language
 
 All skills respond in **your language** — ask in English, get English; ask in Korean, get Korean. The 6 SZ-specific skills carry bilingual (KO/EN) documentation.

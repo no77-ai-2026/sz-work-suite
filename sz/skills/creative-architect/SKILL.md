@@ -11,7 +11,7 @@ description: |
   - "reklama kreativ" (광고 크리에이티브, UZ)
   단독으로도 쓰지만 보통 sz:creative-wizard 코디네이터가 호출합니다. 시장 현지화는 sz:market-profile-engine, 자료 흐름은 sz:material-analyzer, 포맷 산출은 sz:detail-page-copy·sz:card-news·sz:poster-ad-builder·sz:print-creative-builder로 이어집니다. 텍스트 산출은 마지막에 sz:ai-slop-reviewer → sz:humanize-korean으로 종료합니다.
 user-invocable: true
-version: 1.1.2
+version: 1.1.3
 ---
 
 # 크리에이티브 아키텍트 (Creative Architect)

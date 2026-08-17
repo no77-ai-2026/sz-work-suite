@@ -3,7 +3,7 @@ name: devil-review
 description: |
   [한·UZ 듀얼] Devil's Advocate 리뷰
 user-invocable: true
-version: 1.1.2
+version: 1.1.3
 ---
 ## 스킬 개요(상세)
 

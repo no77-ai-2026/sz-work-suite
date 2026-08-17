@@ -3,7 +3,7 @@ name: daily-briefing
 description: |
   업계 뉴스·시장 동향·경쟁사 소식·규제 변화·오늘 할 일을 한 장으로 묶은 아침 비즈니스 브리핑을 만들어 드립니다 트리거: "오늘 비즈니스 브리핑 해줘", "아침 이슈 요약해줘", "데일리 리포트 만들어줘"
 user-invocable: true
-version: 1.1.2
+version: 1.1.3
 ---
 ## 스킬 개요(상세)
 
@@ -164,7 +164,7 @@ version: 1.1.2
 
 ### 1단계: 브리핑 범위 설정
 
-- 대상 업종 및 키워드 확인 (`.gil/config.json`의 `industry` 설정 우선 사용)
+- 대상 업종 및 키워드 확인 (`.sz/config.json`의 `industry` 설정 우선 사용)
 - 브리핑 기간 설정 (일간/주간/월간)
 - 모니터링 경쟁사 목록 확인
 
@@ -219,7 +219,7 @@ version: 1.1.2
 ### 4단계: 사용자 검토 및 저장
 
 - 리포트를 사용자에게 제시
-- 피드백 반영 후 `.gil/briefings/YYYYMMDD.md`에 저장 (옵션)
+- 피드백 반영 후 `.sz/briefings/YYYYMMDD.md`에 저장 (옵션)
 
 ## 사용 예시
 
@@ -338,7 +338,7 @@ version: 1.1.2
 
 ### 맞춤 설정
 
-`.gil/config.json`에 다음 설정 추가:
+`.sz/config.json`에 다음 설정 추가:
 ```json
 {
   "industry": "SaaS",
@@ -359,7 +359,7 @@ version: 1.1.2
 
 ### 브리핑 자동화 팁
 
-- `.gil/config.json`에 `industry`, `competitors`, `keywords` 설정 시 맞춤 브리핑 자동화
+- `.sz/config.json`에 `industry`, `competitors`, `keywords` 설정 시 맞춤 브리핑 자동화
 - 사용자가 "매일 아침 브리핑" 요청 시 이전 브리핑과 비교하여 변화 포인트를 강조
 - TAM·SAM·SOM 기반 시장 동향 분석 가능 (sz:market-analyst 스킬과 연동)
 

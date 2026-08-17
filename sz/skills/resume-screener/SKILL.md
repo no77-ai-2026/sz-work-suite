@@ -3,7 +3,7 @@ name: resume-screener
 description: |
   NCS 국가직무능력표준 기반 이력서·자기소개서 적합성 평가 스킬입니다 트리거: "이력서 검토", "지원자 평가", "서류 스크리닝"
 user-invocable: true
-version: 1.1.2
+version: 1.1.3
 ---
 ## 스킬 개요(상세)
 

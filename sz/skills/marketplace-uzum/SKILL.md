@@ -3,7 +3,7 @@ name: marketplace-uzum
 description: |
   [한·UZ 듀얼] Uzum Market(UZ 최대 이커머스) 입점·운영 전담 스킬 트리거: "Uzum Market 등록", "Uzum 입점 절차", "Uzum 수수료"
 user-invocable: true
-version: 1.1.2
+version: 1.1.3
 ---
 ## 스킬 개요(상세)
 

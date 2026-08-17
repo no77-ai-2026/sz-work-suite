@@ -3,7 +3,7 @@ name: data-visualizer
 description: |
   데이터를 한눈에 보여주는 인터랙티브 차트·대시보드(HTML)를 만들어 드립니다 트리거: "차트 만들어줘", "그래프 그려줘", "시각화해줘"
 user-invocable: true
-version: 1.1.2
+version: 1.1.3
 ---
 ## 스킬 개요(상세)
 

@@ -3,7 +3,7 @@ name: hwpx-writer
 description: |
   아래아한글(.hwpx) 문서를 만들어 드립니다 트리거: "한글 파일로 공문서 만들어줘", "HWP 문서 작성해줘", "아래한글 기안서 써줘"
 user-invocable: true
-version: 1.1.2
+version: 1.1.3
 ---
 ## 스킬 개요(상세)
 

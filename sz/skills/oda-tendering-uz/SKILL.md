@@ -3,7 +3,7 @@ name: oda-tendering-uz
 description: |
   ODA·EDCF·국제기구 입찰에 대응합니다
 user-invocable: true
-version: 1.1.2
+version: 1.1.3
 ---
 ## 스킬 개요(상세)
 

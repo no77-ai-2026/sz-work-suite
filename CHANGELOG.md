@@ -28,3 +28,7 @@
 - Fix: project setup now ALWAYS creates CLAUDE.md pointer (@AGENTS.md) alongside AGENTS.md — empty CLAUDE.md silently broke auto-loading of project rules in new sessions
 - Templates embedded: work/references/templates/AGENTS.md.tmpl + CLAUDE.md.tmpl (verbatim copy, no-backtick warning)
 - Doctor check: detect empty/broken CLAUDE.md pointer and propose repair (opt-in)
+
+# sz v1.1.3 (2026-08-18)
+- Audit fixes: legacy .gil/ paths -> .sz/ (3 skills); YAML description marker unified; optional .sz/refs guidance in project setup
+- README: Getting started (first-run guide, KO/EN) + Known limitations section

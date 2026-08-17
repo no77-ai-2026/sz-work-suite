@@ -3,7 +3,7 @@ name: oda-proposal-writer
 description: |
   ODA 사업 제안서를 작성합니다
 user-invocable: true
-version: 1.1.2
+version: 1.1.3
 ---
 ## 스킬 개요(상세)
 

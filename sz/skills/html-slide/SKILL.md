@@ -3,7 +3,7 @@ name: html-slide
 description: |
   발표용 슬라이드 덱을 브라우저에서 바로 열리는 단일 파일·자체 완결형(self-contained) HTML로 만들어 드립니다 트리거: "발표 슬라이드 HTML로 만들어줘", "키노트 덱 단일 HTML 파일로 렌더해줘", "사업계획서 슬라이드 10장, 브라우저에서 바로 열리게"
 user-invocable: true
-version: 1.1.2
+version: 1.1.3
 ---
 ## 스킬 개요(상세)
 

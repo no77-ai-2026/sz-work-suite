@@ -3,7 +3,7 @@ name: design-sync-upload
 description: |
   디자인 시스템 자산(DESIGN.md·토큰·로고)을 Claude Design에 업로드합니다. 자동 우선 + 수동 폴백 양경로. 트리거: "Claude Design에 디자인 시스템 업로드", "DesignSync로 자산 등록", "DESIGN.md 업로드해 줘"
 user-invocable: true
-version: 1.1.2
+version: 1.1.3
 uz: n/a
 origin: moai-cowork@f1eb954
 ---
