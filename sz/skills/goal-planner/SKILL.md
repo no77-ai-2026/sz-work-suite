@@ -3,7 +3,7 @@ name: goal-planner
 description: |
   목표를 막연한 다짐이 아니라 실천 가능한 계획으로 바꿔주는 스킬입니다 트리거: "신년 목표 세워줘", "12주 계획법으로 쪼개줘", "만다라트 만들어줘"
 user-invocable: true
-version: 1.1.1
+version: 1.1.2
 ---
 ## 스킬 개요(상세)
 

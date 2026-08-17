@@ -3,7 +3,7 @@ name: pdf-writer
 description: |
   어떤 콘텐츠든 PDF 파일로 만들어 드립니다 트리거: "PDF로 만들어줘", "PDF로 생성해줘", "PDF로도 생성해줘"
 user-invocable: true
-version: 1.1.1
+version: 1.1.2
 ---
 ## 스킬 개요(상세)
 

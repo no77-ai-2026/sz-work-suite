@@ -3,7 +3,7 @@ name: commerce-morning-brief
 description: |
   매장 운영 데이터를 1줄로 통합 요약합니다 트리거: "아침 브리핑 만들어줘", "오늘 매장 현황 보여줘", "ROAS 확인해줘"
 user-invocable: true
-version: 1.1.1
+version: 1.1.2
 ---
 ## 스킬 개요(상세)
 

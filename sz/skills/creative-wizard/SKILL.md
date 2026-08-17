@@ -10,7 +10,7 @@ description: |
   - "reklama kreativ sehrgari" (광고 크리에이티브 마법사, UZ)
   텍스트 지능(카피·구성·현지화·후기분석)은 Claude가 직접 수행하고, 이미지 생성만 image-bridge(미포함)(OpenAI/Gemini BYOK)로 붙입니다. 설계는 sz:creative-architect, 현지화는 sz:market-profile-engine, 자료는 sz:material-analyzer로 위임합니다.
 user-invocable: true
-version: 1.1.1
+version: 1.1.2
 ---
 
 # 크리에이티브 마법사 (Creative Wizard) — 코디네이터

@@ -3,7 +3,7 @@ name: work
 description: |
   SZ Work Suite 진입 오케스트레이터 — 요청을 팀·스킬 체인·코디네이터로 라우팅, 산출물 등급제(⚡초안/◐작업본/◆최종본)와 승인 게이트 적용, 프로젝트 지침(AGENTS.md) 준수·갱신. 트리거: "이 업무 어떻게 처리해", "프로젝트 세팅해줘", "최종본으로 만들어줘", "/work"
   EN: Entry orchestrator for SZ Work Suite — routes requests to team skill chains and coordinators, applies output grades (draft/working/final), approval gates, and project instruction files (AGENTS.md). Triggers: "how should I handle this task", "set up this project", "make it final quality", "/work"
-version: 1.1.1
+version: 1.1.2
 ---
 
 # sz:work — SZ Work Suite 진입 오케스트레이터
@@ -29,9 +29,13 @@ version: 1.1.1
 1. 프로젝트 폴더에 `AGENTS.md` 또는 `CLAUDE.md`가 있으면 **먼저 읽고 그 규칙을 본 스킬 기본값보다 우선** 적용한다.
 2. 산출물 완료 시 지침 파일 말미의 evolution log에 1줄(날짜·산출물·변경 요지) 추가를 **제안**한다 — 승인형: 사용자가 동의한 경우에만 파일을 수정하고, 무단 수정하지 않는다.
 3. 지침 파일이 없고 반복 작업이 예상되면 프로젝트 세팅(아래)을 1회 제안한다.
+4. **닥터 체크**: 프로젝트 확인 시 `CLAUDE.md`가 비어 있거나 `@AGENTS.md` 임포트 줄이 없으면(백틱으로 감싼 경우 포함 — 조용히 실패함) 결함으로 보고하고, `@AGENTS.md` 포인터 채움을 제안한다(승인형).
 
 ## 프로젝트 세팅 모드
-"프로젝트 세팅해줘" → ① 목적 ② 담당 팀·주 사용자 ③ 주요 산출물 유형 ④ 특수 규칙(익명화·양식 등) 4문항 인터뷰 → `AGENTS.md` 골격 생성: 프로젝트 목적 / HARD 규칙 / 산출물별 워크플로(라우팅 맵 오버라이드) / 등급제 재정의(필요 시) / evolution log 섹션. 생성 전 초안을 보여주고 승인받는다.
+"프로젝트 세팅해줘" → ① 목적 ② 담당 팀·주 사용자 ③ 주요 산출물 유형 ④ 특수 규칙(익명화·양식 등) 4문항 인터뷰 → 승인 후 **두 파일을 반드시 함께 생성**한다:
+1. `AGENTS.md` (정본) — `references/templates/AGENTS.md.tmpl` 치환: 목적 / HARD 규칙 / 산출물 워크플로 / 언어 / evolution log 섹션.
+2. `CLAUDE.md` (포인터) — `references/templates/CLAUDE.md.tmpl`을 **그대로 복사**. 내용은 `@AGENTS.md` 한 줄 + 주석. **CLAUDE.md를 빈 파일로 두거나 임포트 줄을 백틱으로 감싸는 것 금지(HARD)** — 자동 로드가 조용히 실패해 새 세션에서 프로젝트 규칙이 무시된다.
+기존 CLAUDE.md에 별도 내용이 이미 있으면 덮어쓰지 말고 최상단에 `@AGENTS.md` 줄 추가를 제안한다.
 
 ## 라우팅 맵 (요청 → 1차 목적지)
 | 요청 유형 | 목적지 |

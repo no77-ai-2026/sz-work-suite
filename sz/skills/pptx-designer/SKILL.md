@@ -3,7 +3,7 @@ name: pptx-designer
 description: |
   발표용 파워포인트(.pptx) 슬라이드를 디자인해 바로 열리는 파일로 만들어 드립니다 트리거: "발표자료 PPT로 만들어줘", "파워포인트 슬라이드 디자인해줘", "보고서를 발표용 PPT로 만들어줘"
 user-invocable: true
-version: 1.1.1
+version: 1.1.2
 ---
 ## 스킬 개요(상세)
 

@@ -3,7 +3,7 @@ name: executive-summary
 description: |
   복잡한 분석·재무·운영 보고를 경영진 1페이지(≤500단어) 요약으로 변환합니다 트리거: "임원 보고용 1페이지 요약 만들어줘", "이사회 보고서 요약해줘", "경영진 브리핑 1장으로 정리해줘"
 user-invocable: true
-version: 1.1.1
+version: 1.1.2
 ---
 ## 스킬 개요(상세)
 

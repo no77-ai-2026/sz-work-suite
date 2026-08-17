@@ -3,7 +3,7 @@ name: humanize-korean
 description: |
   AI(ChatGPT·Claude·Gemini 등)가 쓴 한국어 텍스트의 "AI 티"를 정밀하게 제거해 사람이 쓴 글처럼 윤문하는 한국어 특화 스킬입니다 트리거: "AI 티", "AI 티 없애줘", "GPT 문체 제거해줘"
 user-invocable: true
-version: 1.1.1
+version: 1.1.2
 ---
 ## 스킬 개요(상세)
 

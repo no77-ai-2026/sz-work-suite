@@ -17,7 +17,7 @@
 ## 4. 프로젝트 지침 파일
 - AGENTS.md/CLAUDE.md 존재 시 그 규칙이 본 정본보다 우선.
 - 산출물 완료 후 evolution log 1줄 추가를 제안(승인형 — 무단 수정 금지).
-- 반복 업무 프로젝트에는 sz:work 프로젝트 세팅 모드로 AGENTS.md 골격 생성(승인 후).
+- 반복 업무 프로젝트에는 sz:work 프로젝트 세팅 모드로 AGENTS.md(정본)+CLAUDE.md(@AGENTS.md 포인터, 빈 파일 금지)를 함께 생성(승인 후).
 
 ## 5. 조사 규칙 (정본: sz:uz-research references)
 - 인용 4분류 VERIFIED/SECONDARY/NOT_FOUND/MISMATCH · 원문 접근 상한 3곳·5회 · 심도 3모드(8분 초과 사전 고지) · 1차 출처 발표일 기준.

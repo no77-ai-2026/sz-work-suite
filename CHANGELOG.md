@@ -23,3 +23,8 @@
 - Approval gate (HARD): file deliverables / multi-step chains require plan + explicit user approval before execution; no unsolicited deliverables
 - Project instruction files: read & obey AGENTS.md/CLAUDE.md first; propose evolution-log entry after each deliverable (opt-in); lightweight project setup mode (4-question interview -> AGENTS.md skeleton)
 - Language rule extended to KO/EN/RU/UZ across sz:work, common-rules and 6 SZ-specific skills; Korean-only QA steps skipped with notice for non-Korean outputs
+
+# sz v1.1.2 (2026-08-18)
+- Fix: project setup now ALWAYS creates CLAUDE.md pointer (@AGENTS.md) alongside AGENTS.md — empty CLAUDE.md silently broke auto-loading of project rules in new sessions
+- Templates embedded: work/references/templates/AGENTS.md.tmpl + CLAUDE.md.tmpl (verbatim copy, no-backtick warning)
+- Doctor check: detect empty/broken CLAUDE.md pointer and propose repair (opt-in)

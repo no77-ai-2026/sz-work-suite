@@ -3,7 +3,7 @@ name: kb-article
 description: |
   고객지원 지식베이스 문서를 작성합니다 트리거: "FAQ 만들어줘", "트러블슈팅 가이드 작성해줘", "헬프센터 아티클 써줘"
 user-invocable: true
-version: 1.1.1
+version: 1.1.2
 ---
 ## 스킬 개요(상세)
 
