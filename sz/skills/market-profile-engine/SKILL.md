@@ -10,7 +10,7 @@ description: |
   - "bozor profili" (시장 프로필, UZ)
   sz:creative-wizard·sz:creative-architect가 현지화 오버레이로 호출합니다. 심층 시장 규모/경쟁은 sz:market-analyst, 규제 점검은 commerce-marketing-compliance-kr(미포함)로 이어집니다.
 user-invocable: true
-version: 1.1.3
+version: 1.2.0
 ---
 
 # 시장 프로필 엔진 (Market Profile Engine)

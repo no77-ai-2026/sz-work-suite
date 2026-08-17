@@ -1,20 +1,57 @@
-# {프로젝트명} — AGENTS.md (정본)
+# {project_name} — Cowork 작업 지침
 
-> 생성 {날짜} · SZ Work Suite. 공통 규칙 정본: sz:work references/common-rules.md — 본문과 상충 시 정본 우선.
-> 산출물 등급제: ⚡초안(기본) / ◐작업본("다듬어줘") / ◆최종본("최종·납품·제출" 명시 시만).
+> SZ v{version} | 생성일 {date}
+> 설치 번들: {installed_bundles}
+> 주요 산출물: {primary_deliverables}
 
-## 1. 프로젝트 목적
-{목적 1~3줄}
+---
 
-## 2. HARD 규칙
-1. {프로젝트 고유 규칙 — 익명화·양식·금칙어 등}
+## 1. 프로젝트 개요
 
-## 3. 산출물별 워크플로우
-| 산출물 | 요청 예시 | 체인 |
-|---|---|---|
-| {유형} | "{예시}" | {sz:스킬 → sz:스킬} |
+**목적**: {project_purpose}
+**대상 독자/고객**: {audience}
+**톤·형식 제약**: {tone_constraints}
 
-## 4. 언어
-요청 언어(KO/EN/RU/UZ)로 응답. {병기 규칙 필요 시}
+## 2. 공통 규칙 (HARD — 정본 참조)
+
+공통 HARD 규칙(산출물 등급제 ⚡◐◆ · 행동 원칙 · 요청 평가 사다리 · 파일 생성 기준 · 스킬 우선순위 · AI 슬롭 후처리 · 인용·저작권 가드 · 톤 · 맥락 적용 · 장시간 작업 고지)은 **sz:work 스킬의 `references/core/common-rules.md` 정본**을 따른다. 이 파일에 복제하지 않는다.
+
+- 이 프로젝트의 **기본 등급**: {default_grade} (미지정 시 ⚡초안)
+- 이 프로젝트의 **◆최종본 기본 포맷**: {final_format}
+{project_hard_overrides}
+
+## 3. 프로젝트 워크플로우 (스킬 체인)
+
+{workflow_chains}
+
+<!--
+예시:
+### 블로그 발행
+- 요청 예시: "AI 스킬 체인 블로그 글 써줘"
+- 체인(⚡): `sz:blog` / (◆): + ai-slop-reviewer → humanize-korean → korean-spell-check
+- 입력: 주제, 키워드, 목표 독자 / 출력: Markdown 포스트
+-->
+
+## 4. 라우팅 요약
+
+{routing_summary}
+
+## 5. 커넥터 / API 키
+
+{connectors_and_apikeys}
+
+## 6. 상세 참조 (지연 로드)
+
+프로젝트별 상세 자료(스타일 가이드·레퍼런스·도메인 노트)는 `.sz/refs/`에 두고, **관련 요청일 때만** 해당 파일을 읽는다. 세션 시작 시 전체를 로드하지 않는다.
+
+{sz_refs_index}
+
+## 7. 프로젝트 맥락
+
+{project_context_notes}
 
 <!-- evolution-log -->
+
+---
+
+**작업을 요청하면 위 체인이 자동으로 트리거됩니다. 자연스럽게 대화하세요.**

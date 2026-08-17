@@ -3,7 +3,7 @@ name: commerce-automation-audit
 description: |
   [책임 경계] 셀러 운영 자체 진단 + 자동화 우선순위 점수 산정 + 3 Phase 로드맵 자동 생성 전담 트리거: "커머스 업무 자동화", "자동화 진단해줘", "내 매장 자동화 우선순위"
 user-invocable: true
-version: 1.1.3
+version: 1.2.0
 ---
 ## 스킬 개요(상세)
 

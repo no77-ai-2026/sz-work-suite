@@ -3,7 +3,7 @@ name: negotiation-1on1
 description: |
   1:1 면담을 준비하고, 상대를 설득하거나 무언가를 요청·협상할 때 대화를 설계해 주는 스킬입니다
 user-invocable: true
-version: 1.1.3
+version: 1.2.0
 ---
 ## 스킬 개요(상세)
 

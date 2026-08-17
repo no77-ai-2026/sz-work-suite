@@ -32,3 +32,7 @@
 # sz v1.1.3 (2026-08-18)
 - Audit fixes: legacy .gil/ paths -> .sz/ (3 skills); YAML description marker unified; optional .sz/refs guidance in project setup
 - README: Getting started (first-run guide, KO/EN) + Known limitations section
+
+# sz v1.2.0 (2026-08-18)
+- sz:work upgraded to FULL gil:project port (individual-use mode): Socratic interview init, AGENTS.md(<=100 lines)+CLAUDE.md pointer+.sz/ scaffold+.claude/agents custom agents, approval-based self-improvement (/work evolve), /work update sync, /work doctor diagnostics (incl. empty-pointer repair), legacy CLAUDE.md migration, 13 core protocol refs + templates
+- SZ extensions preserved: KO/EN/RU/UZ language rule, SZ-specific 6-skill routing table, output grade system (core common-rules SSOT)

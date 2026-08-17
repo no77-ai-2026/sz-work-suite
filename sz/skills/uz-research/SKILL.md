@@ -3,7 +3,7 @@ name: uz-research
 description: |
   우즈베키스탄 법규·정책·경제지표·시장 조사의 SZ 표준 엔진 — T1/T2/T3 소스 신뢰도, 인용 4분류, 원문 접근 상한, 조사 심도 3모드. 트리거: "우즈벡 규정 조사해줘", "UZ 시장 동향 확인", "이 정책 사실 확인"
   EN: SZ standard engine for researching Uzbekistan laws, policies, economy and markets — source tiers T1/T2/T3, 4-level citation tags, depth modes. Triggers: "research UZ regulation", "check this UZ policy", "UZ market trend"
-version: 1.1.3
+version: 1.2.0
 ---
 
 # sz:uz-research — 우즈베키스탄 조사 엔진 (SZ 정본)

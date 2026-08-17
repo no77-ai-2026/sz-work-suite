@@ -3,7 +3,7 @@ name: spec-writer
 description: |
   제품 기획 문서(PRD·기능 명세서)와 AI 도입 전략 보고서를 만들어 드립니다 트리거: "PRD 작성해줘", "기능 명세서 만들어줘", "AI 도입 전략 보고서 써줘"
 user-invocable: true
-version: 1.1.3
+version: 1.2.0
 ---
 ## 스킬 개요(상세)
 

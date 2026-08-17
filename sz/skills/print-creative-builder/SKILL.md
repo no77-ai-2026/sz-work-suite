@@ -10,7 +10,7 @@ description: |
   - "bosma reklama" (인쇄 광고, UZ)
   sz:creative-architect 설계를 입력으로 받아 sz:pdf-writer로 PDF를 조립하고, 배경은 image-bridge(미포함)로 렌더합니다. 인쇄 규격 후처리는 인쇄소 프리플라이트 전제입니다.
 user-invocable: true
-version: 1.1.3
+version: 1.2.0
 ---
 
 # 인쇄물 빌더 (Print Creative Builder)

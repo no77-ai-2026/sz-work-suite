@@ -3,7 +3,7 @@ name: doc-formats
 description: |
   SZ 문서 양식 레이어 — 공문·품의서·회의록·주간보고·출장보고의 표준 골격과 필수 항목을 규정하고 파일 생성은 docx/pptx/xlsx 스킬에 위임. 트리거: "품의서 써줘", "공문 양식으로", "출장보고서 만들어줘"
   EN: SZ document format layer — official letters, approval requests, minutes, weekly and trip reports; delegates file creation to docx/pptx/xlsx. Triggers: "draft an approval request", "official letter format", "trip report"
-version: 1.1.3
+version: 1.2.0
 ---
 
 # sz:doc-formats — SZ 문서 양식 레이어

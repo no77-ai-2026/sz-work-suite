@@ -10,7 +10,7 @@ description: |
   - "material tahlili" (자료 분석, UZ)
   방법론 #7(후기 선분석)·#9(벤치마크 흐름 계승)를 담당합니다. 후기 대량 분석은 sz:commerce-voc-triage, 상품 사진 분석은 sz:product-photo-brief로 이어지고, 결과는 sz:creative-architect 설계 입력으로 전달됩니다.
 user-invocable: true
-version: 1.1.3
+version: 1.2.0
 ---
 
 # 자료·벤치마크 분석기 (Material Analyzer)

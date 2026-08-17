@@ -3,7 +3,7 @@ name: design-tokens-transformer
 description: |
   하나의 브랜드 토큰을 3계층(DTCG SSOT ↔ 원시 CSS 변수 ↔ semantic/shadcn 롤)으로 양방향 변환합니다. 트리거: "DTCG 토큰을 CSS 변수로 변환", "디자인 토큰 3계층 매핑", "shadcn semantic 롤 생성"
 user-invocable: true
-version: 1.1.3
+version: 1.2.0
 uz: n/a
 origin: moai-cowork@f1eb954
 ---

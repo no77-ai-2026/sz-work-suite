@@ -3,7 +3,7 @@ name: commerce-repurchase-timer
 description: |
   [책임 경계] 재구매 타이밍 엔진 트리거: "재구매 시점 알려줘", "골든타임 3구간", "리마인드 메시지 시점"
 user-invocable: true
-version: 1.1.3
+version: 1.2.0
 ---
 ## 스킬 개요(상세)
 

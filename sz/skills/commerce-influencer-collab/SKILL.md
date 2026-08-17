@@ -3,7 +3,7 @@ name: commerce-influencer-collab
 description: |
   [책임 경계] 인플루언서·UGC 협업 가이드 전담 트리거: "인플루언서 협업", "뒷광고 회피", "체험단 운영"
 user-invocable: true
-version: 1.1.3
+version: 1.2.0
 ---
 ## 스킬 개요(상세)
 

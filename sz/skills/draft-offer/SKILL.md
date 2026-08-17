@@ -3,7 +3,7 @@ name: draft-offer
 description: |
   채용 제안서와 근로계약서를 작성해주는 스킬입니다 트리거: "오퍼 레터 만들어줘", "근로계약서 초안 작성해줘", "연봉 협상 문서 써줘"
 user-invocable: true
-version: 1.1.3
+version: 1.2.0
 ---
 ## 스킬 개요(상세)
 

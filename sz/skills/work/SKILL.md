@@ -1,68 +1,190 @@
 ---
 name: work
 description: |
-  SZ Work Suite 진입 오케스트레이터 — 요청을 팀·스킬 체인·코디네이터로 라우팅, 산출물 등급제(⚡초안/◐작업본/◆최종본)와 승인 게이트 적용, 프로젝트 지침(AGENTS.md) 준수·갱신. 트리거: "이 업무 어떻게 처리해", "프로젝트 세팅해줘", "최종본으로 만들어줘", "/work"
-  EN: Entry orchestrator for SZ Work Suite — routes requests to team skill chains and coordinators, applies output grades (draft/working/final), approval gates, and project instruction files (AGENTS.md). Triggers: "how should I handle this task", "set up this project", "make it final quality", "/work"
-version: 1.1.3
+  SZ Work Suite(sz 단일 플러그인)의 **프로젝트 초기화 단일 진입점**. `/work 자연어-지시`로 진입하는 Cowork 슈퍼 오케스트레이터다. 소크라테스 인터뷰로 맥락을 파악하고, 설치된 번들 인벤토리를 스캔한 뒤, 프로젝트 전용 커스텀 에이전트와 스킬 체인을 설계해 AGENTS.md(정본, ≤100라인)와 CLAUDE.md(@AGENTS.md 포인터)·.claude/agents/·.sz/ 스캐폴드를 생성한다. 이후 사용 신호를 감지하면 승인형 자가 개선을 수행한다.
+  트리거: "/work ...", "/work update", "/work evolve", "/work doctor", "새 프로젝트 시작", "AGENTS.md 만들어줘", "CLAUDE.md 만들어줘", "프로젝트 설정 도와줘", "이어서 진행"·"설치 완료"(재개), "지침 업데이트해줘"·"플러그인 업데이트됐어"(동기화), 비개발 자연어 요청의 번들 라우팅. 이름·회사 같은 글로벌 프로필은 재질문하지 않는다.
+user-invocable: true
+version: 1.2.0
+origin: "modu-ai/moai-cowork@f1eb954 (sz project 1.3.0, Apache-2.0) — SZ 등급제·2층 지침·승인형 자가 개선으로 재설계"
 ---
 
-# sz:work — SZ Work Suite 진입 오케스트레이터
+# project — 프로젝트 초기화 단일 진입점
 
-공통 규칙 정본: `references/common-rules.md` (등급제·승인 게이트·QA 체인·조사 규칙·언어 규칙)
+사용자는 이 프로젝트에서 **무엇을 할지** 말해주면 됩니다. `/project`가 소크라테스 인터뷰로 맥락을 파악하고, 설치된 SZ 플러그인을 스캔해 프로젝트 전용 커스텀 에이전트와 스킬 체인을 설계한 뒤 `AGENTS.md`(정본)와 `CLAUDE.md`(포인터), `.claude/agents/`를 생성합니다.
 
-## 언어 규칙 (HARD)
-**요청 언어로 대화·산출한다 — 한국어/영어/러시아어/우즈벡어(KO/EN/RU/UZ).** 사용자가 러시아어로 물으면 러시아어로 진행한다. 공식 문서는 요청 시 KO/EN 또는 KO/RU 병기. 한국어 전용 QA 단계(humanize-korean·korean-spell-check)는 비한국어 산출물에서 생략하고 1줄 고지하며, ai-slop-reviewer와 수치 재검산은 전 언어에 적용한다.
+## 개요
 
-## 승인 게이트 (HARD)
-- **파일 산출물·다단계 체인·대량 작업은 착수 전에 계획을 제시하고 사용자 명시 승인 후 시작한다.** 계획에는 산출물 목록·단계·(변경 작업이면) 전/후 비교를 담는다.
-- 예외: 단순 질문 답변, 1회성 텍스트 초안, 사용자가 이미 형식·내용을 특정한 소규모 요청.
-- 임의 선제작 금지 — 요청받지 않은 보고서·문서를 미리 만들지 않는다.
+이 스킬은 모든 Claude Cowork 프로젝트의 슈퍼 오케스트레이터다. `conversation_language`로 대화하며, 모든 사용자 확인은 `AskUserQuestion`로만 수행한다. 이 스킬이 생성하는 하위 에이전트는 사용자에게 직접 질문하지 않고 blocker report만 반환한다(subagent 경계).
 
-## 산출물 등급제 (HARD)
-| 등급 | 트리거 | 처리 |
-|---|---|---|
-| ⚡ 초안 | 기본값 | 검수 체인 없음 |
-| ◐ 작업본 | "다듬어줘" | `sz:ai-slop-reviewer` 1회 |
-| ◆ 최종본 | "최종", "납품", "제출", "보고용", "발행" | `sz:ai-slop-reviewer` → (한국어) `sz:humanize-korean` → `sz:korean-spell-check` + 수치 재검산 |
+**커버리지**: 사업·콘텐츠·창작·커머스·문서·법무·재무·인사·교육·데이터·디자인 — 전 도메인. 개발 프로젝트 초기화는 범위 밖(§개발 요청 처리).
 
-## 프로젝트 지침 준수·갱신 (HARD)
-1. 프로젝트 폴더에 `AGENTS.md` 또는 `CLAUDE.md`가 있으면 **먼저 읽고 그 규칙을 본 스킬 기본값보다 우선** 적용한다.
-2. 산출물 완료 시 지침 파일 말미의 evolution log에 1줄(날짜·산출물·변경 요지) 추가를 **제안**한다 — 승인형: 사용자가 동의한 경우에만 파일을 수정하고, 무단 수정하지 않는다.
-3. 지침 파일이 없고 반복 작업이 예상되면 프로젝트 세팅(아래)을 1회 제안한다.
-4. **닥터 체크**: 프로젝트 확인 시 `CLAUDE.md`가 비어 있거나 `@AGENTS.md` 임포트 줄이 없으면(백틱으로 감싼 경우 포함 — 조용히 실패함) 결함으로 보고하고, `@AGENTS.md` 포인터 채움을 제안한다(승인형).
+**구 커맨드 폐기**: `/work init`·`/work init resume`·`/work catalog`·`/work status`·`/work apikey`는 v2.0.0에서 폐기 — 전부 자연어로 라우팅한다("새 프로젝트 시작해줘"·"설치 완료했어"·"어떤 스킬 있어?"·"지금 상태 어때?"·"API 키 설정할래"). 명시적 서브커맨드는 `update`·`evolve`·`doctor` 3개만 남는다.
 
-## 프로젝트 세팅 모드
-"프로젝트 세팅해줘" → ① 목적 ② 담당 팀·주 사용자 ③ 주요 산출물 유형 ④ 특수 규칙(익명화·양식 등) 4문항 인터뷰 → 승인 후 **두 파일을 반드시 함께 생성**한다:
-1. `AGENTS.md` (정본) — `references/templates/AGENTS.md.tmpl` 치환: 목적 / HARD 규칙 / 산출물 워크플로 / 언어 / evolution log 섹션.
-1-1. (선택) 참조 폴더 `.sz/refs/` — 긴 규칙·용어집·양식 상세는 AGENTS.md 본문 대신 여기 두고 1줄 참조한다.
-2. `CLAUDE.md` (포인터) — `references/templates/CLAUDE.md.tmpl`을 **그대로 복사**. 내용은 `@AGENTS.md` 한 줄 + 주석. **CLAUDE.md를 빈 파일로 두거나 임포트 줄을 백틱으로 감싸는 것 금지(HARD)** — 자동 로드가 조용히 실패해 새 세션에서 프로젝트 규칙이 무시된다.
-기존 CLAUDE.md에 별도 내용이 이미 있으면 덮어쓰지 말고 최상단에 `@AGENTS.md` 줄 추가를 제안한다.
+---
 
-## 라우팅 맵 (요청 → 1차 목적지)
-| 요청 유형 | 목적지 |
+## 산출물 등급제 (⚡◐◆ — v2.0.0 핵심)
+
+정본은 `references/core/common-rules.md` §1. 요약: **기본값 ⚡초안(검수 체인 없음, 채팅/md)** / ◐작업본(ai-slop-reviewer 1회, md·html) / ◆최종본("최종·납품·발행" 명시 시만 — 풀 체인 ai-slop-reviewer → humanize-korean → korean-spell-check + 3중 QA, 프로젝트 기본 포맷). 이 스킬이 생성하는 모든 AGENTS.md·에이전트는 이 등급제를 내장하며, 과거의 "모든 텍스트 무조건 풀 체인" 배선을 만들지 않는다.
+
+---
+
+## Socratic Interview (2-Stage)
+
+이 프로젝트에서 **무엇을·어떻게** 처리할지만 인터뷰한다. 글로벌 프로필은 재질문하지 않는다. 질문은 항상 `AskUserQuestion` 설문으로, 한 라운드에 묶어서 낸다.
+
+| 단계 | 목적 | 호출 | 구성 |
+|---|---|---|---|
+| **S1 일괄 진단** | 필요 맥락을 한 번에 확보 | `AskUserQuestion` 1회 | 질문 풀에서 정보 이득 순 최대 4개 |
+| **S2 보강** | S1의 공백·모호성만 | 필요할 때만 | 부족분을 다시 한 번에. 충분하면 0회 |
+
+**S1 질문 풀**: ① 업무 유형(multiSelect) ② 주요 산출물 ③ 대상 독자 ④ 톤·형식 제약 ⑤ 산출물 포맷(◆최종본 기본 포맷 지정) ⑥ 작업 주기 ⑦ 기존 자료 유무 ⑧ 피해야 할 것 ⑨ 배경·동기.
+
+**규칙 (HARD)**: 한 라운드 = 한 호출(1개씩 연속 호출 금지) · 1회 최대 4질문×4옵션 · 이미 A등급 확립 축은 제외하고 4슬롯을 채움 · 모든 옵션에 description 필수, 첫 옵션에만 `(권장)`.
+
+**S2 발동**: (a) 필수 축 공백 (b) Other·저신뢰 응답 (c) 답변 상충 (d) 4슬롯 제한으로 못 물은 필수 축. **종료**: A등급+필수 B등급 충족 시. S2 2회 초과 시 「지금 아는 것으로 진행」 선택지 배치.
+
+**맥락 등급**: A(AGENTS.md에서 즉시 획득 — 질문 없이 사용) / B(핵심 맥락, 80%+ 권장 — S1 배치) / C(보강 — 고위험 산출물만 S2). 재질문 금지. 상세: `references/core/init-protocol.md` + `references/core/context-collector.md`.
+
+**재진입 확인 (S3)**: 대상 프로젝트에 이미 `AGENTS.md`(또는 구 방식 `CLAUDE.md`)·`.sz/`(구 `.moai/`)가 있으면 덮어쓰기 전 `AskUserQuestion` 확인(재생성/부분 수정/취소). 침묵 덮어쓰기 금지. `CLAUDE.md`가 포인터가 아니라 전체 지침을 담고 있으면 **레거시 프로젝트**이므로 `references/core/agentsmd-generator.md` §7.1 마이그레이션을 먼저 적용한다(SZ v1.x 프로젝트 33개가 이 케이스다).
+
+---
+
+## Plugin Inventory Scan
+
+체인 설계 **전에** `~/.claude/plugins/`를 스캔해 설치된 SZ 플러그인(`sz`·`sz-creative`·`sz-commerce`)을 확인한다. 스킬 수는 하드코딩하지 않는다 — 각 번들 `plugin.json`+`skills/` 실측이 정본이다. 결과는 `.sz/config.json`에 스냅샷 저장.
+
+**Gap Detection**: 설계 체인의 스킬이 미설치 번들 소속이면 `AskUserQuestion` 4옵션(설치 안내+재개 권장 / 제외하고 진행 / 대체 스킬 / 중단). "설치 완료"·"이어서 진행" 발화로 재개를 감지한다. **경계 규칙**: 타 번들 참조는 설치 시에만 체이닝 — 미설치면 해당 단계 생략+1줄 고지.
+
+---
+
+## Custom Agent & Skill-Chain Design
+
+`.claude/agents/*.md`는 프로젝트 전용으로 매번 새로 설계한다(프리빌트 복사 금지). 반복 작업 유형별 1개만 생성(과잉 생성 금지).
+
+1. 인터뷰 답변 + 인벤토리 + 재진입 시 `.sz/context.md`, 3종 입력 종합
+2. 산출물별 체인 설계: `[기획/분석] → [생성] → [포맷/미디어]` + **등급제 검수**(⚡없음/◐slop 1회/◆풀 체인)
+3. 에이전트 본문에 7-step 루프 + 프로젝트 맥락 내장: ① 요청 평가 → ② 인터뷰 → ③ 요약 확인 → ④ 계획+완료 기준 → ⑤ 승인 → ⑥ 순차 실행 → ⑦ 등급별 검수 + 「확인 필요 항목」
+4. frontmatter 최소 권한: `name`·`description`·`tools`(최소 목록, `Agent` 툴 제외 — 중첩 스폰 차단)
+5. 각 체인을 `AGENTS.md` §워크플로우 표에 기록해 자연어 라우팅 배선
+
+**검증 깊이(위험 비례)**: QUICK/NORMAL/DEEP — `references/core/execution-protocol.md`. 법무·세무·재무·계약은 DEEP + `sz:contract-review`의 조사 심도 3모드(⚡Quick/◐Standard/◆Deep, 8분 초과 사전 고지) 연동.
+
+---
+
+## Generation Targets (2층 지침 구조)
+
+Phase 5 확인 후 생성:
+
+1. **`AGENTS.md`(정본, ≤100라인) + `CLAUDE.md`(@AGENTS.md 포인터)** — 정본은 한 파일, 본문 복제 금지. **공통 HARD 규칙은 AGENTS.md에 복제하지 않는다** — `references/core/common-rules.md`(플러그인 SSOT)를 1줄 참조하고, AGENTS.md에는 프로젝트 고유 맥락(개요·등급 기본값·워크플로우 표·라우팅·커넥터·맥락 노트)만 담는다. 템플릿: `references/templates/AGENTS.md.tmpl`(치환) + `references/templates/CLAUDE.md.tmpl`(그대로 복사). 임포트 줄 백틱 감싸기 금지(조용히 실패).
+2. **`.sz/refs/` (지연 로드 층)** — 프로젝트별 상세 자료(스타일 가이드·도메인 노트·레퍼런스)는 여기 두고 AGENTS.md §상세 참조 인덱스에서 관련 요청일 때만 읽게 배선한다. 세션 고정 부하를 늘리지 않는다.
+3. **`.claude/agents/*.md`** — 반복 작업 유형별 1개. (Codex/ChatGPT Work 병용 사용자가 명시 요청할 때만 `.codex/agents/*.toml` 병행 생성 — 기본은 생성 안 함.)
+4. **`.sz/` 스캐폴드** — `config.json`(메타+언어+번들 스냅샷) · `context.md`(인터뷰 요약) · `credentials.env`(GUIDANCE 전용 — 실제 값 기록 금지) · `refs/` · `evolution/`(자가 개선 기록).
+
+---
+
+## Recursive Self-Improvement (승인형 절충안)
+
+셋업된 프로젝트는 사용하면서 개선된다. 단일 단순화 모델만 사용한다(점수화·반성 에세이 없음, 전부 1줄 단위).
+
+**4가지 트리거** (영문 토큰이 기계 앵커): ① `repeated correction` — 같은 행동 수정 요청 2회+ ② `chain failure` — 체인이 같은 단계에서 반복 실패 ③ `/work evolve` 수동 ④ `inventory drift` — 번들 스냅샷 불일치.
+
+**신호 영속화 (HARD)**: 신호 감지 즉시 `.sz/evolution/signals.md`에 1줄 기록(`날짜 | 토큰 | 대상 | 요지`). 반복 판정은 대화 기억이 아니라 **이 파일을 세어서** 한다 — 세션이 바뀌어도 유실되지 않는다.
+
+**승인 절충 (HARD — SZ 고유)**: 개선 diff의 승인 경로는 대상에 따라 갈린다.
+- **HARD 규칙·보안·자격증명·인용 가드 관련 지침 변경** → **사전 승인**: diff 요지를 AskUserQuestion으로 제시하고 승인 후 적용.
+- **형식·스타일·체인 순서·문구 수준 변경** → **선적용·후보고**: 최소 diff 적용 후 변경 요지 1-3줄 보고.
+
+**개선 사이클**: 신호 → 진단(AGENTS.md vs 에이전트 vs 체인) → 최소 diff(전면 재작성 금지) → 승인 경로 분기 → `<!-- evolution-log -->`에 1줄 기록. diff 적용 전 원문 조각을 `.sz/evolution/`에 남겨 롤백 가능해야 한다.
+
+**검증+롤백 (HARD)**: 적용 후 같은 토큰+같은 대상 신호가 재발동하면 실패한 개선 — 원문 조각으로 되돌리고 자동 재수정 대신 사용자에게 1-3줄 보고. **가드레일 (HARD)**: 수정 대상은 `AGENTS.md`+`.claude/agents/`만(evolution 기록 제외), 1회 최대 3파일. 스킬 본문·플러그인 파일은 건드리지 않는다. evolution-log는 최근 10건만 유지, 초과분은 `.sz/evolution/log.md` 이관. 개선 후 100라인 예산 재검증.
+
+---
+
+## Plugin Update Synchronization (`update`)
+
+`/work update`는 번들 업데이트 직후 프로젝트를 최신 인벤토리에 동기화하는 수동 스위치 — `inventory drift`를 즉시·전수조사로 강제 실행한다. 자가 개선 가드레일(승인 절충·3파일 상한) 계승. 절차 5단계(전수조사 → 세션 신호 분석 → AGENTS.md·에이전트 최소 diff 동기화 → 스냅샷 갱신 → 검증·롤백): 정본 `references/core/update-protocol.md`. 미설치 프로젝트(`AGENTS.md`·`.sz/` 없음)면 동기화 대상이 없다 — 최초 셋업으로 안내(침묵 생성 금지).
+
+---
+
+## 라우팅
+
+| 발화 맥락 | 분기 |
+|-----------|------|
+| 개발·코딩·SPEC·개발환경 | §개발 요청 처리 |
+| 그 외 전부 | 이 스킬이 직접 처리 |
+| 불명확 | `AskUserQuestion` |
+
+번들 키워드 매핑(sz 코어/creative/commerce)·모호성 해소·복합 요청은 `references/core/router.md`가 단일 진실 원천. 디자인 중심이면 `references/core/designer-setup.md` 서브 프로토콜.
+
+---
+
+## 워크플로우 (8-Phase)
+
+```
+Phase 1 인터뷰 → 2 인벤토리 → 3 체인 설계 → 4 Gap Detection
+  → 5 확인 → 6 지침 생성(AGENTS.md+CLAUDE.md 포인터+.sz/refs) → 7 커스텀 에이전트 → 8 API 키+첫 실행 안내
+```
+
+상세: `references/core/cowork-setup.md`(8-Phase 정본) + `references/core/designer-setup.md`(디자인 5-Phase).
+
+## 커맨드 표면
+
+| 커맨드 | 동작 |
+|--------|------|
+| `/work <지시>` | 진입 — 인터뷰→설계→생성. **PRIMARY.** |
+| `/work update` | 번들 업데이트 후 전수조사→재동기화 |
+| `/work evolve` | 자가 개선 수동 발동 |
+| `/work doctor` | 환경 진단 (`references/core/diagnostic-protocol.md`) |
+
+## 저장 위치
+
+- 정본 지침: `./AGENTS.md`(≤100라인) · 포인터: `./CLAUDE.md`(@AGENTS.md)
+- 에이전트: `./.claude/agents/*.md` · 설정: `./.sz/config.json` · 맥락: `./.sz/context.md`
+- 지연 로드: `./.sz/refs/` · 개선 기록: `./.sz/evolution/` · 키 안내: `./.sz/credentials.env`(GUIDANCE 전용)
+- 템플릿: `references/templates/AGENTS.md.tmpl` + `references/templates/CLAUDE.md.tmpl` · UZ 프로필: `references/templates/sz-profile-uz.md`
+
+## 상세 레퍼런스 (`references/core/`)
+
+| 파일 | 역할 |
+|------|------|
+| `common-rules.md` | **전 프로젝트 공통 HARD 규칙 정본(SSOT)** — 등급제·행동 원칙·평가 사다리·파일 기준·스킬 우선순위·슬롭 후처리·인용 가드·톤·맥락 적용·장시간 고지 |
+| `router.md` | 자연어 → 번들 키워드 매핑·모호성 해소 |
+| `cowork-setup.md` | 8-Phase 정본 |
+| `designer-setup.md` | 디자인 자산 5-Phase 서브 프로토콜 |
+| `init-protocol.md` | 인터뷰 스키마·인벤토리 스캔·Gap Detection·재개 |
+| `context-collector.md` | 맥락 등급 A/B/C·2-Stage 설문 |
+| `agentsmd-generator.md` | AGENTS.md 치환·100라인 예산·포인터 규칙·레거시 마이그레이션 |
+| `execution-protocol.md` | 체인 실행·검증 깊이 |
+| `evaluation-protocol.md` | 5차원 산출물 평가 |
+| `quality-evaluator.md` | 결정론적 품질 게이트 |
+| `diagnostic-protocol.md` | 환경 진단·상태 조회 |
+| `update-protocol.md` | 업데이트 동기화 |
+| `INDEX.md` | 전체 인덱스 |
+
+## 개발 요청 처리
+
+**범위 (HARD)**: SZ은 비개발 코워크 전용이다. 개발 셋업 산출물(hooks·LSP·output-styles 포함)은 어떤 경로에서도 생성하지 않는다. 개발 의도가 보이면 범위 밖임을 안내하고 비개발 초기화로 안내한다.
+
+## 주의사항
+
+1. **글로벌 프로필 질문 금지** — 사용자 정보는 AGENTS.md 한 곳에만.
+2. **project 스킬은 구현하지 않는다** — 라우팅·셋업·자가 개선 배선만. 실무 체인은 각 번들 스킬에 위임.
+3. **번들 정합** — 스킬 참조는 `sz:`·`sz:`·`sz:` 접두어. 로스터는 설치 번들 실측(하드코딩 금지). `router.md`가 매핑 정본.
+
+## SZ 확장 (sz 고유 — 원형 프로토콜에 추가 적용)
+
+### 언어 규칙 (HARD)
+요청 언어로 대화·산출한다 — **KO/EN/RU/UZ**. 공식 문서는 요청 시 KO/EN 또는 KO/RU 병기. 한국어 전용 QA(humanize-korean·korean-spell-check)는 비한국어 산출물에서 생략+1줄 고지, ai-slop-reviewer·수치 재검산은 전 언어 적용. AGENTS.md 생성 시 이 규칙을 §언어에 기본 반영한다.
+
+### SZ 특화 스킬 라우팅 (router 보조표)
+| 요청 | 목적지 |
 |---|---|
-| 전략·사업계획·IR | business-plan-coordinator |
-| 텍스트 최종 검수 | core-text-qa-coordinator |
-| 데이터 분석·시각화·리포트 | data-analysis-coordinator |
-| 결산·재무제표·변동분석 | finance-report-assembler |
-| 채용·온보딩·인사 | hiring-coordinator |
-| 계약·NDA·법적 리스크 | legal-review-coordinator |
-| 프로세스·벤더·회의→보고 | operations-coordinator |
-| 제안서 작성·마감 | sales-proposal-coordinator |
-| 고객 문의 분류·응대 | support-ticket-triage-batch |
-| 교육·연수 설계 | education-course-builder |
-| UX·제품 기획 | product-ux-audit-coordinator |
-| 마케팅 캠페인·감사·콘텐츠 | marketing-campaign-coordinator / marketing-audit-coordinator / content-publishing-pipeline |
-| 커머스 런칭·성장·상세페이지 | commerce-launch-coordinator / commerce-growth-analyst / commerce-detail-page-builder |
-| UZ 조사·검증 | sz:uz-research |
-| 리스크 센싱·브리핑 | sz:risk-radar |
-| 공문·품의·보고 양식 | sz:doc-formats |
-| 통관·보세·수출입 | sz:trade-logistics |
+| UZ 법규·시장 조사·검증 | sz:uz-research (조사 규칙 정본) |
+| 리스크 센싱·등급·브리핑 | sz:risk-radar |
+| 공문·품의·회의록·출장보고 양식 | sz:doc-formats |
+| 통관·보세창고·수출입 | sz:trade-logistics |
 | 재고실사 사진 대조 | sz:sample-log |
-| ISA 판매 검증·인센티브 | sz:sales-verify |
-단일 스킬로 끝나는 요청은 코디네이터 없이 해당 스킬 직행.
+| ISA 판매 검증·세일즈 인센티브 | sz:sales-verify |
 
-## 실행 원칙 (HARD)
-1. 8분 초과 예상 작업은 착수 전 소요·모드(⚡/◐/◆) 1회 고지 후 사용자 선택.
-2. 조사와 문서화는 2단 분리(조사 확정 → 문서화 승인).
-3. 다단계 체인은 계획 승인 후 진행하며, 단계 완료마다 간결히 보고.
+### 닥터 보강
+`/work doctor` 점검 항목에 추가: CLAUDE.md가 비어 있거나 `@AGENTS.md` 임포트가 없음(백틱 감쌈 포함) → 포인터 수리 제안. CLAUDE.md에 본문 지침이 통째로 있으면 레거시 마이그레이션(§7.1) 적용.

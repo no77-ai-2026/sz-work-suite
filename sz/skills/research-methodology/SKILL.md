@@ -3,7 +3,7 @@ name: research-methodology
 description: |
   [한·UZ 듀얼] 연구 질문에 적합한 최신 연구 방법론을 추천·설계합니다
 user-invocable: true
-version: 1.1.3
+version: 1.2.0
 ---
 ## 스킬 개요(상세)
 
