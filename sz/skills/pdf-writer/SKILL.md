@@ -2,8 +2,7 @@
 name: pdf-writer
 description: |
   어떤 콘텐츠든 PDF 파일로 만들어 드립니다 트리거: "PDF로 만들어줘", "PDF로 생성해줘", "PDF로도 생성해줘"
-user-invocable: true
-version: 1.2.0
+version: 2.0.0
 ---
 ## 스킬 개요(상세)
 
@@ -25,7 +24,7 @@ PDF 생성·변환 요청 시 weasyprint를 직접 설치·호출하거나 Claud
 
 # PDF 생성기 (pdf-writer)
 
-> **타 번들 연계**: 본 문서의 `sz:*`·`sz:*` 참조는 해당 번들이 설치된 경우에만 체이닝합니다. 미설치 시 해당 단계를 생략하고 코어 스킬만으로 진행합니다.
+> **타 번들 연계**: 본 문서의 `gil-creative:*`·`gil-commerce:*` 참조는 해당 번들이 설치된 경우에만 체이닝합니다. 미설치 시 해당 단계를 생략하고 코어 스킬만으로 진행합니다.
 
 
 ## 개요
@@ -104,7 +103,7 @@ FONT_DIR = Path("skills/pdf-writer/assets/fonts")
 # 번들 Noto Sans CJK를 @font-face로 등록 (weight별)
 FONT_FACE = "".join(
     f"@font-face{{font-family:'Noto Sans CJK';font-weight:{w};"
-    f"src:url('file://{FONT_DIR}/NotoSansCJK-{n}.otf');}}"
+    f"src:url('{(FONT_DIR / f'NotoSansCJK-{n}.otf').as_uri()}');}}"  # Windows: 문자열 'file://'+경로 조립은 file://C:\... 로 깨짐 → as_uri()
     for w, n in {300: "Light", 400: "Regular", 500: "Medium", 700: "Bold"}.items()
     if (FONT_DIR / f"NotoSansCJK-{n}.otf").exists()
 )
@@ -128,6 +127,13 @@ pip install markdown     # Markdown → HTML 변환 (선택, 없으면 최소 �
 
 > weasyprint는 시스템 라이브러리 `cairo` / `pango` / `gdk-pixbuf`를 사용합니다. 대부분의
 > Cowork 샌드박스 및 Linux/macOS 환경에 기본 포함돼 있어 `pip install weasyprint`만으로 동작합니다.
+>
+> **Windows에서 로컬 실행할 때는 이 라이브러리들이 기본 제공되지 않습니다.** `pip install weasyprint`가
+> 성공해도 `import weasyprint` 단계에서 `cannot load library 'libpango...'`로 실패합니다. GTK 런타임을
+> 먼저 설치해야 합니다 — 아래 §문제 해결의 Windows 행 참조. 설치가 어려운 환경이면 PDF 대신
+> `sz:html-report` 산출물을 브라우저에서 "PDF로 인쇄"하는 경로를 안내하세요.
+>
+> **CJK 폰트 OS별 설치**: Windows — [Google Fonts Noto Sans KR](https://fonts.google.com/noto/specimen/Noto+Sans+KR)에서 받아 압축 해제 → 폰트 파일 전체 선택 → 우클릭 → **설치** / macOS — `brew install --cask font-noto-sans-cjk-kr` / Debian·Ubuntu — `apt install fonts-noto-cjk`
 
 ## 입력 포맷 명세
 
@@ -196,7 +202,8 @@ PDF 생성 후 산출 `.pdf`를 다시 열어 **플레이스홀더 잔존·페�
 |------|------|-----------|
 | 한글/한자가 □□□ 또는 공백 | CJK 폰트 미해결 | `download_fonts.py` 실행으로 번들 OTF 확보, 또는 시스템 `Noto Sans CJK KR` 설치 |
 | `ModuleNotFoundError: weasyprint` | weasyprint 미설치 | `pip install weasyprint` 실행 |
-| `cannot load library 'libpango...'` | 시스템 라이브러리 부재 | (Debian/Ubuntu) `apt install libpango-1.0-0 libpangocairo-1.0-0`, (macOS) `brew install pango` |
+| `cannot load library 'libpango...'` **(Windows)** | GTK 런타임 부재 — Windows는 `pip install`만으로 해결되지 않음 | ① MSYS2 설치 후 **UCRT64 셸**에서 `pacman -S mingw-w64-ucrt-x86_64-pango` (WeasyPrint 공식 안내 기준 — MINGW64 셸의 `mingw-w64-x86_64-pango`가 아님), 그다음 `$env:WEASYPRINT_DLL_DIRECTORIES="C:\msys64\ucrt64\bin"`을 설정하고 **새 터미널**에서 재시도. DLL 경로를 지정하지 않으면 설치해도 Pango를 못 찾는다. ② 또는 [GTK for Windows Runtime 설치본](https://github.com/tschoonj/GTK-for-Windows-Runtime-Environment-Installer/releases). ③ 둘 다 어려우면 `sz:html-report`로 HTML을 만든 뒤 브라우저 "PDF로 인쇄"(Ctrl+P → 대상: PDF로 저장)로 대체 |
+| `cannot load library 'libpango...'` (macOS/Linux) | 시스템 라이브러리 부재 | (Debian/Ubuntu) `apt install libpango-1.0-0 libpangocairo-1.0-0`, (macOS) `brew install pango` |
 | HTML 디자인이 PDF에서 깨짐 | 완성 HTML이 조각으로 오인됨 | 입력에 `<html>`/`<body>` 래퍼 포함, 또는 `--in *.html` 파일로 전달 |
 | 웹폰트(CDN) 미적용 | 오프라인/CDN 차단 | HTML에 폰트를 인라인하거나 시스템 폰트로 대체 (오프라인 PDF는 CDN 의존 회피 권장) |
 | 표가 페이지 경계에서 분리 | CSS 미지정 | `tr { page-break-inside: avoid; }` 추가 |

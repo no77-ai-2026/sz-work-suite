@@ -1,9 +1,9 @@
 # common-rules — 전 프로젝트 공통 HARD 규칙 (플러그인 SSOT)
 
-> **타 번들 연계**: 본 문서의 `sz:*`·`sz:*` 참조는 해당 번들이 설치된 경우에만 체이닝합니다. 미설치 시 해당 단계를 생략하고 코어 스킬만으로 진행합니다.
+> **타 번들 연계**: 본 문서의 `gil-creative:*`·`gil-commerce:*` 참조는 해당 번들이 설치된 경우에만 체이닝합니다. 미설치 시 해당 단계를 생략하고 코어 스킬만으로 진행합니다.
 
 
-> **이 파일이 공통 규칙의 정본이다.** `/project`가 생성하는 각 프로젝트 `AGENTS.md`는 이 파일을 복제하지 않고 1줄로 참조한다("공통 HARD 규칙은 sz:work `references/core/common-rules.md` 정본을 따른다"). 규칙 개정은 이 파일 한 곳에서만 한다 — 33개+ 프로젝트 지침이 동시에 낡는 문제(지침 노화)를 차단하는 2층 구조의 아래층이다.
+> **이 파일이 공통 규칙의 정본이다.** `/work`가 생성하는 각 프로젝트 `AGENTS.md`는 이 파일을 복제하지 않고 1줄로 참조한다("공통 HARD 규칙은 sz:work `references/core/common-rules.md` 정본을 따른다"). 규칙 개정은 이 파일 한 곳에서만 한다 — 33개+ 프로젝트 지침이 동시에 낡는 문제(지침 노화)를 차단하는 2층 구조의 아래층이다.
 
 ---
 
@@ -15,7 +15,7 @@
 |------|--------|-----------|-----------|
 | **⚡ 초안** (기본값) | 별도 지시 없음 | 없음 — 생성 스킬만 실행 | 채팅 답변 또는 .md |
 | **◐ 작업본** | "작업본", "다듬어서", "검수해서" | `sz:ai-slop-reviewer` 1회 | .md / .html |
-| **◆ 최종본** | "최종", "납품", "발행", "제출용" 명시 시**만** | 풀 체인: `sz:ai-slop-reviewer` → `sz:humanize-korean` → `sz:korean-spell-check` + 3중 QA(사실 검증·형식 검증·요구사항 대조) | 프로젝트 기본 포맷(§AGENTS.md 지정 — docx/hwpx/pptx 등) |
+| **◆ 최종본** | "최종", "납품", "발행", "제출용" 명시 시**만** | 풀 체인(§6 한국어 감사 3단): `sz:ai-slop-reviewer` → `sz:korean-spell-check`(민감도 `public`일 때만) → `sz:humanize-korean`(마지막, Phase 6 최종 검수 포함) + 3중 QA(사실 검증·형식 검증·요구사항 대조) | 프로젝트 기본 포맷(§AGENTS.md 지정 — docx/hwpx/pptx 등) |
 
 - 사용자가 포맷을 명시하면 등급 기본 포맷보다 우선한다(오버라이드).
 - 상위 등급 승격은 언제든 가능하다("이거 최종본으로 올려줘" → 기존 초안에 풀 체인 적용).
@@ -50,19 +50,56 @@
 
 | 산출물 | 사용 스킬 | 번들 |
 |---|---|---|
-| DOCX / PPTX / XLSX / HWPX / PDF | `sz:docx-generator` / `sz:pptx-designer` / `sz:xlsx-creator` / `sz:hwpx-writer` / `sz:pdf-writer` | sz |
-| HTML 보고서 / 슬라이드 | `sz:html-report` / `sz:html-slide` | sz |
-| 블로그 / 카드뉴스 / 뉴스레터 / SNS / 카피 | `sz:blog` / `card-news` / `newsletter` / `sns-content` / `copywriting` | sz-creative |
-| 랜딩 페이지 | `sz:landing-page` | sz-creative |
-| 이미지 / 영상 / 음성 | `higgsfield-image(미포함)` / `higgsfield-video` / `audio-gen` | sz-creative |
-| 상세페이지 | `sz:detail-page-copy`(카피) · `detail-page-image`(이미지) | sz-commerce |
+| DOCX / PPTX / XLSX / HWPX / PDF | `sz:docx-generator` / `sz:pptx-designer` / `sz:xlsx-creator` / `sz:hwpx-writer` / `sz:pdf-writer` | gil |
+| HTML 보고서 / 슬라이드 | `sz:html-report` / `sz:html-slide` | gil |
+| 블로그 / 카드뉴스 / 뉴스레터 / SNS / 카피 | `blog(미포함)` / `card-news` / `newsletter` / `sns-content` / `copywriting` | gil-creative |
+| 랜딩 페이지 | `landing-page(미포함)` | gil-creative |
+| 이미지 / 영상 / 음성 | `higgsfield-image(미포함)` / `higgsfield-video` / `audio-gen` | gil-creative |
+| 상세페이지 | `detail-page-copy(미포함)`(카피) · `detail-page-image`(이미지) | gil-commerce |
 
-## 6. AI 슬롭 후처리 (HARD — 등급제 연동)
+## 6. 한국어 품질 체인 (HARD — 등급제 연동)
 
-후처리 체인은 §1 등급제가 결정한다. **⚡초안은 후처리 없음**, ◐작업본은 `sz:ai-slop-reviewer` 1회, ◆최종본만 풀 체인(`ai-slop-reviewer` → `humanize-korean` → `korean-spell-check`)이다. 과거의 "모든 텍스트 산출물 무조건 풀 체인" 규칙은 폐기한다.
+후처리 체인은 §1 등급제가 결정한다. **⚡초안은 후처리 없음**, ◐작업본은 `sz:ai-slop-reviewer` 1회, **◆최종본만 아래 3단 감사**다. 과거의 "모든 텍스트 산출물 무조건 풀 체인" 규칙은 폐기한다. 건너뛰었다면 **그 사실과 이유를 결과에 적는다** — 조용히 생략하면 감사가 있었는지 아무도 모른다.
 
-- 검수 출력: **진단 요약 → 수정 텍스트 → 주요 변경사항** 3블록
 - 제외: 코드, JSON/CSV, 차트·표, 숫자 리포트, 단순 조회 응답
+
+### 6-1. 작성 전 — 장르를 먼저 정한다 (◐·◆ 공통)
+
+`산문`(보고서·안내문·칼럼) · `카피`(모집·랜딩·SNS) · `슬라이드`(원고·덱) 중 하나를 확정해 감사 스킬에 `장르:` 옵션으로 넘긴다. 같은 수치가 장르에 따라 정상이 되기도 결함이 되기도 한다 — 슬라이드는 단문이 정상이고 산문은 같은 길이가 결함이다.
+
+### 6-2. 작성 — 영어 수사 구조를 쓰지 않는다 (모집·랜딩·홍보·안내 장르)
+
+어휘 번역투보다 잡기 어려운 층이다. 문장은 어법상 완벽한 한국어인데 **글의 골격이 영어 마케팅 문서**인 경우이며, 헤딩에서 가장 잘 보인다. 계약·정책·기술·학술 문서에서는 **보고만 하고 자동 수정하지 않는다**(그런 문서의 `A가 아니라 B`는 법적·기술적 배제 장치일 수 있다).
+
+| 쓰지 않는다 | 원문 | 한국 문서의 관용 |
+|---|---|---|
+| **수사적** `A가 아니라 B입니다`가 여러 번 | *It's not X, it's Y* | 수사만 1회까지. 부정된 쪽을 지워도 주장이 남으면 수사, 안 남으면 내용상 대조라 세지 않는다 |
+| `## 이런 분에게` · `## 내 절차를 자산으로` | *For those who…* | `이런 분께 추천합니다` · `교육 대상` |
+| `## 3일 뒤 손에 남는 것` | *What you'll walk away with* | `수료 후 얻는 것` · `사흘 뒤 결과물` |
+| 종결 없는 `## 무엇이 다른가` | *What's different* | `어떤 점이 다른가요?` |
+| `이유는 하나입니다` | *The reason is simple* | 뜸 들이지 말고 이유를 바로 쓴다 |
+| `겨냥합니다` · `관통하는` · `~의 얼굴` | *target / run through* | 구체 동사로 |
+
+- **[HARD] 지우기만 하면 글이 죽는다.** 위 표현은 강조하려던 자리다. 지운 자리에 숫자·행동·사례를 넣는다
+- **[HARD] 의문형 제목·FAQ에는 물음표를 붙인다.** 독자를 부르는 목소리가 사라지는 자리다
+- **[HARD] 한정어를 군더더기로 지우지 않는다.** `사실상 독점`→`독점`은 실질적 지배를 법적 독점으로 바꾼다
+- 상세 패턴: `sz:humanize-korean` `references/ai-tell-taxonomy.md` 카테고리 N
+
+### 6-3. ◆최종본 감사 — 3단 체인 (생략 불가)
+
+```
+⟨한국어 감사 3단⟩ =
+  sz:ai-slop-reviewer      1차 일반 슬롭 정리
+→ sz:korean-spell-check    2차 맞춤법 — 제안 수집 (민감 문서는 건너뛴다, 아래)
+→ sz:humanize-korean       3차 정밀 윤문 + 맞춤법 제안 반영 + Phase 6 최종 검수
+```
+
+- **[HARD] `sz:humanize-korean`이 마지막이다.** Phase 6 최종 검수가 의미 보존을 판정한 **바로 그 산출물**이 사용자에게 간다. 검수 뒤에 다른 스킬이 문장을 다시 고치면 전달되는 것은 검수받지 않은 텍스트다. (구 순서 slop→humanize→spell은 폐기)
+- **[HARD] 맞춤법 단계 기본값은 「전송하지 않음」이다.** `sz:korean-spell-check`는 원문을 **외부 서비스(바른한글)로 전송**한다. 민감도가 `public`으로 **명시 판정된 문서에서만** 돌린다. 미응답·모호·재진입·판정 실패는 전부 `unknown`이고 `unknown`은 **건너뛴다**. 문서 단위로 다시 판정한다 — 프로젝트가 `public`이어도 계약서·NDA·재무·세무·인사·급여·개인정보·대외비·미공개 IR을 담은 개별 문서는 건너뛰고 그 사실을 결과에 적는다. 생략해도 `sz:humanize-korean`이 맞춤법을 함께 본다(외부 전송 없음).
+- 호출 시 옵션 — `장르: 산문|카피|슬라이드`, `최소심각도: S1`
+- `sz:humanize-korean`은 **전문 정독**으로 판정한다(`references/contextual-review.md`). 규칙 매칭은 정독이 지목한 자리를 고치는 도구이지 판정 주체가 아니다
+- **최종 검수는 생략 불가**(`sz:humanize-korean` Phase 6). 원문↔윤문본 대조로 ① **의미 보존**(없던 주장 주입·각주 원위치·수치와 인용 불변) ② **과윤문 역방향**(격식 상향·상투구 주입·구어 종결 소실)을 본다. 판정이 `hold_and_report`면 **전달하지 않고** 사람에게 넘긴다
+- 검수 출력: **진단 요약 → 수정 텍스트 → 주요 변경사항** 3블록
 
 ## 7. 인용·저작권 가드 (HARD)
 

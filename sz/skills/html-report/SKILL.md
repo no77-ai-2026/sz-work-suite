@@ -2,8 +2,7 @@
 name: html-report
 description: |
   마크다운 보고서를 그대로 브라우저에서 열리는 단일 파일 HTML로 바꿔 드립니다 트리거: "이 보고서 HTML 파일로 만들어줘", "주간 현황 보고서를 하나의 HTML로 렌더해줘", "재무제표를 HTML 보고서로 변환해줘"
-user-invocable: true
-version: 1.2.0
+version: 2.0.0
 ---
 ## 스킬 개요(상세)
 
@@ -20,7 +19,7 @@ PDF 파일이 필요하면 생성한 HTML을 sz:pdf-writer로 넘겨 디자인 �
 
 # html-report — 단일 파일 HTML 보고서 렌더러
 
-> **타 번들 연계**: 본 문서의 `sz:*`·`sz:*` 참조는 해당 번들이 설치된 경우에만 체이닝합니다. 미설치 시 해당 단계를 생략하고 코어 스킬만으로 진행합니다.
+> **타 번들 연계**: 본 문서의 `gil-creative:*`·`gil-commerce:*` 참조는 해당 번들이 설치된 경우에만 체이닝합니다. 미설치 시 해당 단계를 생략하고 코어 스킬만으로 진행합니다.
 
 
 ## 목적과 범위
@@ -69,9 +68,9 @@ PDF 파일이 필요하면 생성한 HTML을 sz:pdf-writer로 넘겨 디자인 �
 | **`status`** | 메트릭 카드 4개 · 하이라이트 · 완료 테이블 · Velocity SVG 막대 차트 · Carryover | `sz:executive-summary`, `sz:daily-briefing` |
 | **`incident`** | TL;DR 다크 배너 · 타임라인 · 로그 발췌 `<details>` · 코드 diff 패널 · 영향 테이블 · 액션 체크리스트 | `sz:compliance-check` |
 | **`plan`** | 요약 KPI 스트립 · 마일스톤 수직 타임라인 · 데이터 플로우 SVG · 슬라이스 테이블 · 리스크 그리드 · 성공 지표 | `sbiz365-analyst(미포함)` |
-| **`explainer`** | 사이드 네비 · `<details>` 접이식 단계 · 탭 코드 블록(vanilla JS) · FAQ 아코디언 · 콜아웃 박스 | `sz:*`, `sz:*` |
+| **`explainer`** | 사이드 네비 · `<details>` 접이식 단계 · 탭 코드 블록(vanilla JS) · FAQ 아코디언 · 콜아웃 박스 | `gil:*`, `gil:*` |
 | **`financial`** | KPI 카드 4개 · 손익계산서 테이블(항목/당기/전기/증감/증감률) · Variance SVG 수평 막대 차트 · 주석 패널 | `sz:financial-statements` |
-| **`pr`** | TL;DR · PR 메타 행(파일수·+/−·브랜치) · Before/After 2단 카드 · 파일 투어 `<details>` · 핵심 포인트 · 테스트 체크리스트 · 롤아웃 단계 | `sz:investor-relations` |
+| **`pr`** | TL;DR · PR 메타 행(파일수·+/−·브랜치) · Before/After 2단 카드 · 파일 투어 `<details>` · 핵심 포인트 · 테스트 체크리스트 · 롤아웃 단계 | `investor-relations(미포함)` |
 
 #### 모드별 입력 항목 요약
 
@@ -215,6 +214,30 @@ PDF 파일이 필요하면 생성한 HTML을 sz:pdf-writer로 넘겨 디자인 �
 ```
 PR #312 실시간 알림 채널 통합 내용을 HTML 리뷰 문서로 만들어줘.
 ```
+
+---
+
+## 시각 품질 게이트 (필수)
+
+**[HARD] 렌더가 끝나면 산출 HTML을 브라우저에서 열어 아래 4축을 실측하고 PASS/FAIL을 보고한다.**
+
+**공통 4축** — 렌더 후 DOM 실측으로 판정한다. 눈으로 훑는 것으로 갈음하지 않는다.
+
+| 축 | 측정 | 기준 | 등급 |
+|---|---|---|---|
+| **본문 크기** | 본문 노드 computed `font-size` | ≥16px (화면 읽기 기준). 부연·캡션 ≥14px | hard |
+| **명도대비** | 상대 휘도 기반 WCAG 대비비 | 본문 ≥4.5:1 · 큰 텍스트 ≥3:1 | hard |
+| **텍스트 오버플로** | `scrollHeight > clientHeight` | 0건 | hard |
+| **산출물 밖 요소** | 본문 컨테이너 바깥의 렌더되는 텍스트 노드 | 0개 — 장수·해상도·사용 폰트 같은 **제작 메타는 화면에 찍지 않는다**(HTML 주석으로) | hard |
+
+**아이콘을 쓸 때** — 아이콘은 레이아웃상 빈 자리로 보여서, 근거를 요구하지 않으면 손에 잡히는 몇 개를 돌려쓰게 된다.
+
+- 문구의 **동사**에서 고른다 (적는다 → 메모, 멈춘다 → 정지). 명사가 아니라 그 자리가 시키는 행동에 맞춘다.
+- 한 문서에서 같은 아이콘을 **3회 넘게 쓰지 않는다**.
+- 마땅한 것이 없으면 **비운다**. 빈 자리가 틀린 아이콘보다 낫다.
+- **[HARD] 아이콘을 썼으면 PASS/FAIL 증거표에 넣는다.** 슬롯 문구·아이콘·고른 이유를 나란히 적어 보고한다. "아이콘이 필요해서" 같은 동어반복은 근거가 아니며, 근거를 한 줄로 못 쓰면 비운다.
+
+> 이 4축은 [`html-slide/references/deck-quality-rubric.md`](../html-slide/references/deck-quality-rubric.md)의 hard-fail에서 **문서형(연속 스크롤)에 해당하는 것만** 옮겨온 것이다. 프로젝터 투사 기준인 pt 하한(24pt)은 문서형에 적용하지 않고 화면 읽기 기준(16px)으로 대체한다.
 
 ---
 

@@ -2,8 +2,7 @@
 name: draft-response
 description: |
   고객 문의에 대한 응답 초안을 작성합니다 트리거: "이 문의에 답변 초안 써줘", "환불 요청 이메일 답변 만들어줘", "카카오채널 응답 초안 작성해줘"
-user-invocable: true
-version: 1.2.0
+version: 2.0.0
 ---
 ## 스킬 개요(상세)
 
@@ -85,7 +84,7 @@ version: 1.2.0
 응답 초안을 작성한 뒤에는 다음 체인으로 마무리합니다:
 
 ```
-draft-response → sz:ai-slop-reviewer → sz:humanize-korean
+draft-response → sz:ai-slop-reviewer → sz:humanize-korean → 최종 검수(◆최종본, humanize Phase 6)
 ```
 
 - `sz:ai-slop-reviewer` — AI 티 나는 표현·과잉 수식·기계적 문장 패턴을 검수·수정
@@ -95,7 +94,7 @@ draft-response → sz:ai-slop-reviewer → sz:humanize-korean
 
 ## 이 스킬을 사용하지 말아야 할 때
 
-- **티켓 분류 및 우선순위 판단** → sz:ticket-triage 스킬이 더 적합합니다
-- **에스컬레이션 처리** → sz:escalation-manager 스킬을 사용하세요
-- **지식베이스 문서 작성** → sz:kb-article 스킬을 사용하세요
+- **티켓 분류 및 우선순위 판단** → ticket-triage(미포함) 스킬이 더 적합합니다
+- **에스컬레이션 처리** → escalation-manager(미포함) 스킬을 사용하세요
+- **지식베이스 문서 작성** → kb-article(미포함) 스킬을 사용하세요
 - **법적 공식 답변서 (소송·분쟁 관련)** → gil-legal 스킬과 법무팀 검토를 활용하세요

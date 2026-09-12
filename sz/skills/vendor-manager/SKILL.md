@@ -2,8 +2,7 @@
 name: vendor-manager
 description: |
   공급업체를 평가·선정하고 계약 및 리스크를 관리합니다 트리거: "벤더 평가 기준 만들어줘", "공급업체 리스크 레지스터 작성해줘", "계약 관리 체계를 잡아줘"
-user-invocable: true
-version: 1.2.0
+version: 2.0.0
 ---
 ## 스킬 개요(상세)
 
@@ -99,7 +98,7 @@ version: 1.2.0
 리스크 대응 계획, 벤더 위험 요소 설명, 계약 관리 절차 설명 등 **서술형 보고 본문**은 다음 체인으로 마무리합니다.
 
 ```
-vendor-manager → sz:ai-slop-reviewer → sz:humanize-korean
+vendor-manager → sz:ai-slop-reviewer → sz:humanize-korean → 최종 검수(◆최종본, humanize Phase 6)
 ```
 
 - `sz:ai-slop-reviewer` — 서술형 본문의 AI 티 패턴을 검수·수정합니다.

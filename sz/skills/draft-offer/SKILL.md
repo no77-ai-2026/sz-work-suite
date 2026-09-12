@@ -2,8 +2,7 @@
 name: draft-offer
 description: |
   채용 제안서와 근로계약서를 작성해주는 스킬입니다 트리거: "오퍼 레터 만들어줘", "근로계약서 초안 작성해줘", "연봉 협상 문서 써줘"
-user-invocable: true
-version: 1.2.0
+version: 2.0.0
 ---
 ## 스킬 개요(상세)
 
@@ -168,7 +167,7 @@ version: 1.2.0
 **텍스트 후처리 체인 (오퍼 레터·근로계약서 본문 등 산문 산출물)**:
 
 ```
-draft-offer → sz:ai-slop-reviewer → sz:humanize-korean
+draft-offer → sz:ai-slop-reviewer → sz:humanize-korean → 최종 검수(◆최종본, humanize Phase 6)
 ```
 
 - `sz:ai-slop-reviewer` — AI 티 패턴(기계적 어투, 과장 표현) 검수·수정

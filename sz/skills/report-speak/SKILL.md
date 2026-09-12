@@ -2,8 +2,7 @@
 name: report-speak
 description: |
   상사에게 보고하거나 누군가에게 무언가를 설명할 때 결론부터 명확하게 전달하도록 도와주는 스킬입니다
-user-invocable: true
-version: 1.2.0
+version: 2.0.0
 ---
 ## 스킬 개요(상세)
 
@@ -101,8 +100,8 @@ version: 1.2.0
 ## 관련 스킬
 
 - **sz:meeting-facilitator**: 보고가 회의로 이어질 때 진행 설계
-- **sz:feedback-loop**: 진행 중 중간 보고·피드백 요청
-- **sz:conflict-handler**: 까다로운 상사·반응에 대한 대응
+- **feedback-loop(미포함)**: 진행 중 중간 보고·피드백 요청
+- **conflict-handler(미포함)**: 까다로운 상사·반응에 대한 대응
 - **sz:docx-generator**: 구두 보고를 문서 보고서로 정리
 
 ## 이 스킬을 사용하지 말아야 할 때

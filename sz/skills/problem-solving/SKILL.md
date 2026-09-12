@@ -2,8 +2,7 @@
 name: problem-solving
 description: |
   [책임 경계] 문제 정의·구조화 전담 — SCQ로 Key Question을 도출하고 3-Test로 이슈화, 로직트리(5유형)로 분해해 가설·Work Plan까지 산출하는 PSA(Problem Solving Approach) 스킬. 리서치 실행·사실검증은 sz:research-verify가 담당 트리거: "문제 정의해줘", "이슈 정리해줘", "로직트리 짜줘"
-user-invocable: true
-version: 1.2.0
+version: 2.0.0
 ---
 
 # problem-solving — PSA 기반 문제 구조화 스킬
@@ -19,7 +18,7 @@ version: 1.2.0
 | 담당 | 위임 |
 |---|---|
 | SCQ·Key Question 도출 | 웹 리서치·출처 검증 → `sz:research-verify` |
-| 이슈화(3-Test)·로직트리·가설·QDT | 반론 심층 검증 → `sz:devil-review` |
+| 이슈화(3-Test)·로직트리·가설·QDT | 반론 심층 검증 → `devil-review(미포함)` |
 | Work Plan(WBS) 설계 | 데이터 분석 QA → `sz:validate-data` |
 | 스토리라인 종합 | 문서화 → `sz:docx-generator`·`sz:pptx-designer`·`sz:html-report` |
 
@@ -29,7 +28,7 @@ version: 1.2.0
 |---|---|---|
 | ⚡초안 (기본) | 1페이지 문제정의서 | SCQ + Key Question + 이슈 후보 3안(3-Test 판정표 포함) |
 | ◐작업본 | + 구조화 패키지 | 로직트리(유형 명시) + 가설·QDT + Evidence 목록 |
-| ◆최종본 | + 실행 패키지 | Work Plan 6컬럼 + 스토리라인 + QA 체인(`sz:ai-slop-reviewer` → `sz:humanize-korean` → `sz:korean-spell-check`) |
+| ◆최종본 | + 실행 패키지 | Work Plan 6컬럼 + 스토리라인 + QA 체인(`sz:ai-slop-reviewer` → `sz:korean-spell-check`(민감도 public 시) → `sz:humanize-korean`(마지막, Phase 6 최종 검수)) |
 
 사용자가 등급을 지정하지 않으면 ⚡초안으로 시작하고, 완료 시 상위 등급 승격을 1줄로 제안한다.
 

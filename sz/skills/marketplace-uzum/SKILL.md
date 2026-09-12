@@ -2,8 +2,7 @@
 name: marketplace-uzum
 description: |
   [한·UZ 듀얼] Uzum Market(UZ 최대 이커머스) 입점·운영 전담 스킬 트리거: "Uzum Market 등록", "Uzum 입점 절차", "Uzum 수수료"
-user-invocable: true
-version: 1.2.0
+version: 2.0.0
 ---
 ## 스킬 개요(상세)
 
@@ -60,8 +59,8 @@ version: 1.2.0
 상품명 공식: `{브랜드} {제품명} {핵심 특징} {용량/사이즈}`
 예: `Innisfree Green Tea Foam 150ml` + 키워드 `Korean cosmetics·K-beauty·Skincare`
 
-- 카피·키워드는 `sz:copywriting`(러·우즈벡 트릴링구얼)로 산출 후 현지 검수 1회 필수.
-- 상세 이미지는 `sz:detail-page-image`(러시아어 우선) 또는 `sz:gemini-3-image-prompt`.
+- 카피·키워드는 `copywriting(미포함)`(러·우즈벡 트릴링구얼)로 산출 후 현지 검수 1회 필수.
+- 상세 이미지는 `detail-page-image(미포함)`(러시아어 우선) 또는 `gemini-3-image-prompt(미포함)`.
 
 ### 3. 카테고리·수수료
 
@@ -70,7 +69,7 @@ version: 1.2.0
 ### 4. 광고·프로모션
 
 - Uzum Promoted(검색 상위), 카테고리 배너, 메인 노출(대형 셀러).
-- CPC 대략 200~2,000 UZS. 캠페인 기획은 `sz:campaign-planner`(uz-marketing-channels) 연동.
+- CPC 대략 200~2,000 UZS. 캠페인 기획은 `campaign-planner(미포함)`(uz-marketing-channels) 연동.
 - 시즌(나브루즈·라마단·연말) 프로모션은 현지 캘린더에 맞춤.
 
 ### 5. 결제·정산
@@ -86,7 +85,7 @@ Uzum Delivery(자체망) 또는 셀러 자체배송. 한국발 직배송은 리�
 ### 7. 운영·CS
 
 - 리뷰·Q&A는 러시아어 중심 응대.
-- 리뷰 분석·VOC 우선순위 → `sz:commerce-voc-triage`.
+- 리뷰 분석·VOC 우선순위 → `commerce-voc-triage(미포함)`.
 
 ## 한·UZ 듀얼 컨텍스트
 
@@ -95,11 +94,11 @@ Uzum Delivery(자체망) 또는 셀러 자체배송. 한국발 직배송은 리�
 ## 체이닝
 
 ```
-sz:detail-page-copy / sz:product-detail  (상세페이지)
-  → sz:detail-page-image / sz:gemini-3-image-prompt  (이미지, 러시아어 우선)
+detail-page-copy(미포함) / product-detail(미포함)  (상세페이지)
+  → detail-page-image(미포함) / gemini-3-image-prompt(미포함)  (이미지, 러시아어 우선)
   → marketplace-uzum  (본 스킬: 등록·운영)
-  → sz:campaign-planner  (광고)
-  → sz:commerce-voc-triage  (리뷰·VOC)
+  → campaign-planner(미포함)  (광고)
+  → commerce-voc-triage(미포함)  (리뷰·VOC)
   → sz:data-explorer  (매출·전환 분석)
 ```
 

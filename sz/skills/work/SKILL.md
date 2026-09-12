@@ -3,14 +3,13 @@ name: work
 description: |
   SZ Work Suite(sz 단일 플러그인)의 **프로젝트 초기화 단일 진입점**. `/work 자연어-지시`로 진입하는 Cowork 슈퍼 오케스트레이터다. 소크라테스 인터뷰로 맥락을 파악하고, 설치된 번들 인벤토리를 스캔한 뒤, 프로젝트 전용 커스텀 에이전트와 스킬 체인을 설계해 AGENTS.md(정본, ≤100라인)와 CLAUDE.md(@AGENTS.md 포인터)·.claude/agents/·.sz/ 스캐폴드를 생성한다. 이후 사용 신호를 감지하면 승인형 자가 개선을 수행한다.
   트리거: "/work ...", "/work update", "/work evolve", "/work doctor", "새 프로젝트 시작", "AGENTS.md 만들어줘", "CLAUDE.md 만들어줘", "프로젝트 설정 도와줘", "이어서 진행"·"설치 완료"(재개), "지침 업데이트해줘"·"플러그인 업데이트됐어"(동기화), 비개발 자연어 요청의 번들 라우팅. 이름·회사 같은 글로벌 프로필은 재질문하지 않는다.
-user-invocable: true
-version: 1.2.0
-origin: "modu-ai/moai-cowork@f1eb954 (sz project 1.3.0, Apache-2.0) — SZ 등급제·2층 지침·승인형 자가 개선으로 재설계"
+version: 2.0.0
+origin: "modu-ai/moai-cowork@f1eb954 (gil project 1.3.0, Apache-2.0) — SZ 등급제·2층 지침·승인형 자가 개선으로 재설계"
 ---
 
 # project — 프로젝트 초기화 단일 진입점
 
-사용자는 이 프로젝트에서 **무엇을 할지** 말해주면 됩니다. `/project`가 소크라테스 인터뷰로 맥락을 파악하고, 설치된 SZ 플러그인을 스캔해 프로젝트 전용 커스텀 에이전트와 스킬 체인을 설계한 뒤 `AGENTS.md`(정본)와 `CLAUDE.md`(포인터), `.claude/agents/`를 생성합니다.
+사용자는 이 프로젝트에서 **무엇을 할지** 말해주면 됩니다. `/work`가 소크라테스 인터뷰로 맥락을 파악하고, 설치된 SZ 플러그인을 스캔해 프로젝트 전용 커스텀 에이전트와 스킬 체인을 설계한 뒤 `AGENTS.md`(정본)와 `CLAUDE.md`(포인터), `.claude/agents/`를 생성합니다.
 
 ## 개요
 
@@ -24,34 +23,38 @@ origin: "modu-ai/moai-cowork@f1eb954 (sz project 1.3.0, Apache-2.0) — SZ 등�
 
 ## 산출물 등급제 (⚡◐◆ — v2.0.0 핵심)
 
-정본은 `references/core/common-rules.md` §1. 요약: **기본값 ⚡초안(검수 체인 없음, 채팅/md)** / ◐작업본(ai-slop-reviewer 1회, md·html) / ◆최종본("최종·납품·발행" 명시 시만 — 풀 체인 ai-slop-reviewer → humanize-korean → korean-spell-check + 3중 QA, 프로젝트 기본 포맷). 이 스킬이 생성하는 모든 AGENTS.md·에이전트는 이 등급제를 내장하며, 과거의 "모든 텍스트 무조건 풀 체인" 배선을 만들지 않는다.
+정본은 `references/core/common-rules.md` §1. 요약: **기본값 ⚡초안(검수 체인 없음, 채팅/md)** / ◐작업본(ai-slop-reviewer 1회, md·html) / ◆최종본("최종·납품·발행" 명시 시만 — 풀 체인 ai-slop-reviewer → korean-spell-check(민감도 public 시) → humanize-korean(마지막, Phase 6 최종 검수) + 3중 QA, 프로젝트 기본 포맷). 이 스킬이 생성하는 모든 AGENTS.md·에이전트는 이 등급제를 내장하며, 과거의 "모든 텍스트 무조건 풀 체인" 배선을 만들지 않는다.
 
 ---
 
-## Socratic Interview (2-Stage)
+## Socratic Interview (렌즈 도출 · 커버리지 종료)
 
-이 프로젝트에서 **무엇을·어떻게** 처리할지만 인터뷰한다. 글로벌 프로필은 재질문하지 않는다. 질문은 항상 `AskUserQuestion` 설문으로, 한 라운드에 묶어서 낸다.
+이 프로젝트에서 **무엇을·어떻게** 처리할지만 인터뷰한다. 글로벌 프로필은 재질문하지 않는다. 질문은 `AskUserQuestion` 설문으로, 한 라운드에 묶어서 낸다(1개씩 연속 호출 금지 · 1회 최대 4질문×4옵션 · 모든 옵션에 description, 첫 옵션에만 `(권장)`).
 
-| 단계 | 목적 | 호출 | 구성 |
+**[HARD] 질문은 고정 목록이 아니라 프로젝트에서 도출한다.** 아래 8렌즈는 «빠진 게 없는지 훑는 렌즈»이지 질문지가 아니다. `/work <프로젝트 설명>`·폴더명·기존 파일에서 **이 프로젝트의 명사**(무엇을 만들어 누구에게 주는가)를 뽑고, 렌즈를 하나씩 대어 해당 없는 렌즈는 **버린다**(1인 블로그에 「검토·승인 주체」를 묻지 않는다). 남은 축을 정보 이득 순으로 4슬롯에 배치한다 — 강의면 「수강생·차수·일정」, 커머스면 「상품군·채널·재고」, 법무면 「의뢰인·관할·기한」의 말로 묻는다.
+
+| 렌즈 | 훑는 것 | 렌즈 | 훑는 것 |
 |---|---|---|---|
-| **S1 일괄 진단** | 필요 맥락을 한 번에 확보 | `AskUserQuestion` 1회 | 질문 풀에서 정보 이득 순 최대 4개 |
-| **S2 보강** | S1의 공백·모호성만 | 필요할 때만 | 부족분을 다시 한 번에. 충분하면 0회 |
+| **A 정체성** | 목적·업무 유형·성공 정의 | **E 현행** | 지금 방식·시간·병목 |
+| **B 산출물** | 무엇·포맷·분량·주기(◆최종본 기본 포맷) | **F 품질** | 실패 조건·검토 주체 |
+| **C 독자** | 누가 받나·무엇으로 판단하나 | **G 자산** | 기존 산출물·양식·용어집·브랜드 |
+| **D 문체** | 톤·경어·참고 글·금칙어 | **H 제약** | **민감도**·법규·외부 연동 |
 
-**S1 질문 풀**: ① 업무 유형(multiSelect) ② 주요 산출물 ③ 대상 독자 ④ 톤·형식 제약 ⑤ 산출물 포맷(◆최종본 기본 포맷 지정) ⑥ 작업 주기 ⑦ 기존 자료 유무 ⑧ 피해야 할 것 ⑨ 배경·동기.
+**[HARD] H 렌즈의 민감도만은 모든 프로젝트에서 반드시 묻는다** — 이 답이 `sz:korean-spell-check`의 외부 전송 여부를 가른다(common-rules §6-3). 끝내 답이 없으면 `unknown`으로 기록하고 `unknown`은 **전송하지 않는 쪽**으로 처리한다.
 
-**규칙 (HARD)**: 한 라운드 = 한 호출(1개씩 연속 호출 금지) · 1회 최대 4질문×4옵션 · 이미 A등급 확립 축은 제외하고 4슬롯을 채움 · 모든 옵션에 description 필수, 첫 옵션에만 `(권장)`.
+**종료는 라운드 수가 아니라 커버리지다.** 각 축을 충족/유예/미확인으로 `.sz/config.json` `coverage`에 기록하고, 미확인이 남으면 라운드를 더 돈다(매 라운드 "8영역 중 N 확인" 진행률 고지). 이미 확립된 축(진입 발화·기존 `AGENTS.md`·`.sz/context.md`)은 묻지 않고 다음 순위로 4슬롯을 채운다. 모호한 답은 좁혀서 다음 라운드에 재배치. **[HARD] 첫 라운드부터 「지금 아는 것으로 진행」 선택지를 둔다** — 이탈 시 남은 축은 유예로 기록하고 가정값을 `.sz/context.md`에 적은 뒤 진행한다(고위험 산출물—계약·법무·재무·대외 발송—에 걸린 유예 축은 생성을 멈추고 다시 묻는다). 설계안이 나오면 마지막 한 라운드로 체인·에이전트 구성을 보이고 승인/수정/취소를 받는다.
 
-**S2 발동**: (a) 필수 축 공백 (b) Other·저신뢰 응답 (c) 답변 상충 (d) 4슬롯 제한으로 못 물은 필수 축. **종료**: A등급+필수 B등급 충족 시. S2 2회 초과 시 「지금 아는 것으로 진행」 선택지 배치.
+**[HARD] 응답이 없다고 「거절」로 읽지 않는다.** Cowork 데스크톱에는 질문 카드가 렌더러에 도달하지 못한 채 앱 종료 시 `deny`/`Dismissed`로 기록되는 미해결 버그가 있다(anthropics/claude-code #58750). 빈 응답·deny·dismissed는 사용자의 결정이 아니다 → 같은 질문을 **응답 본문에 번호 매긴 선택지로 다시 낸다**("선택지가 화면에 안 뜨셨을 수 있어 글로 다시 여쭙니다"). **서브에이전트에 인터뷰를 위임하지 않는다** — 서브에이전트에는 `AskUserQuestion`이 없다(공식 문서 명시). 민감도가 이 경로로 유실되면 `unknown`이다.
 
-**맥락 등급**: A(AGENTS.md에서 즉시 획득 — 질문 없이 사용) / B(핵심 맥락, 80%+ 권장 — S1 배치) / C(보강 — 고위험 산출물만 S2). 재질문 금지. 상세: `references/core/init-protocol.md` + `references/core/context-collector.md`.
+**맥락 등급**: A(AGENTS.md에서 즉시 획득 — 질문 없이 사용) / B(핵심 맥락, 80%+ 권장 — 1라운드 배치) / C(보강 — 고위험 산출물만). 재질문 금지. 상세: `references/core/init-protocol.md` + `references/core/context-collector.md`.
 
-**재진입 확인 (S3)**: 대상 프로젝트에 이미 `AGENTS.md`(또는 구 방식 `CLAUDE.md`)·`.sz/`(구 `.moai/`)가 있으면 덮어쓰기 전 `AskUserQuestion` 확인(재생성/부분 수정/취소). 침묵 덮어쓰기 금지. `CLAUDE.md`가 포인터가 아니라 전체 지침을 담고 있으면 **레거시 프로젝트**이므로 `references/core/agentsmd-generator.md` §7.1 마이그레이션을 먼저 적용한다(SZ v1.x 프로젝트 33개가 이 케이스다).
+**재진입 확인**: 대상 프로젝트에 이미 `AGENTS.md`(또는 구 방식 `CLAUDE.md`)·`.sz/`(구 `.moai/`)가 있으면 덮어쓰기 전 `AskUserQuestion` 확인(재생성/부분 수정/취소). 침묵 덮어쓰기 금지. `CLAUDE.md`가 포인터가 아니라 전체 지침을 담고 있으면 레거시 복제 프로젝트로 보고 2층 전환을 제안한다. 재개(resume)는 `.sz/context.md`+기존 `AGENTS.md`를 먼저 읽어 빈 칸만 묻는다.
 
 ---
 
 ## Plugin Inventory Scan
 
-체인 설계 **전에** `~/.claude/plugins/`를 스캔해 설치된 SZ 플러그인(`sz`·`sz-creative`·`sz-commerce`)을 확인한다. 스킬 수는 하드코딩하지 않는다 — 각 번들 `plugin.json`+`skills/` 실측이 정본이다. 결과는 `.sz/config.json`에 스냅샷 저장.
+체인 설계 **전에** `~/.claude/plugins/`를 스캔해 설치된 SZ 플러그인(`gil`·`gil-creative`·`gil-commerce`)을 확인한다. 스킬 수는 하드코딩하지 않는다 — 각 번들 `plugin.json`+`skills/` 실측이 정본이다. 결과는 `.sz/config.json`에 스냅샷 저장.
 
 **Gap Detection**: 설계 체인의 스킬이 미설치 번들 소속이면 `AskUserQuestion` 4옵션(설치 안내+재개 권장 / 제외하고 진행 / 대체 스킬 / 중단). "설치 완료"·"이어서 진행" 발화로 재개를 감지한다. **경계 규칙**: 타 번들 참조는 설치 시에만 체이닝 — 미설치면 해당 단계 생략+1줄 고지.
 
@@ -94,7 +97,7 @@ Phase 5 확인 후 생성:
 - **HARD 규칙·보안·자격증명·인용 가드 관련 지침 변경** → **사전 승인**: diff 요지를 AskUserQuestion으로 제시하고 승인 후 적용.
 - **형식·스타일·체인 순서·문구 수준 변경** → **선적용·후보고**: 최소 diff 적용 후 변경 요지 1-3줄 보고.
 
-**개선 사이클**: 신호 → 진단(AGENTS.md vs 에이전트 vs 체인) → 최소 diff(전면 재작성 금지) → 승인 경로 분기 → `<!-- evolution-log -->`에 1줄 기록. diff 적용 전 원문 조각을 `.sz/evolution/`에 남겨 롤백 가능해야 한다.
+**개선 사이클**: 신호 → 진단(AGENTS.md vs 에이전트 vs 체인) → 최소 diff(전면 재작성 금지) → 승인 경로 분기 → `.sz/evolution/log.md`(이력 정본)에 1줄 기록 — `AGENTS.md`에는 이력을 쓰지 않는다. diff 적용 전 원문 조각을 `.sz/evolution/`에 남겨 롤백 가능해야 한다.
 
 **검증+롤백 (HARD)**: 적용 후 같은 토큰+같은 대상 신호가 재발동하면 실패한 개선 — 원문 조각으로 되돌리고 자동 재수정 대신 사용자에게 1-3줄 보고. **가드레일 (HARD)**: 수정 대상은 `AGENTS.md`+`.claude/agents/`만(evolution 기록 제외), 1회 최대 3파일. 스킬 본문·플러그인 파일은 건드리지 않는다. evolution-log는 최근 10건만 유지, 초과분은 `.sz/evolution/log.md` 이관. 개선 후 100라인 예산 재검증.
 
@@ -114,7 +117,7 @@ Phase 5 확인 후 생성:
 | 그 외 전부 | 이 스킬이 직접 처리 |
 | 불명확 | `AskUserQuestion` |
 
-번들 키워드 매핑(sz 코어/creative/commerce)·모호성 해소·복합 요청은 `references/core/router.md`가 단일 진실 원천. 디자인 중심이면 `references/core/designer-setup.md` 서브 프로토콜.
+번들 키워드 매핑(gil 코어/creative/commerce)·모호성 해소·복합 요청은 `references/core/router.md`가 단일 진실 원천. 디자인 중심이면 `references/core/designer-setup.md` 서브 프로토콜.
 
 ---
 
@@ -163,15 +166,15 @@ Phase 1 인터뷰 → 2 인벤토리 → 3 체인 설계 → 4 Gap Detection
 
 ## 개발 요청 처리
 
-**범위 (HARD)**: SZ은 비개발 코워크 전용이다. 개발 셋업 산출물(hooks·LSP·output-styles 포함)은 어떤 경로에서도 생성하지 않는다. 개발 의도가 보이면 범위 밖임을 안내하고 비개발 초기화로 안내한다.
+**범위 (HARD)**: GIL은 비개발 코워크 전용이다. 개발 셋업 산출물(hooks·LSP·output-styles 포함)은 어떤 경로에서도 생성하지 않는다. 개발 의도가 보이면 범위 밖임을 안내하고 비개발 초기화로 안내한다.
 
 ## 주의사항
 
 1. **글로벌 프로필 질문 금지** — 사용자 정보는 AGENTS.md 한 곳에만.
 2. **project 스킬은 구현하지 않는다** — 라우팅·셋업·자가 개선 배선만. 실무 체인은 각 번들 스킬에 위임.
-3. **번들 정합** — 스킬 참조는 `sz:`·`sz:`·`sz:` 접두어. 로스터는 설치 번들 실측(하드코딩 금지). `router.md`가 매핑 정본.
+3. **번들 정합** — 스킬 참조는 `gil:`·`gil-creative:`·`gil-commerce:` 접두어. 로스터는 설치 번들 실측(하드코딩 금지). `router.md`가 매핑 정본.
 
-## SZ 확장 (sz 고유 — 원형 프로토콜에 추가 적용)
+## SZ 확장 (sz 고유 — 원형 프로토콜 위에 추가 적용)
 
 ### 언어 규칙 (HARD)
 요청 언어로 대화·산출한다 — **KO/EN/RU/UZ**. 공식 문서는 요청 시 KO/EN 또는 KO/RU 병기. 한국어 전용 QA(humanize-korean·korean-spell-check)는 비한국어 산출물에서 생략+1줄 고지, ai-slop-reviewer·수치 재검산은 전 언어 적용. AGENTS.md 생성 시 이 규칙을 §언어에 기본 반영한다.
@@ -180,11 +183,23 @@ Phase 1 인터뷰 → 2 인벤토리 → 3 체인 설계 → 4 Gap Detection
 | 요청 | 목적지 |
 |---|---|
 | UZ 법규·시장 조사·검증 | sz:uz-research (조사 규칙 정본) |
-| 리스크 센싱·등급·브리핑 | sz:risk-radar |
+| 리스크 등급 판정·델타 브리핑 | sz:risk-radar (판정 엔진) |
+| 리스크 대시보드 세팅·주간 갱신·심층 보고서·점검 | sz:risk-center (init / update / report / doctor) |
 | 공문·품의·회의록·출장보고 양식 | sz:doc-formats |
 | 통관·보세창고·수출입 | sz:trade-logistics |
 | 재고실사 사진 대조 | sz:sample-log |
 | ISA 판매 검증·세일즈 인센티브 | sz:sales-verify |
+| HTML 보고서·슬라이드·대시보드 디자인 통일 | sz:design-system-library (프리셋 `sz-corporate`) → sz:html-report / sz:html-slide / sz:build-dashboard |
+| 위키 컴파일·인제스트·린트·위키 세팅 / "위키 기준으로" 조회 | sz:wiki (compile / ingest / lint / init) |
+<!-- 사무실 제작 custom 스킬은 아래에 1행씩 추가 (INTAKE-CHECKLIST #8) -->
+
+### 프로젝트 프리셋
+- **리스크 대시보드 프로젝트**: "리스크 대시보드 프로젝트 세팅" 요청은 본 스킬의 init 인터뷰를 건너뛰고 `sz:risk-center init`으로 위임한다(RM 전용 AGENTS.md 프리셋·폴더 4종·템플릿 HTML 생성).
+- **위키 프로젝트**: "위키 세팅해줘"는 `sz:wiki init`으로 위임한다.
+
+### 위키 배선 (init 인터뷰 추가 문항)
+프로젝트 init 인터뷰에 "이 프로젝트가 참조할 위키 도메인이 있나요? (`../_Wiki` 존재 시 도메인 목록 제시)"를 1문항 추가한다. 선택 시 AGENTS.md에 배선 1줄을 삽입한다: "`{도메인}` 주제의 배경 지식이 필요할 때 내장 지식보다 먼저 `../_Wiki/wiki/{도메인}/INDEX.md`를 읽고 근거로 삼는다. 위키에 없으면 평소대로 진행하고, 재사용할 지식이 확정되면 '위키로 컴파일' 여부를 1줄로 제안한다. 위키 파일은 이 프로젝트에서 직접 수정하지 않는다." `_Wiki`가 없으면 `sz:wiki init`을 1회 제안하고 강요하지 않는다.
+evolution 신호 감지 시 "이 교훈은 위키로 컴파일할 가치가 있다"도 제안 후보에 포함한다(자동 실행 금지).
 
 ### 닥터 보강
-`/work doctor` 점검 항목에 추가: CLAUDE.md가 비어 있거나 `@AGENTS.md` 임포트가 없음(백틱 감쌈 포함) → 포인터 수리 제안. CLAUDE.md에 본문 지침이 통째로 있으면 레거시 마이그레이션(§7.1) 적용.
+`/work doctor` 점검 항목에 추가: CLAUDE.md가 비어 있거나 `@AGENTS.md` 임포트가 없음(백틱 감쌈 포함) → 포인터 수리 제안. CLAUDE.md에 본문 지침이 통째로 있으면 레거시 마이그레이션(§7.1) 적용. `gil:` 등 구 네임스페이스(이전 사내판 접두어 포함)나 `.sz/` 경로가 프로젝트 지침에 남아 있으면 `sz:`·`.sz/`로 이관 제안.

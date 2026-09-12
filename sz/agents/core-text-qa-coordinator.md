@@ -29,8 +29,8 @@ effort: medium
 **A. 텍스트 검수 (기본)**
 1. (임의의 텍스트 산출물 입력)
 2. `sz:ai-slop-reviewer` — 1차 일반 AI 슬롭 후처리 (◐작업본은 여기서 종료)
-3. `sz:humanize-korean` — 2차 한국어 정밀 윤문(40+ 패턴 SSOT, 등급 판정)
-4. `sz:korean-spell-check` — 맞춤법·오탈자 최종 교정
+3. `sz:korean-spell-check` — 2차 맞춤법 제안 수집. **민감도가 `public`으로 명시 판정된 문서에서만** 실행(원문을 외부 서비스로 전송하므로 `unknown`·계약·재무·인사·개인정보·대외비 문서는 건너뛰고 그 사실을 결과에 적는다)
+4. `sz:humanize-korean` — 3차 한국어 정밀 윤문(전문 정독 판정) + 맞춤법 제안 반영 + **Phase 6 최종 검수**(원문↔윤문본 대조, 생략 불가). **이 단계가 마지막이다** — 검수를 통과한 산출물이 그대로 사용자에게 간다. 판정이 `hold_and_report`면 전달하지 않고 사람에게 넘긴다
 
 **B. 오피스 문서 생성+검수 (구 office-doc-qa)**
 1. 문서 생성 — `sz:docx-generator` / `pptx-designer` / `hwpx-writer` / `pdf-writer` / `xlsx-creator` 중 선택
@@ -46,3 +46,4 @@ effort: medium
 
 - 의미 불변이 최상위 원칙 — 사실·수치·고유명사·인용은 100% 보존.
 - humanize-korean 등급 B 이하면 사용자에게 정밀 검증을 안내합니다.
+- **서브에이전트에는 AskUserQuestion이 없다** — 민감도 판정이 필요한데 지침에 없으면 `unknown`으로 두고 맞춤법 단계를 건너뛴 뒤 blocker report로 부모 세션에 넘긴다.

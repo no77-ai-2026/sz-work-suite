@@ -2,8 +2,7 @@
 name: data-visualizer
 description: |
   데이터를 한눈에 보여주는 인터랙티브 차트·대시보드(HTML)를 만들어 드립니다 트리거: "차트 만들어줘", "그래프 그려줘", "시각화해줘"
-user-invocable: true
-version: 1.2.0
+version: 2.0.0
 ---
 ## 스킬 개요(상세)
 
@@ -17,7 +16,7 @@ Mermaid·Recharts·Chart.js·Tremor·ECharts 중 적합한 스택으로 인터�
 
 # 데이터 시각화 (Data Visualizer)
 
-> **타 번들 연계**: 본 문서의 `sz:*`·`sz:*` 참조는 해당 번들이 설치된 경우에만 체이닝합니다. 미설치 시 해당 단계를 생략하고 코어 스킬만으로 진행합니다.
+> **타 번들 연계**: 본 문서의 `gil-creative:*`·`gil-commerce:*` 참조는 해당 번들이 설치된 경우에만 체이닝합니다. 미설치 시 해당 단계를 생략하고 코어 스킬만으로 진행합니다.
 
 
 ## 역할
@@ -127,9 +126,9 @@ Word 보고서 요청 시:
 
 ## 이 스킬을 사용하지 말아야 할 때
 - **데이터 탐색/프로파일링** → `sz:data-explorer` 사용
-- **공공데이터 조회** → `sz:public-data` 사용
-- **랜딩 페이지 내 차트 섹션** → `sz:landing-page`에서 Q4 효과 선택 시 통합 산출
-- **상세페이지 내 가격 비교 차트** → `sz:product-detail`에서 직접 처리
+- **공공데이터 조회** → `public-data(미포함)` 사용
+- **랜딩 페이지 내 차트 섹션** → `landing-page(미포함)`에서 Q4 효과 선택 시 통합 산출
+- **상세페이지 내 가격 비교 차트** → `product-detail(미포함)`에서 직접 처리
 
 ## 흡수 방법론 (knowledge-work-plugins@2cf4294, Apache-2.0)
 

@@ -2,8 +2,7 @@
 name: meeting-facilitator
 description: |
   회의가 산으로 가지 않게 아젠다를 짜고 결론까지 끌고 가는 진행을 도와주는 스킬입니다
-user-invocable: true
-version: 1.2.0
+version: 2.0.0
 ---
 ## 스킬 개요(상세)
 
@@ -100,8 +99,8 @@ version: 1.2.0
 ## 관련 스킬
 
 - **sz:report-speak**: 회의에서 결론 먼저 발제·보고
-- **sz:negotiation-1on1**: 회의 전 핵심 인물과 사전 정렬·설득
-- **sz:conflict-handler**: 회의 중 충돌·발언 독점 대응
+- **negotiation-1on1(미포함)**: 회의 전 핵심 인물과 사전 정렬·설득
+- **conflict-handler(미포함)**: 회의 중 충돌·발언 독점 대응
 - **sz:docx-generator**: 회의록을 정식 문서로 정리
 
 ## 이 스킬을 사용하지 말아야 할 때

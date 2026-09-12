@@ -2,8 +2,7 @@
 name: compliance-check
 description: |
   규제 준수 점검, 내부 감사, ESG 보고, 인허가 서류를 지원합니다
-user-invocable: true
-version: 1.2.0
+version: 2.0.0
 ---
 ## 스킬 개요(상세)
 
@@ -150,7 +149,7 @@ version: 1.2.0
 - **sz:contract-review**: 계약서 검토, 이용약관 작성
 - **sz:nda-triage**: NDA 비밀유지계약 검토
 - **sz:legal-risk**: 법적 리스크 분석, 지적재산권 전략
-- **sz:tax-helper**: 세금 신고, 홈택스 안내
+- **tax-helper(미포함)**: 세금 신고, 홈택스 안내
 - **sz:ai-slop-reviewer**: 텍스트 산출물(감사 보고서·체크리스트) AI 패턴 검수
 
 ### 후처리 체인 (텍스트 산출물)
@@ -158,7 +157,7 @@ version: 1.2.0
 감사 보고서·갭 분석·ESG 보고서 등 서술형 산출물은 작성 후 반드시 다음 체인으로 마무리합니다.
 
 ```
-compliance-check → sz:ai-slop-reviewer → sz:humanize-korean
+compliance-check → sz:ai-slop-reviewer → sz:humanize-korean → 최종 검수(◆최종본, humanize Phase 6)
 ```
 
 - **sz:ai-slop-reviewer**: AI 글쓰기 패턴(과장·상투구·획일적 구조) 검수

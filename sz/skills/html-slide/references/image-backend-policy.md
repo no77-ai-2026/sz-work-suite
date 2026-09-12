@@ -1,6 +1,6 @@
 # 이미지 백엔드 정책 — 허용 백엔드: Higgsfield + codex
 
-> **타 번들 연계**: 본 문서의 `sz:*`·`sz:*` 참조는 해당 번들이 설치된 경우에만 체이닝합니다. 미설치 시 해당 단계를 생략하고 코어 스킬만으로 진행합니다.
+> **타 번들 연계**: 본 문서의 `gil-creative:*`·`gil-commerce:*` 참조는 해당 번들이 설치된 경우에만 체이닝합니다. 미설치 시 해당 단계를 생략하고 코어 스킬만으로 진행합니다.
 
 
 html-slide의 비트맵 이미지(실사 히어로·일러스트 컨셉 등 SVG로 표현 불가능한 영역) 생성 백엔드 정책입니다. **인포그래픽(차트·다이어그램·KPI)은 이미지 백엔드를 쓰지 않고 인라인 SVG로 직접 저작**합니다 (`references/inline-svg-infographics.md`).
@@ -37,7 +37,7 @@ html-slide의 비트맵 이미지(실사 히어로·일러스트 컨셉 등 SVG�
 
 ```text
 # 한국어 텍스트 포함 시 — gpt-image-2-prompt로 6-Block 프롬프트 빌드 후 전달
-sz:gpt-image-2-prompt → 산출 프롬프트 → higgsfield-image(GPT Image 2 모델)
+gpt-image-2-prompt(미포함) → 산출 프롬프트 → higgsfield-image(GPT Image 2 모델)
 ```
 
 **권장 모델 선택**:

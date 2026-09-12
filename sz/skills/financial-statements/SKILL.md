@@ -2,8 +2,7 @@
 name: financial-statements
 description: |
   재무제표를 만들어주는 스킬입니다
-user-invocable: true
-version: 1.2.0
+version: 2.0.0
 ---
 ## 스킬 개요(상세)
 
@@ -173,14 +172,14 @@ K-IFRS(한국채택국제회계기준)에 따른 재무제표 작성을 지원�
 
 - **sz:close-management**: 월말·급여 결산 업무
 - **sz:variance-analysis**: 예산 대비 실적 분석
-- **sz:tax-helper**: 세금 신고, 홈택스 안내
+- **tax-helper(미포함)**: 세금 신고, 홈택스 안내
 
 ### 후처리 체인 (재무제표 해설·주석·재무비율 코멘트 등 서술형 산출물)
 
 재무제표 분석 코멘트, 주석 초안의 서술 문단, 재무비율 해설, 경영진 보고용 설명문처럼 문장 산출물을 작성한 뒤에는 아래 체인으로 마무리한다.
 
 ```
-financial-statements (해설·코멘트 부분) → sz:ai-slop-reviewer → sz:humanize-korean
+financial-statements (해설·코멘트 부분) → sz:ai-slop-reviewer → sz:humanize-korean → 최종 검수(◆최종본, humanize Phase 6)
 ```
 
 - **sz:ai-slop-reviewer**: AI 티 나는 표현·과장·상투구 검수 및 수정
@@ -192,7 +191,7 @@ financial-statements (해설·코멘트 부분) → sz:ai-slop-reviewer → sz:h
 
 - **월말·급여 결산 업무**: 계정 마감, 급여 정산, 4대보험 계산은 `sz:close-management` 스킬이 더 적합합니다.
 - **예산 대비 실적 분석**: 분산 분석과 KPI 추적은 `sz:variance-analysis` 스킬을 사용하세요.
-- **세금 신고·납부**: 부가가치세·법인세 신고 절차는 `sz:tax-helper` 스킬을 먼저 확인하고 세무사에게 의뢰하세요.
+- **세금 신고·납부**: 부가가치세·법인세 신고 절차는 `tax-helper(미포함)` 스킬을 먼저 확인하고 세무사에게 의뢰하세요.
 - **투자 판단용 실사(DD)**: 인수합병, 투자 결정을 위한 재무 실사는 공인회계사나 회계법인의 공식 실사가 필요합니다.
 
 ## 흡수 방법론 (knowledge-work-plugins@2cf4294, Apache-2.0)

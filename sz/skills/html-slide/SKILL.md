@@ -2,8 +2,7 @@
 name: html-slide
 description: |
   발표용 슬라이드 덱을 브라우저에서 바로 열리는 단일 파일·자체 완결형(self-contained) HTML로 만들어 드립니다 트리거: "발표 슬라이드 HTML로 만들어줘", "키노트 덱 단일 HTML 파일로 렌더해줘", "사업계획서 슬라이드 10장, 브라우저에서 바로 열리게"
-user-invocable: true
-version: 1.2.0
+version: 2.0.0
 ---
 ## 스킬 개요(상세)
 
@@ -18,11 +17,11 @@ version: 1.2.0
 - "발표 자료를 HTML 슬라이드 + 편집 가능 PPTX 둘 다"
 design-system-library 75개 브랜드 토큰 중 테마를 골라 적용하고, 각 토큰별 getdesign.md 상세 페이지 링크로 미리보기를 제공합니다.
 PDF 배포본이 필요하면 브라우저 `?print-pdf` 인쇄 모드를 쓰거나, 생성한 HTML을 sz:pdf-writer로 넘겨 변환하세요 (weasyprint를 직접 설치·호출하지 말 것).
-[책임 경계] vs sz:pptx-designer: 이 스킬=브라우저에서 바로 열리는 단일 .html 슬라이드 덱(편집 가능 .pptx는 pptx-designer 체이닝으로 산출). vs sz:notebooklm-slide-prompt: 저 스킬=NotebookLM 입력용 프롬프트(파일 생성 없음). vs sz:html-report: 저 스킬=연속 스크롤 문서/보고서(슬라이드 덱이 아님).
+[책임 경계] vs sz:pptx-designer: 이 스킬=브라우저에서 바로 열리는 단일 .html 슬라이드 덱(편집 가능 .pptx는 pptx-designer 체이닝으로 산출). vs notebooklm-slide-prompt(미포함): 저 스킬=NotebookLM 입력용 프롬프트(파일 생성 없음). vs sz:html-report: 저 스킬=연속 스크롤 문서/보고서(슬라이드 덱이 아님).
 
 # html-slide — 단일 파일 HTML 슬라이드 덱 생성기
 
-> **타 번들 연계**: 본 문서의 `sz:*`·`sz:*` 참조는 해당 번들이 설치된 경우에만 체이닝합니다. 미설치 시 해당 단계를 생략하고 코어 스킬만으로 진행합니다.
+> **타 번들 연계**: 본 문서의 `gil-creative:*`·`gil-commerce:*` 참조는 해당 번들이 설치된 경우에만 체이닝합니다. 미설치 시 해당 단계를 생략하고 코어 스킬만으로 진행합니다.
 
 
 ## 목적과 범위
@@ -88,7 +87,7 @@ PDF 배포본이 필요하면 브라우저 `?print-pdf` 인쇄 모드를 쓰거�
 
 > 위 4개 백엔드만 허용됩니다. 그 외 외부 이미지 백엔드(MCP·API·게이트웨이)는 사용하지 않습니다 — [`references/image-backend-policy.md`](references/image-backend-policy.md).
 
-한국어 텍스트가 이미지에 들어가면 `sz:gpt-image-2-prompt`(6-Block 프롬프트 빌더)로 verbatim 지시 후 선택 백엔드로 생성합니다.
+한국어 텍스트가 이미지에 들어가면 `gpt-image-2-prompt(미포함)`(6-Block 프롬프트 빌더)로 verbatim 지시 후 선택 백엔드로 생성합니다.
 
 ### 5. design-system-library 토큰 적용
 design_system 지정 시 `systems/<name>.md` 토큰 → Tailwind Play CDN config + shadcn vanilla 컴포넌트로 렌더. 미지정 시 0의존 기본 템플릿. html-report와 동일 계약 재사용. 사용자가 getdesign.md 링크로 토큰을 미리 확인한 뒤 선택할 수 있습니다.
@@ -96,14 +95,73 @@ design_system 지정 시 `systems/<name>.md` 토큰 → Tailwind Play CDN config
 ### 6. 단일 파일 HTML 덱 조립
 16:9 슬라이드 컨테이너 + 자체 vanilla JS 덱 런타임(키보드 내비·풀스크린·`?print-pdf` 인쇄 모드·speaker notes 토글·progress bar)을 단일 `.html`로 산출. 런타임 구현: [`references/html-runtime.md`](references/html-runtime.md).
 
+- **[HARD] 슬라이드 바깥에 제작 메타를 렌더하지 않는다.** 장수·해상도·도식 개수·사용 폰트 같은 **제작 메타는 산출물이 아니라 작업 메모**다. (카운터·진행바·발표자 노트 같은 덱 조작 UI는 여기 해당하지 않는다 — 루브릭 §제작 메타 판정.) 필요하면 HTML 주석(`<!-- -->`)이나 `deck.json`에 남기고, 화면에 찍히는 자리에는 두지 않는다 — 수강생·고객에게 그대로 보인다. 루브릭 #34가 이를 hard-fail로 검사한다.
+- 아이콘은 `deck.json`의 `icon` + `icon_reason` 쌍을 그대로 따른다(스키마 §아이콘 슬롯 계약). 렌더 단계에서 임의로 대체하지 않는다.
+
 ### 7. AI 슬롭 후처리 (의무)
-모든 슬라이드 카피·speaker notes 텍스트에 `ai-slop-reviewer` → `humanize-korean` 체인 적용. CLAUDE.local.md §3-2 HARD 규칙.
+모든 슬라이드 카피·speaker notes 텍스트에 `sz:ai-slop-reviewer` → `sz:humanize-korean`(`장르: 슬라이드`) → 최종 검수(◆최종본, humanize Phase 6) 체인 적용. common-rules.md §6 한국어 품질 체인(등급제 연동).
 
 ### 8. PPTX 산출 (선택, export_pptx: true 시)
 `deck.json` 원고를 `pptx-designer`(gil-office)에 전달하며 체이닝. pptx-designer가 pptxgenjs로 편집 가능 OOXML `.pptx` 생성(원고→객체 직접 생성). html-slide 자체는 PPTX 생성 로직을 구현하지 않습니다. 체이닝 규약: [`references/pptx-chaining.md`](references/pptx-chaining.md).
 
-### 9. 자체 검수
-단일 HTML 열기·`?print-pdf` 인쇄 미리보기·speaker notes 표시·이미지 broken link·한국어 폰트 렌더·이미지 백엔드 정책 준수(허용 백엔드만 사용)를 자체 검수 후 PASS/FAIL 보고. PPTX 체이닝 시 pptx-designer QA 결과 통합 보고.
+### 9. 정량 QA 채점 (의무)
+
+**[HARD] 산출된 HTML을 브라우저에서 렌더해 [`references/deck-quality-rubric.md`](references/deck-quality-rubric.md)의 34개 기준으로 채점한다.** 이 단계는 §7과 같은 등급의 필수 게이트이며, 눈으로 훑어보는 것으로 갈음하지 않는다 — 루브릭은 DOM 실측(`getBoundingClientRect`·computed `font-size`·명도대비 계산)을 요구하고, 그 수치가 곧 증거다.
+
+> **왜 (의무)로 못 박는가.** 이 루브릭이 참고 문서 목록에만 걸려 있고 워크플로 어느 단계에서도 호출되지 않던 시기에, 실제 산출 덱에서 본문 텍스트 14종 중 12종이 hard-fail 하한(#9)에 미달한 채 배포된 사례가 있다. 같은 덱의 한국어 카피는 우수했다 — §7이 워크플로 안에 "(의무)"로 있었기 때문이다. **게이트는 존재만으로 작동하지 않고, 파이프라인에 걸려 있을 때만 작동한다.**
+
+**hard 기준 9개(실패군 8종) — 한 건이라도 걸리면 반려하고 고쳐서 다시 렌더한다.** (#32와 #33은 둘 다 아이콘 문제라 하나의 실패군으로 보고하되, 채점은 독립 함수 두 개다.) (임계값은 전부 `qa-config.json` 오버라이드 대상이며 상수로 하드코딩하지 않는다.)
+
+| # | 기준 | DOM 측정 | 기본 임계값 |
+|---|------|---------|------------|
+| 9 | **본문 폰트 하한** | 본문 노드 computed `font-size`. **슬라이드 폭 → pt 환산 후 판정** (1280px 슬라이드 = 960pt, 즉 `1px = 0.75pt`) | ≥24pt (온라인 전용 덱 18pt로 하향 설정 가능) |
+| 16 | **명도대비** | 상대 휘도 기반 WCAG 대비비 | 본문 ≥4.5:1 · 큰 텍스트 ≥3:1 |
+| 17 | **3D 차트 효과** | SVG/CSS 원근·`rotateX/Y`·입체 그림자 | 검출 시 반려 |
+| 20 | **그리드 정렬 편차** | 동일 역할 요소(제목/푸터) 좌표 표준편차 | 슬라이드 너비 1% 이내 |
+| 24 | **수치 슬라이드 출처라인** | 숫자·차트·표 있는 슬라이드에 `출처:`/`자료:`/`Source:` 노드 | 부재 시 반려 |
+| 28 | **텍스트 오버플로** | `scrollHeight > clientHeight` 또는 축소 후 하한 미만 | 발생 시 반려 |
+| 32 | **아이콘 어휘 다양성** | 정규화된 icon ID별 **최대 사용 횟수**(`max_count_per_normalized_icon`) | 같은 아이콘 ≤3회 (역할 반복 예외는 루브릭 §아이콘 근거 판정) |
+| 33 | **아이콘 의미 근거** | `icon_reason`이 그 문구의 동사·행동과 실제로 대응하는가 — 필드 존재만으로 통과시키지 않는다 | 대응 불명이면 반려 |
+| 34 | **제작 메타 노출** | 슬라이드 바깥에 렌더되는 **제작 메타·디버그** 텍스트 | 0개 (런타임 UI는 허용 — §아래) |
+
+- **[HARD] pt 환산을 생략하지 않는다.** #9는 px 값이 아니라 **투사 시 실제 크기**를 판정한다. 1280px 덱의 본문 18px는 13.5pt이며, 프로젝터 기준 하한(24pt)의 절반을 조금 넘는 수준이다. px로만 보면 "충분히 커 보이는" 값이 여기서 걸린다.
+- **[HARD] 강의장·회의실 투사 덱은 온라인 완화(18pt)를 적용하지 않는다.** 완화는 화면으로만 볼 아카이브 덱에 한한다. 어느 쪽인지 불분명하면 §1에서 사용자에게 확인한다.
+- soft 25개 기준은 6카테고리 가중합으로 채점해 점수와 함께 보고한다. 합격선 미달이면 사용자에게 항목별 수치를 제시하고 수정 여부를 확인한다.
+
+**렌더 검사 실무 주의**: 슬라이드가 많은 덱은 문서 전체 높이가 수만 px에 달해 브라우저 스크린샷이 빈 이미지를 반환하는 일이 있다. 측정은 스크린샷이 아니라 **DOM API(`getBoundingClientRect`·`getComputedStyle`·`elementFromPoint`)로 하고**, 시각 확인이 필요하면 대상 슬라이드만 남기고 나머지를 `display:none`으로 접은 뒤 촬영한다.
+
+**그 밖의 기능 검수**: 단일 HTML 열기·`?print-pdf` 인쇄 미리보기·speaker notes 표시·이미지 broken link·한국어 폰트 렌더·이미지 백엔드 정책 준수(허용 백엔드만 사용)를 함께 확인한 뒤 PASS/FAIL 보고. PPTX 체이닝 시 pptx-designer QA 결과 통합 보고.
+
+---
+
+## 승인 요청 계약 (런타임 중립)
+
+[HARD] 이 스킬의 게이트는 **특정 도구 이름에 묶이지 않는다.** `AskUserQuestion`은 Claude 런타임의 수단일 뿐이고, Codex를 비롯한 다른 런타임에는 그 도구가 없다. 도구 이름으로 계약을 쓰면 그 도구가 없는 런타임에서 게이트가 **영구 blocker**가 되어, 승인이 필요한 모든 작업이 그냥 멈춘다. 그건 안전이 아니라 고장이다.
+
+승인은 아래 순서로 구한다. 위에서부터 **실제로 가능한 첫 번째**를 쓴다.
+
+**승인의 정의는 수단이 아니라 결과다: 승인서를 사용자에게 그대로 보여주고, 그에 대한 명시적 응답을 받는 것.** 아래는 그 결과를 만드는 경로들이며, 위에서부터 가능한 첫 번째를 쓴다.
+
+| 순위 | 경로 | 조건 |
+|---|---|---|
+| 1 | 런타임의 구조화 질문 도구 (`AskUserQuestion` 등) | 그 도구가 현재 세션에 노출돼 있을 때 |
+| 2 | **일반 대화로 승인서를 제시하고 다음 턴에서 응답을 받는다** | 사용자와 직접 대화 중일 때. 도구가 없어도 이 경로는 언제나 열려 있다 |
+| 3 | 구조화 blocker 반환 → 상위 오케스트레이터가 물어봄 | 서브에이전트로 실행 중일 때 |
+
+**[HARD] 런타임의 도구 실행 권한 프롬프트는 승인이 아니다.** 그 프롬프트는 "이 도구를 호출해도 되는가"를 물을 뿐, 게이트가 보여주기로 한 인자·견적·동의 문항을 표시하지 않는다. 승인서 전체와 선택지를 실제로 표시하는 경우에만 2번 경로로 인정한다.
+
+**[HARD] 2번 경로가 있으므로 "물을 수단이 없다"는 상황은 사실상 없다.** 대화가 가능한 곳에서는 언제나 승인서를 글로 제시할 수 있다. fail-closed는 **대화도 blocker 반환도 불가능한 완전 무인 실행**에만 해당한다 — 그 경우에만 실행하지 않고 멈춘다.
+
+**[HARD] 3번을 쓸 때 blocker는 그 자체로 승인 요청서여야 한다.** 상위가 무엇을 물어야 할지 모르면 되물을 수 없고, 그러면 교착된다. 다음을 모두 담는다:
+
+- 승인받을 **행위** 한 줄 (무엇이 되돌릴 수 없는지 / 얼마가 나가는지)
+- 게이트가 요구하는 **인자 전부** (요약하지 않은 값)
+- **선택지 목록** — 상위가 그대로 사용자에게 제시할 수 있는 형태
+- **재개 방법** — 어떤 답을 받으면 무엇을 이어서 실행하는지
+
+**[HARD] 세 경로가 모두 불가능한 무인 실행에서는 실행하지 않는다(fail-closed).** 물을 수단이 없다는 것은 승인을 받았다는 뜻이 아니다. 이때는 "승인 수단이 없어 진행하지 못했다"고 기록하고 멈춘다 — 조용히 진행하지 않는다. 반대로 **대화가 가능한데 도구가 없다는 이유로 멈추는 것도 잘못**이다. 2번 경로를 쓴다.
+
+> 이 계약은 GIL 공통 규칙(`project(미포함)` `references/core/common-rules.md`)의 승인형 원칙을 게이트 쪽에 적용한 것이다. AskUserQuestion 유무·서브에이전트 여부와 무관하게 같은 승인서·같은 선택지로 동작해야 한다.
 
 ---
 
@@ -145,7 +203,7 @@ design_system 지정 시 `systems/<name>.md` 토큰 → Tailwind Play CDN config
 이미지 필요 시 분기:
 ```
 html-slide → higgsfield-image(미포함) (Higgsfield MCP, 기본)
-           → sz:gpt-image-2-prompt (한국어 verbatim 프롬프트 빌더) → higgsfield-image
+           → gpt-image-2-prompt(미포함) (한국어 verbatim 프롬프트 빌더) → higgsfield-image
            → codex exec "$imagegen ..." (image_backend: codex 시, 로컬)
 ```
 
@@ -186,7 +244,7 @@ AI 슬라이드 스킬 스타트업 사업계획서 10장 슬라이드로 만들
 
 - 연속 스크롤 문서는 `sz:html-report`가 맡습니다 — 본 스킬은 슬라이드 시퀀스(16:9 페이지) 전용입니다.
 - 편집 가능 .pptx 직접 생성은 하지 않습니다 — `pptx-designer`(gil-office) 체이닝으로 위임합니다.
-- NotebookLM 입력용 프롬프트는 `sz:notebooklm-slide-prompt`가 맡습니다.
+- NotebookLM 입력용 프롬프트는 `notebooklm-slide-prompt(미포함)`가 맡습니다.
 - React/Vue/webpack/vite 같은 빌드 단계·런타임 SPA 의존을 도입하지 않습니다 — `file://` 즉시 오픈이 원칙입니다.
 - [`references/image-backend-policy.md`](references/image-backend-policy.md)의 허용 백엔드(Higgsfield MCP + codex)만 사용합니다. 그 외 외부 이미지 백엔드는 사용하지 않습니다.
 - 여러 파일로 나누지 않습니다 — HTML 산출물은 단일 `.html` 파일입니다.
@@ -211,7 +269,7 @@ AI 슬라이드 스킬 스타트업 사업계획서 10장 슬라이드로 만들
 - [`sz:design-system-library`](../design-system-library/SKILL.md) — 75개 브랜드 토큰 SSOT
 - [`sz:pptx-designer`](../pptx-designer/SKILL.md) — 편집 가능 .pptx 생성 (체이닝)
 - [`higgsfield-image(미포함)`](../higgsfield-image/SKILL.md) — Higgsfield MCP 이미지 (기본 백엔드)
-- [`sz:gpt-image-2-prompt`](../gpt-image-2-prompt/SKILL.md) — 한국어 verbatim 이미지 프롬프트 빌더
+- [`gpt-image-2-prompt(미포함)`](../gpt-image-2-prompt/SKILL.md) — 한국어 verbatim 이미지 프롬프트 빌더
 - [`sz:ai-slop-reviewer`](../../../gil/skills/ai-slop-reviewer/SKILL.md) → [`sz:humanize-korean`](../humanize-korean/SKILL.md) — 의무 후처리 체인
 
 ## 자체 검수

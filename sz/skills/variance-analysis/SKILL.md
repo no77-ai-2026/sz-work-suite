@@ -2,8 +2,7 @@
 name: variance-analysis
 description: |
   예산과 실적 차이를 분석해주는 스킬입니다
-user-invocable: true
-version: 1.2.0
+version: 2.0.0
 ---
 ## 스킬 개요(상세)
 
@@ -162,14 +161,14 @@ version: 1.2.0
 
 - **sz:financial-statements**: K-IFRS 재무제표 작성
 - **sz:close-management**: 월말·급여 결산 업무
-- **sz:tax-helper**: 세금 신고, 홈택스 안내
+- **tax-helper(미포함)**: 세금 신고, 홈택스 안내
 
 ### 후처리 체인 (분산 분석 보고서·경영진 요약·개선 권고안 등 서술형 산출물)
 
 경영진 요약, 원인 분석 코멘트, 개선 권고안, 수정 전망 설명문처럼 문장 산출물을 작성한 뒤에는 아래 체인으로 마무리한다.
 
 ```
-variance-analysis (보고서 서술 부분) → sz:ai-slop-reviewer → sz:humanize-korean
+variance-analysis (보고서 서술 부분) → sz:ai-slop-reviewer → sz:humanize-korean → 최종 검수(◆최종본, humanize Phase 6)
 ```
 
 - **sz:ai-slop-reviewer**: AI 티 나는 표현·과장·상투구 검수 및 수정
@@ -181,7 +180,7 @@ variance-analysis (보고서 서술 부분) → sz:ai-slop-reviewer → sz:human
 
 - **재무제표 공식 작성**: K-IFRS 기준 재무제표 작성은 `sz:financial-statements` 스킬을 사용하세요.
 - **월말 결산·급여 정산**: 회계 마감 업무는 `sz:close-management` 스킬이 더 적합합니다.
-- **세금 계산**: 세무 관련 문의는 `sz:tax-helper` 스킬을 사용하세요.
+- **세금 계산**: 세무 관련 문의는 `tax-helper(미포함)` 스킬을 사용하세요.
 - **투자 타당성 분석**: IRR, NPV 등 투자 의사결정 분석은 별도 재무 모델링이 필요합니다.
 
 ## 흡수 방법론 (knowledge-work-plugins@2cf4294, Apache-2.0)

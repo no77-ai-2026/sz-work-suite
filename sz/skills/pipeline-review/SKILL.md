@@ -2,21 +2,21 @@
 name: pipeline-review
 description: |
   파이프라인 건강 점검 — 딜 우선순위·리스크 플래그·주간 액션 플랜을 만듭니다 트리거: "파이프라인 리뷰", "딜 상태 점검해줘", "이번 주 영업 액션 플랜"
-version: 1.2.0
+version: 2.0.0
 uz: references/uz-pipeline-review.md
 origin: anthropics/knowledge-work-plugins@2cf4294 (sales/pipeline-review, Apache-2.0)
 ---
 
 # pipeline-review
 
-> **타 번들 연계**: 본 문서의 `sz:*`·`sz:*` 참조는 해당 번들이 설치된 경우에만 체이닝합니다. 미설치 시 해당 단계를 생략하고 코어 스킬만으로 진행합니다.
+> **타 번들 연계**: 본 문서의 `gil-creative:*`·`gil-commerce:*` 참조는 해당 번들이 설치된 경우에만 체이닝합니다. 미설치 시 해당 단계를 생략하고 코어 스킬만으로 진행합니다.
 
 
 ## 스킬 개요(상세)
 
 파이프라인 건강 점검 — 딜 우선순위·리스크 플래그·주간 액션 플랜을 만듭니다. 한국 표준 + UZ 듀얼 컨텍스트를 적용합니다.
 
-**한국화 노트**: [경계] 소상공인 리드 분류는 sz:lead-triage — 이 스킬은 B2B 딜 파이프라인.
+**한국화 노트**: [경계] 소상공인 리드 분류는 lead-triage(미포함) — 이 스킬은 B2B 딜 파이프라인.
 
 **도구 일반화**: 원문의 미국 SaaS 연동(QuickBooks·HubSpot·PayPal·Gusto 등)은 방법론으로만 계승한다 — 한국 실무에서는 스마트스토어·카페24 MCP(gil-commerce 설치 시), 엑셀/CSV 업로드, 사용자 제공 수치를 소스로 쓰고, 해당 커넥터가 연결된 경우에만 직접 조회한다.
 

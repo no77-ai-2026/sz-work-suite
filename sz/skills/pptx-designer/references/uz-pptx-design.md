@@ -1,6 +1,6 @@
 # UZ PPT 디자인 가이드
 
-> **타 번들 연계**: 본 문서의 `sz:*`·`sz:*` 참조는 해당 번들이 설치된 경우에만 체이닝합니다. 미설치 시 해당 단계를 생략하고 코어 스킬만으로 진행합니다.
+> **타 번들 연계**: 본 문서의 `gil-creative:*`·`gil-commerce:*` 참조는 해당 번들이 설치된 경우에만 체이닝합니다. 미설치 시 해당 단계를 생략하고 코어 스킬만으로 진행합니다.
 
 
 > gil-office v0.1.0 | UZ 발표·IR·비즈니스 슬라이드 디자인
@@ -232,7 +232,7 @@ Background: #FFF5F8
 - Atlas 실크 줄무늬
 - 면화 (목화)
 
-상세는 `sz:market-profile-engine/references/uz-market-profile.md`.
+상세는 `market-profile-engine(미포함)/references/uz-market-profile.md`.
 
 ### 아이콘
 

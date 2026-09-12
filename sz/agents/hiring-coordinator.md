@@ -23,8 +23,8 @@ effort: medium
 1. `sz:resume-screener` — 이력서 스크리닝·평가
 2. `sz:draft-offer` — 오퍼레터 작성
 3. `sz:employment-manager` — 근로계약·온보딩 관리
-4. `sz:people-operations` — 인사운영 / `sz:performance-review` 성과평가
-5. (대외 문서 텍스트) → `sz:ai-slop-reviewer` → `sz:humanize-korean`
+4. `people-operations(미포함)` — 인사운영 / `sz:performance-review` 성과평가
+5. (대외 문서 텍스트) → `sz:ai-slop-reviewer` → `sz:humanize-korean` → 최종 검수(◆최종본, humanize Phase 6)
 
 ## Cowork 환경 제약
 

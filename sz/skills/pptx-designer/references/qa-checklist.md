@@ -1,6 +1,6 @@
 # PPTX QA Checklist — 자동·시각 검수
 
-> **타 번들 연계**: 본 문서의 `sz:*`·`sz:*` 참조는 해당 번들이 설치된 경우에만 체이닝합니다. 미설치 시 해당 단계를 생략하고 코어 스킬만으로 진행합니다.
+> **타 번들 연계**: 본 문서의 `gil-creative:*`·`gil-commerce:*` 참조는 해당 번들이 설치된 경우에만 체이닝합니다. 미설치 시 해당 단계를 생략하고 코어 스킬만으로 진행합니다.
 
 
 PPTX 출력 직전 다음을 점검합니다.
@@ -116,7 +116,7 @@ unoconv -f pdf output.pptx
 
 ### 8. AI 슬롭 카피 검출
 
-`sz:design-slop-check` 또는 `sz:humanize-korean` 체이닝.
+`design-slop-check(미포함)` 또는 `sz:humanize-korean` 체이닝.
 
 영문 Tier 1 슬롭 — 발견 시 수정 권장:
 - "Reimagine your X"

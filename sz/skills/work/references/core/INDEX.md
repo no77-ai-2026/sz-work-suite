@@ -1,6 +1,6 @@
 # project 스킬 references — 전체 인덱스
 
-`sz/skills/project/references/core/`의 레퍼런스 파일 인덱스. project 스킬은 개발을 제외한 모든 Claude Cowork(Desktop) 작업의 슈퍼 오케스트레이터/어드바이저다.
+`gil/skills/project/references/core/`의 레퍼런스 파일 인덱스. project 스킬은 개발을 제외한 모든 Claude Cowork(Desktop) 작업의 슈퍼 오케스트레이터/어드바이저다.
 
 ## 진입점
 
@@ -32,7 +32,7 @@
 ## 아키텍처
 
 ```
-계층 1: 플러그인(Read-Only) — SZ 플러그인(sz 코어 허브 포함)
+계층 1: 플러그인(Read-Only) — SZ 플러그인(gil 코어 허브 포함)
          ↑ Gap Detection: Bash ~/.claude/plugins/ + system reminder 교차 검증
          ↑ 누락 플러그인 감지 → 설치 안내 → "이어서 진행" 재개
 계층 2: ./AGENTS.md(정본) — 프로젝트별 맞춤형 페르소나 + 스킬 체인 정의

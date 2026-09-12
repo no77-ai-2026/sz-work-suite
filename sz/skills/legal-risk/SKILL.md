@@ -2,8 +2,7 @@
 name: legal-risk
 description: |
   기업 법적 리스크를 분석하고 지적재산권 전략을 수립합니다
-user-invocable: true
-version: 1.2.0
+version: 2.0.0
 ---
 ## 스킬 개요(상세)
 
@@ -158,7 +157,7 @@ version: 1.2.0
 법적 리스크 평가 보고서·법령 변화 영향 분석·대응 액션 플랜 등 서술형 산출물은 작성 후 반드시 다음 체인으로 마무리합니다.
 
 ```
-legal-risk → sz:ai-slop-reviewer → sz:humanize-korean
+legal-risk → sz:ai-slop-reviewer → sz:humanize-korean → 최종 검수(◆최종본, humanize Phase 6)
 ```
 
 - **sz:ai-slop-reviewer**: AI 글쓰기 패턴(과장·상투구·획일적 구조) 검수

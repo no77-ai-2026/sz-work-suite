@@ -1,0 +1,60 @@
+# {프로젝트명} — AGENTS.md (정본)
+
+> 생성 {날짜} · SZ Work Suite v{sz버전} · sz:risk-center 프리셋
+> 공통 HARD 규칙 정본(SSOT): sz:work `references/core/common-rules.md` — 본문과 상충 시 정본 우선.
+> 산출물 등급제(HARD): 기본 ⚡초안(검수 없음) / ◐작업본("다듬어줘")=`sz:ai-slop-reviewer` 1회 /
+> ◆최종본("최종·납품·발행" 명시 시만)=`sz:ai-slop-reviewer`→`sz:korean-spell-check`→`sz:humanize-korean`+재검산.
+
+## 1. 프로젝트 목적
+C레벨 대상 {시장} 리스크 센싱을 **단일 HTML 통합 대시보드** 1개로 운영한다.
+활성 모듈: {MODULES} — ① 홈(종합) ② 운영 리스크(레지스터 10카테고리) ③ WTO ④ 보세창고 정책 센터 ⑤ 보고서 아카이브.
+
+## 2. 폴더 구조
+| 경로 | 내용 |
+|---|---|
+| `01_대시보드/` | 통합 대시보드 HTML (`uz-risk-center_v{버전}_{YYYY-MM-DD}.html`) — 구버전 보존 |
+| `02_보고서/` | 주제별 Word 심층 보고서 |
+| `03_검증로그/` | 갱신·출처 검증 로그(.md) |
+| `inputs/` | 원본·참고 자료(수정 금지) |
+
+## 3. HARD 규칙
+1. **금칙어**: 대시보드 파일명·내용에 {금칙어 목록 — 예: 법인 약어·'본사'·'당 법인'} 금지. 자사는 '당사/현지 법인(LE)'.
+2. **익명화**: {익명화 매핑 — 예: ○○사=X사}. 그 외 실명. (출처 기사 원제목은 원문 유지)
+3. **출처 무결성·발표일 기준**: 실존 공개 URL + 1차 출처 공식 발표일. 접속일 사용·임의 URL 생성 금지.
+4. **단일 HTML**·**KO/EN 페어링**·**버전·파일명 규칙**·**아카이브 요약 내장(파일 링크 금지)**·**SNAPSHOT_DATE 동기화**·**i18n 렌더링 규칙** — 상세 `.sz/refs/`.
+5. **보고서는 승인 후 제작**.
+6. **갱신 후 한국어 델타 브리핑 6항목**.
+
+## 4. 산출물별 워크플로우
+| 산출물 | 요청 예시 | 체인 | 상세 |
+|---|---|---|---|
+| 대시보드 주간 갱신 | "대시보드 업데이트해줘" | `sz:risk-center update` → 전수 스윕 → `sz:risk-radar` 판정 → HTML 갱신 → URL 검증 → `sz:validate-data` → 검증 로그 → 델타 브리핑 | `.sz/refs/weekly-sweep.md` |
+| 주제별 심층 보고서 | "{주제} 리스크 보고서" | **승인** → `sz:uz-research` → `sz:docx-generator` → 등급별 검수 → 아카이브 내장 | `.sz/refs/report-format.md` |
+| 임원 브리핑 | "법인장 보고 PPT/덱" | `sz:risk-radar` 요약 → `sz:pptx-designer` 또는 `sz:html-slide` → 등급별 검수 | — |
+| 대시보드 점검 | "대시보드 점검해줘" | `sz:risk-center doctor` | — |
+
+## 5. 데이터 소스 신뢰도
+- **T1**: {1차 공식 — 예: cbu.uz, lex.uz, stat.uz, my.gov.uz, soliq.uz, customs.uz, WTO, USTR}
+- **T2**: {현지 매체}
+- **T3**: {국제기구·외신·Big4}
+T1 우선, T2·T3 교차검증. {원문 언어} 원문 검색 필수.
+
+## 6. 상태 임계 기준
+위기(손익 직접 충격 + 6개월 내 발효 + 회피 옵션 부재) / 주의(발효 ≥6개월 또는 영향 ±3% 미만 또는 회피 가능) / 정상(시그널만).
+
+## 7. 상세 참조 인덱스 (지연 로드)
+| 파일 | 내용 | 읽는 시점 |
+|---|---|---|
+| `.sz/refs/weekly-sweep.md` | 스윕 축·보조 검색어·검증·체크리스트·배지·i18n | 갱신 |
+| `.sz/refs/report-format.md` | 보고서 목차·검증 로그 양식·아카이브 내장 | 보고서 |
+| `.sz/refs/data-schema.md` | 데이터 필드 정의 | 데이터 반영 |
+| `.sz/refs/dashboard-tech.md` | 셸·뷰·MODULES·토큰 | HTML 수정 |
+| `.sz/refs/research-depth.md` | 인용 4분류·상한·3모드 | 조사 |
+
+## 8. 언어
+대화는 요청 언어(KO/EN/RU/UZ). 대시보드는 KO/EN 병기, 보고서는 KO 기본.
+
+## 9. _Wiki 중앙 지식 참조 (HARD — `../_Wiki`가 있을 때)
+리스크 관리 배경 지식이 필요할 때 내장 지식보다 먼저 `../_Wiki/wiki/risk-mgmt/INDEX.md`(필요 시 `uzbekistan/`)를 읽고 근거로 삼는다. 위키에 없으면 평소대로 진행하고, 주간 갱신·보고서에서 재사용할 교훈(누락 사례·보조 검색어·판정 기준 변경)이 확정되면 "위키로 컴파일"(`sz:wiki compile`) 여부를 1줄로 제안한다. 위키 파일을 이 프로젝트에서 직접 수정하지 않는다.
+
+<!-- evolution-log -->

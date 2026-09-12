@@ -38,7 +38,7 @@ def _font_face_css() -> str:
             rules.append(
                 "@font-face{font-family:'Noto Sans CJK';"
                 f"font-weight:{weight};font-style:normal;"
-                f"src:url('file://{otf}');}}"
+                f"src:url('{otf.as_uri()}');}}"  # Path.as_uri(): Windows에서 file://C:\... 깨짐 방지
             )
     return "\n".join(rules)
 

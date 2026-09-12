@@ -1,64 +1,67 @@
-# SZ Work Suite (`sz`)
+# SZ Work Suite (`sz`) — v2.0.0
 
-Internal Claude Cowork plugin for SZ business & management support teams. v1.1.0 adds a harness layer: `sz:work` orchestrator, 21 coordinator agents, and an output grade system (draft/working/final QA chain).
-**212 skills** covering strategy & reporting, document production (Word/PPT/Excel/HWP/PDF), finance & accounting, legal & compliance, HR/GA, procurement & trade logistics, sales & CS, data analysis, research, marketing & design, and commerce operations — plus **6 SZ-specific skills**.
+Claude Cowork plugin for SZ business & management support teams — **67 skills, 6 coordinator agents, 2 MCP servers**, one harness.
+Lean by design: the everyday toolbox every team shares, plus the harness that keeps every session on the same rules. Team-specific workflows are added later as custom skills (see *Adding your own skills*).
 
-> Private, internal use. Based on GIL v2.2.0 bundles (Apache-2.0 + MIT). See NOTICE.md.
+> Based on GIL v2.3.1 bundles (Apache-2.0 + MIT). Attributions preserved in `NOTICE.md`, `LICENSE`, `LICENSE.MIT`.
 
-## Installation
+## Install
 
-**Option A — marketplace (recommended)**
-1. In Claude (Cowork), run: `/plugin marketplace add no77-ai-2026/sz-work-suite`
-2. Install the `sz` plugin from the marketplace list.
+**Marketplace (recommended)** — Claude desktop app → Settings → Plugins → *Add marketplace* → `no77-ai-2026/sz-work-suite` → install **sz**.
+**File** — upload `releases/sz.plugin` in the plugin settings.
 
-**Option B — file upload**
-Download `releases/sz.plugin` and upload it via Cowork plugin settings.
+On first use the app asks for one optional key: `KOREAN_LAW_OC` (free, law.go.kr) — only needed for Korean statute lookups. Everything else works without it.
 
 ## Getting started (first run)
 
-1. **Install**: Claude desktop app > Settings > Plugins > *Add marketplace* > enter `no77-ai-2026/sz-work-suite` > install **sz**. (Or upload `releases/sz.plugin` directly.)
-2. **Say what you need in plain language** — Korean, English, Russian or Uzbek. Examples:
-   - "이번 주 주간보고 만들어줘" / "Draft this week's report"
-   - "Проверь этот контракт" (contract review)
-   - "재고실사 사진 대조해줘" (upload ledger + photos)
-3. **Or start from the orchestrator**: type `/sz:work` or say "이 업무 어떻게 처리해?" — it routes your request to the right skill chain.
-4. **Working on a recurring project?** Say "프로젝트 세팅해줘" once in that project folder. After a 4-question interview it creates `AGENTS.md` (project rules) + `CLAUDE.md` (loader pointer) — from then on every session in that project follows your rules automatically.
-5. **Output quality levels**: default is a quick draft. Say "다듬어줘" for a polished working version, or "최종본으로" / "final" for the full QA chain (style review + spell check + number recheck).
+1. Ask in plain language — **Korean, English, Russian or Uzbek**. Skills answer in your language.
+   - "이번 주 주간보고 만들어줘" · "Draft the meeting minutes" · "Проверь этот контракт"
+2. `/sz:work` — the orchestrator. Say what you need; it routes to the right skill chain and applies output grades:
+   default **draft** → "다듬어줘" **working** → "최종본으로" / "final" **full QA chain**.
+3. Recurring project? Say **"프로젝트 세팅해줘"** once in that folder. After a short interview it writes `AGENTS.md` (rules) + `CLAUDE.md` (loader pointer); every later session in that folder follows them. `/sz:work doctor` checks the setup, `/sz:work evolve` proposes improvements (approval-gated).
+4. Anything that changes files, runs multi-step chains or costs more than ~8 minutes shows a plan first and waits for your OK.
 
-### 처음 사용하는 분께 (KO)
-설치 후 그냥 한국어로 업무를 요청하면 됩니다. 반복 업무가 있는 프로젝트 폴더에서는 "프로젝트 세팅해줘"를 한 번 실행해 두면 이후 세션이 규칙을 자동으로 따릅니다. "최종본으로"라고 하면 3중 검수를 거칩니다.
+## What's inside
 
-## Known limitations (v1.1)
+| Area | Skills |
+|---|---|
+| Harness | `work` (orchestrator, project scaffold, self-improvement, doctor) |
+| **SZ-specific** | `uz-research` · `risk-radar` · **`risk-center`** · `doc-formats` · `trade-logistics` · `sample-log` · `sales-verify` · **`wiki`** |
+| Documents | docx · pptx · xlsx · hwpx · pdf · html-report · **html-slide** · doc-reader · **design-system-library** |
+| Text QA | ai-slop-reviewer · humanize-korean · korean-spell-check |
+| Reporting | weekly-report · executive-summary · meeting-facilitator · report-speak · stakeholder-update · status-reporter |
+| Research | research-verify · problem-solving · daily-briefing · language-tutor |
+| Finance | financial-statements · close-management · journal-entry · reconciliation · variance-analysis · audit-support |
+| Legal | contract-review · nda-triage · legal-risk · compliance-check · legal-response |
+| HR / GA | employment-manager · resume-screener · interview-prep · draft-offer · policy-lookup · performance-review · process-manager · vendor-manager · vendor-check · event-planner |
+| Sales support | call-summary · draft-response · pipeline-review · sales-forecast |
+| Data | data-explorer · data-visualizer · statistical-analysis · validate-data · build-dashboard |
+| Strategy | strategy-planner · market-analyst · consulting-brief |
+| UZ channels | marketplace-uzum · yandex-market · telegram-commerce |
 
-- External image/video/audio generation (Higgsfield, image APIs), SNS auto-publishing (Instagram/Threads) and a few key-based connectors are **not included** — mentions of them inside some skills can be ignored; those steps are simply skipped.
-- `korean-law` MCP works better with a personal OC id (`KOREAN_LAW_OC` env var, free from open.law.go.kr); without it some law lookups fall back to web search.
-- Coordinator agents cover multi-step workflows; single-skill requests run directly without them.
+Agents: core-text-qa · data-analysis · finance-report-assembler · hiring · legal-review · operations coordinators.
 
-## Language
+### Risk Management: `sz:risk-center`
+Rebuilds and runs the single-file HTML **risk-sensing dashboard** (Home / 10-category risk register / WTO / Bonded warehouse / Report archive).
+- `init` — folders, data-stripped template (per-category sample items, `MODULES` switches), RM-specific `AGENTS.md`
+- `update` — weekly full sweep (axes A–D, RU/EN auxiliary terms, primary-channel checks) → regrade via `risk-radar` → new versioned HTML → URL verification → QA → verification log → 6-part delta briefing
+- `report` — approved deep-dive DOCX in the standard outline, summary embedded into the archive (no file links)
+- `doctor` — snapshot/version/i18n/archive consistency
+Data schema for skills that feed the dashboard: `sz/skills/risk-center/references/data-schema.md`.
 
-All skills respond in **your language** — ask in English, get English; ask in Korean, get Korean. The 6 SZ-specific skills carry bilingual (KO/EN) documentation.
+### Knowledge: `sz:wiki`
+Personal LLM-Wiki kept apart from working folders — `compile` (chat → frontmatter page in `_inbox/`), `ingest` (placement/promotion proposals, approval-gated), `lint`, `init`. Projects can point at a wiki domain ("위키 기준으로") and skills offer to compile reusable lessons.
 
-## SZ-specific skills
+## Adding your own skills
 
-| Skill | Team | What it does |
-|---|---|---|
-| `sz:uz-research` | All | Uzbekistan law/policy/market research engine — source tiers (T1 official / T2 local media / T3 international), citation tags (VERIFIED/SECONDARY/NOT_FOUND/MISMATCH), retry caps, depth modes |
-| `sz:risk-radar` | Risk Management | Risk sensing across 10 categories, 3 status grades (Crisis/Watch/Normal), executive briefings |
-| `sz:doc-formats` | All | SZ document skeletons: official letter, approval request, minutes, weekly report, trip report (KO/EN) |
-| `sz:trade-logistics` | Procurement/Logistics | UZ customs & bonded-warehouse notes, shipment document checklists |
-| `sz:sample-log` | Risk Management | Stocktaking photo reconciliation: extract serial/ID from photos, rename files, match against the sample ledger, sort into matched/unmatched/unreadable/recapture-suspected folders, report |
-| `sz:sales-verify` | Sales Support | ISA sales verification for sales incentive: match sales-history Excel vs field-force IMEI/serial photos, Luhn IMEI check, duplicate-IMEI and screen-recapture fraud flags, per-field-force payout basis |
+Drop a folder `custom/<skill-name>/SKILL.md` into the build tree (`sz-build/custom/`), tick the 8-item `INTAKE-CHECKLIST.md`, run `BUILD-SZ-v2.bat`. The build script merges, namespaces, masks, prunes agents, runs gates and zips in one step; the manifest `sz-manifest.json` is the single source of truth.
 
-Shared photo-ID matching engine (single source of truth): `sz/skills/sample-log/references/photo-id-match.md`.
-
-## Typical everyday skills
-
-`weekly-report`, `meeting-facilitator`, `executive-summary`, `docx-generator`, `pptx-designer`, `xlsx-creator`, `contract-review`, `nda-triage`, `financial-statements`, `variance-analysis`, `resume-screener`, `draft-offer`, `proposal-writer`, `ticket-triage`, `data-explorer`, `data-visualizer`, `ai-slop-reviewer`, `korean-spell-check`, and ~190 more. Ask Claude "what can the sz plugin do for <my task>?".
+## Known limitations
+- No external image/video/audio generation, no SNS auto-publishing, no DART/ARCHHUB MCPs in this edition — mentions inside some skills are marked "(미포함)" and simply skipped.
+- `kordoc` MCP (HWP parsing) needs Node.js on the machine.
 
 ## 한국어 요약
-
-SZ 업무·경영지원 파트 공유 플러그인입니다. 212스킬(GIL v2.2.0 기반 사내판 206 + SZ 특화 6). 설치는 위 Option A/B, 스킬은 요청 언어(한국어/영어)로 응답합니다.
+업무·경영지원 파트용 얇은 공용 도구함 67스킬 + 하네스. 설치 후 한국어로 요청하면 됩니다. 반복 프로젝트는 "프로젝트 세팅해줘" 1회, 리스크 대시보드는 "리스크 대시보드 프로젝트 세팅", 지식 축적은 "위키로 컴파일". 팀별 개별 스킬은 `sz-build/custom/`에 넣고 빌드하면 자동 포함됩니다.
 
 ## License
-
-Apache-2.0 (with MIT components). Upstream attributions preserved in `NOTICE.md`, `LICENSE`, `LICENSE.MIT`. Internal distribution for SZ staff.
+Apache-2.0 (with MIT components). See `NOTICE.md`.

@@ -2,8 +2,7 @@
 name: employment-manager
 description: |
   채용 프로세스 전반을 관리해주는 스킬입니다 트리거: "JD 작성해줘", "면접 질문 만들어줘", "신입 온보딩 계획 짜줘"
-user-invocable: true
-version: 1.2.0
+version: 2.0.0
 ---
 ## 스킬 개요(상세)
 
@@ -107,7 +106,7 @@ JD·면접 질문·온보딩 계획·멘토링 커리큘럼 본문은 사람이 
 **텍스트 후처리 체인 (JD·면접 질문·온보딩 계획 등 산문 산출물)**:
 
 ```
-employment-manager → sz:ai-slop-reviewer → sz:humanize-korean
+employment-manager → sz:ai-slop-reviewer → sz:humanize-korean → 최종 검수(◆최종본, humanize Phase 6)
 ```
 
 - `sz:ai-slop-reviewer` — AI 티 패턴(기계적 어투, 상투적 채용 표현) 검수·수정
@@ -137,7 +136,7 @@ employment-manager → sz:ai-slop-reviewer → sz:humanize-korean
 - **법적 노동 분쟁 대응**: 해고, 임금 체불, 직장 내 괴롭힘 등 실제 분쟁은 노무사에게 의뢰하세요.
 - **오퍼 레터·근로계약서 작성**: 계약 문서는 `sz:draft-offer` 스킬을 사용하세요.
 - **성과평가 체계 설계**: OKR/KPI 설정 및 평가 면담은 `sz:performance-review` 스킬이 더 적합합니다.
-- **원격 근무 정책 수립**: 재택 정책, 협업 도구 선택은 `sz:people-operations` 스킬을 사용하세요.
+- **원격 근무 정책 수립**: 재택 정책, 협업 도구 선택은 `people-operations(미포함)` 스킬을 사용하세요.
 
 ## 흡수 방법론 (knowledge-work-plugins@2cf4294, Apache-2.0)
 

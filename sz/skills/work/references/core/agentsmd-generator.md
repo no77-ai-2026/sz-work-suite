@@ -2,7 +2,7 @@
 
 ## 개요
 
-`/project` Phase 6에서 호출되는 프로젝트 지침 생성 프로토콜. 폴더 지침의 **정본은 `./AGENTS.md` 한 파일**이며(**100라인 이내**), `./CLAUDE.md`는 그 정본을 `@AGENTS.md` 한 줄로 불러오는 **포인터**다. 두 파일에 같은 내용을 복제하지 않는다 — 복제는 한쪽만 고쳤을 때 조용히 어긋나기 때문이다.
+`/work` Phase 6에서 호출되는 프로젝트 지침 생성 프로토콜. 폴더 지침의 **정본은 `./AGENTS.md` 한 파일**이며(**100라인 이내**), `./CLAUDE.md`는 그 정본을 `@AGENTS.md` 한 줄로 불러오는 **포인터**다. 두 파일에 같은 내용을 복제하지 않는다 — 복제는 한쪽만 고쳤을 때 조용히 어긋나기 때문이다.
 
 - `AGENTS.md` — Codex(ChatGPT Work)가 자동 로드하는 정본. 전체 지침 본문이 여기에만 있다.
 - `CLAUDE.md` — Claude(Cowork/Code)가 자동 로드하며, `@AGENTS.md` 임포트로 정본을 세션 시작 시 펼쳐 읽는다. 결과적으로 두 런타임이 **같은 지침**을 본다(기능 동등).
@@ -54,9 +54,8 @@
 | 스킬 체인 워크플로우 | 약 50라인 | Phase 3에서 설계된 체인 최대 10개 |
 | 라우팅 요약 | 약 15라인 | 설치된 플러그인의 키워드 매핑 |
 | 커넥터 + API 키 | 약 15라인 | 등록 상태 요약 |
-| 딥씽킹 + 참조 | 약 10라인 | `ultrathink` 조건 |
 | 맥락 적용 규칙 + 프로젝트 맥락 | 약 5라인 | 선택 적용·메타 코멘터리 금지(HARD 고정) |
-| **여유분** | 약 29라인 | 맥락 확장용 |
+| **여유분** | 약 39라인 | 맥락 확장용 (딥씽킹 블록 폐기분 10라인 흡수) |
 | **합계** | **≤ 200** | 8개 HARD 블록은 축소 대상이 아니다 — 초과 시 축소는 체인 나열만 |
 
 포인터 `CLAUDE.md`(≈11라인)는 이 예산에 포함하지 않는다 — 고정 길이이고 변수가 없다.
@@ -91,7 +90,7 @@ Phase 3에서 설계된 각 산출물 체인을 `{workflow_chains}` 슬롯에 �
 | `references/templates/AGENTS.md.tmpl` | `./AGENTS.md` | 변수 치환 필요. 8개 HARD 블록 고정 |
 | `references/templates/CLAUDE.md.tmpl` | `./CLAUDE.md` | 변수 없음. 그대로 복사 |
 
-`AGENTS.md.tmpl`을 Read하여 변수 치환을 수행한 결과를 `./AGENTS.md`에 Write한다. 생성된 산출물 내부의 스킬 참조는 `sz:`·`sz:`·`sz:` 번들 접두어를 쓴다.
+`AGENTS.md.tmpl`을 Read하여 변수 치환을 수행한 결과를 `./AGENTS.md`에 Write한다. 생성된 산출물 내부의 스킬 참조는 `gil:`·`gil-creative:`·`gil-commerce:` 번들 접두어를 쓴다.
 
 ---
 
@@ -121,7 +120,7 @@ Phase 3에서 설계된 각 산출물 체인을 `{workflow_chains}` 슬롯에 �
 
 | 변수 | 출처 |
 |------|------|
-| `{version}` | `sz/.claude-plugin/plugin.json` `version` |
+| `{version}` | `gil/.claude-plugin/plugin.json` `version` |
 | `{date}` | 오늘 날짜(YYYY-MM-DD) |
 | `{connectors_and_apikeys}` | Phase 8에서 등록된 키·커넥터 요약 |
 | `{project_context_notes}` | 초기값 비어있음(실행 중 자동 누적) |
@@ -138,7 +137,7 @@ Phase 3에서 설계된 각 산출물 체인을 `{workflow_chains}` 슬롯에 �
 2. 변수 수집: Phase 1 인터뷰 결과 + Phase 2 인벤토리 + Phase 3 체인 설계 + Phase 8 등록 키.
 3. 치환: 각 `{변수}`를 수집된 값으로 치환한다.
 4. 길이 검증: `wc -l`이 100라인 이하인지 확인. 초과 시 스킬 체인 나열을 최대 10개로 자동 축소한다. **8개 HARD 규칙 블록은 축소·삭제 대상이 아니다.**
-5. 주석 제거 + Write: 템플릿의 HTML 주석(출처 표기 포함)은 생성 결과에서 전부 제거한 뒤 `./AGENTS.md`에 저장한다.
+5. 주석 제거 + Write: 템플릿의 HTML 주석(출처 표기 포함)은 생성 결과에서 전부 제거한 뒤 `./AGENTS.md`에 저장한다. **[HARD] 그래서 `AGENTS.md`에는 어떤 마커·주석도 기록 위치로 쓰지 않는다** — 자가 개선 이력 정본은 `.sz/evolution/log.md`다(과거 `<!-- evolution-log -->` 마커 방식은 이 단계에서 마커가 지워져 이력이 남지 않던 결함이 있었다).
 6. 포인터 생성: `references/templates/CLAUDE.md.tmpl`을 **치환 없이 그대로** `./CLAUDE.md`에 Write한다(§2.4 HARD 규칙 준수 — 포인터의 안내 주석은 제거하지 않는다. 사람이 읽으라고 있는 것이고 컨텍스트 비용이 없다).
 7. 보조 파일 생성: `./.sz/config.json`, `./.sz/context.md`(빈 파일).
 
@@ -171,19 +170,19 @@ grep -m1 -v '^[[:space:]]*$' ./CLAUDE.md       # == @AGENTS.md
 
 | 상황 | 동작 |
 |------|------|
-| `/project` 재실행 | `AGENTS.md` 재생성 + `CLAUDE.md` 포인터 재작성(재진입 확인 후 — SKILL.md §Socratic Interview S3 참조) |
-| `/work evolve` | 자가 개선 진단을 `.sz/evolution/`에 기록(`AGENTS.md`는 `<!-- evolution-log -->`만 갱신 — 최근 10건 유지, 초과분은 `.sz/evolution/log.md`로 이관) |
-| 플러그인 추가 설치 | `/project` 재실행 권장(체인 재설계) |
+| `/work` 재실행 | `AGENTS.md` 재생성 + `CLAUDE.md` 포인터 재작성(재진입 확인 후 — SKILL.md §Socratic Interview S3 참조) |
+| `/work evolve` | 자가 개선 진단을 `.sz/evolution/`에 기록(이력 정본은 `.sz/evolution/log.md` — `AGENTS.md`에는 이력을 쓰지 않는다. 최근 10건 유지, 초과분은 `.sz/evolution/log.md`로 이관) |
+| 플러그인 추가 설치 | `/work` 재실행 권장(체인 재설계) |
 | 스킬 체인 수정 요청 | `AGENTS.md`의 해당 체인 블록만 Edit로 교체(전체 재생성 불필요) |
 | **레거시 프로젝트 감지** | `CLAUDE.md`가 포인터가 아니라 전체 지침을 담고 있으면(구 복제 방식) — §7.1 마이그레이션 |
 
 ### 7.1 레거시 복제 프로젝트 마이그레이션
 
-구 방식으로 생성된 프로젝트는 `CLAUDE.md`와 `AGENTS.md`에 같은 본문이 두 벌 들어 있다. `/work update` 또는 `/project` 재실행 시 이를 감지하면 다음 순서로 정리한다.
+구 방식으로 생성된 프로젝트는 `CLAUDE.md`와 `AGENTS.md`에 같은 본문이 두 벌 들어 있다. `/work update` 또는 `/work` 재실행 시 이를 감지하면 다음 순서로 정리한다.
 
 1. **감지**: `./CLAUDE.md`의 첫 비어있지 않은 줄이 `@AGENTS.md`가 아니고, 파일에 `## ` 헤딩이 2개 이상이면 레거시로 판정한다.
 2. **정본 확정**: 두 파일의 내용이 다르면 **더 최근에 수정된 쪽**을 정본 후보로 삼고, 어느 쪽을 남길지 `AskUserQuestion`으로 확인한다(내용이 같으면 확인 없이 진행).
-3. **이관**: 확정된 본문을 `./AGENTS.md`에 쓴다. `<!-- evolution-log -->` 이력이 `CLAUDE.md`에만 있으면 함께 옮긴다 — **이력을 잃지 않는다.**
+3. **이관**: 확정된 본문을 `./AGENTS.md`에 쓴다. 구 방식의 `<!-- evolution-log -->` 이력이 `CLAUDE.md`·`AGENTS.md`에 남아 있으면 `.sz/evolution/log.md`로 옮긴다 — **이력을 잃지 않는다.**
 4. **포인터 교체**: `./CLAUDE.md`를 `CLAUDE.md.tmpl` 내용으로 덮어쓴다.
 5. **검증**: §6 체크리스트를 실행한다.
 

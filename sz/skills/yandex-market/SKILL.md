@@ -2,8 +2,7 @@
 name: yandex-market
 description: |
   [한·UZ 듀얼] Yandex Market(러시아 최대 이커머스) + UZ Yandex 생태계(Direct 광고·Search) 운영 전담 스킬 트리거: "Yandex Market 등록", "얀덱스 마켓 입점", "Yandex Direct 광고"
-user-invocable: true
-version: 1.2.0
+version: 2.0.0
 ---
 ## 스킬 개요(상세)
 
@@ -47,11 +46,11 @@ Yandex Market는 **러시아** 최대 이커머스이며, **UZ**에서는 주로
 
 - UZ 사용자 타겟팅: Yandex Search(UZ 점유율 ~10%)·디스플레이·카테고리/관심사 타겟팅.
 - CPC 대략 $0.05~$0.50(UZ 기준, 한국 대비 낮음).
-- SEO는 `sz:seo-audit`(uz-seo-yandex), 캠페인은 `sz:campaign-planner`(uz-marketing-channels).
+- SEO는 `seo-audit(미포함)`(uz-seo-yandex), 캠페인은 `campaign-planner(미포함)`(uz-marketing-channels).
 
 ### 4. 상품 카피·이미지
 
-러시아어 카피 → `sz:copywriting`. 이미지 → `sz:gemini-3-image-prompt`.
+러시아어 카피 → `copywriting(미포함)`. 이미지 → `gemini-3-image-prompt(미포함)`.
 
 ## UZ 진출 시나리오 (권장)
 
@@ -65,9 +64,9 @@ Yandex Market는 **러시아** 최대 이커머스이며, **UZ**에서는 주로
 ## 체이닝
 
 ```
-sz:seo-audit (uz-seo-yandex)  (Yandex SEO 진단)
-  → sz:copywriting  (러시아어 카피)
-  → sz:gemini-3-image-prompt  (이미지)
+seo-audit(미포함) (uz-seo-yandex)  (Yandex SEO 진단)
+  → copywriting(미포함)  (러시아어 카피)
+  → gemini-3-image-prompt(미포함)  (이미지)
   → yandex-market  (본 스킬: 입점·Direct 광고)
   → marketplace-uzum  (UZ 실판매 연계)
   → sz:data-explorer  (성과 분석)

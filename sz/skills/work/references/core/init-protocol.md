@@ -1,8 +1,8 @@
-# init-protocol.md — `/project` 초기화 전체 플로우
+# init-protocol.md — `/work` 초기화 전체 플로우
 
 ## 개요
 
-`/project`는 모두의 코워크 프로젝트를 초기화하고, 사용자의 업무 워크플로우를 인터뷰한 뒤, **스킬 체이닝 + 프로젝트 전용 커스텀 에이전트 기반 AGENTS.md**(폴더 지침 정본)와 이를 불러오는 `CLAUDE.md` 포인터를 생성한다.
+`/work`는 모두의 코워크 프로젝트를 초기화하고, 사용자의 업무 워크플로우를 인터뷰한 뒤, **스킬 체이닝 + 프로젝트 전용 커스텀 에이전트 기반 AGENTS.md**(폴더 지침 정본)와 이를 불러오는 `CLAUDE.md` 포인터를 생성한다.
 
 **현재 상태**:
 - Phase 2 인벤토리는 설치된 플러그인을 **동적으로 도출**(plugin.json 스캔)하여 신규 플러그인을 자동 포함한다.
@@ -16,7 +16,7 @@
 ## 전체 플로우
 
 ```
-/project
+/work
     ↓
 Phase 1: 워크플로우 인터뷰 (맥락 충분까지 수집)
     ↓
@@ -37,7 +37,10 @@ Phase 8: API 키 / 커넥터 + 첫 실행 안내
 
 ---
 
-## Phase 1: 워크플로우 인터뷰 (2-Stage 일괄 설문)
+## Phase 1: 워크플로우 인터뷰 (렌즈 도출 · 커버리지 종료)
+
+> **v2.3.0 개정 (HARD)** — 아래 S1/S2 절차는 유지하되 세 가지가 바뀐다. ① **질문 풀은 고정 목록이 아니다**: 프로젝트 설명·폴더명·기존 파일에서 명사를 뽑고 8렌즈(정체성·산출물·독자·문체·현행·품질·자산·제약)를 대어 해당 없는 렌즈는 버린 뒤, 그 프로젝트의 말로 묻는다(SKILL.md §Socratic Interview). ② **종료는 커버리지**: 미확인 축이 남으면 S2를 몇 번이든 더 돈다. 단 첫 라운드부터 「지금 아는 것으로 진행」 선택지를 둔다. ③ **응답 없음≠거절**: 빈 응답·deny·dismissed(Cowork 카드 렌더링 버그 #58750)는 결정이 아니므로 같은 질문을 응답 본문에 번호 매긴 선택지로 다시 낸다. 서브에이전트에 인터뷰를 위임하지 않는다. **H 제약 렌즈의 민감도는 모든 프로젝트 필수**이며 미응답이면 `unknown`(외부 전송 안 함).
+
 
 사용자의 **이 프로젝트 맥락**만 수집한다. 이름·회사·역할 같은 **글로벌 프로필 정보는 묻지 않는다**.
 
@@ -86,7 +89,7 @@ Phase 8: API 키 / 커넥터 + 첫 실행 안내
 
 ### 2-1. 인벤토리 소스
 
-**[HARD] 스캔 필터링 — SZ 플러그인만 인정**: `~/.claude/plugins/`에는 여러 마켓플레이스 플러그인이 섞여있을 수 있다. project 스킬은 **SZ 플러그인(`sz`·`sz-creative`·`sz-commerce`)만** 인벤토리에 포함하고, 그 외는 제외한다.
+**[HARD] 스캔 필터링 — SZ 플러그인만 인정**: `~/.claude/plugins/`에는 여러 마켓플레이스 플러그인이 섞여있을 수 있다. project 스킬은 **SZ 플러그인(`gil`·`gil-creative`·`gil-commerce`)만** 인벤토리에 포함하고, 그 외는 제외한다.
 
 **[HARD] 스킬 집합은 하드코딩하지 않는다.** 설치된 각 번들의 `plugin.json` + `skills/` 디렉터리를 스캔해 실측 도출한다. 번들이 추가·갱신되면 자동 반영된다.
 
@@ -95,7 +98,7 @@ Phase 8: API 키 / 커넥터 + 첫 실행 안내
 ```bash
 # Claude(~/.claude/plugins) + Codex(~/.codex/plugins/cache) 양쪽 스캔
 INSTALLED_MOAI_PLUGINS=()
-for dir in ~/.claude/plugins/sz ~/.claude/plugins/sz-creative ~/.claude/plugins/sz-commerce; do
+for dir in ~/.claude/plugins/gil ~/.claude/plugins/gil-creative ~/.claude/plugins/gil-commerce; do
   p=$(basename "$dir")
   if [ -d "$dir" ] && { [ -f "$dir/.claude-plugin/plugin.json" ] || [ -f "$dir/.codex-plugin/plugin.json" ]; }; then
     INSTALLED_MOAI_PLUGINS+=("$p")
@@ -112,7 +115,7 @@ for f in ./.codex/agents/*.toml ~/.codex/agents/*.toml; do [ -f "$f" ] && basena
 
 각 SKILL.md frontmatter의 `name:` 필드를 추출해 `<skill-name> → <plugin>` 매핑을 구성한다.
 
-**소스 B — system reminder 파싱**: 현재 세션 system reminder의 "user-invocable skills" 목록에서 `sz:`·`sz:`·`sz:` 접두 스킬만 등록한다.
+**소스 B — system reminder 파싱**: 현재 세션 system reminder의 "user-invocable skills" 목록에서 `gil:`·`gil-creative:`·`gil-commerce:` 접두 스킬만 등록한다.
 
 **교차 검증**: 두 소스가 일치하면 신뢰도 HIGH. 한쪽에만 있으면 MEDIUM(설치는 됐으나 세션 미반영 등).
 
@@ -121,13 +124,13 @@ for f in ./.codex/agents/*.toml ~/.codex/agents/*.toml; do [ -f "$f" ] && basena
 ```json
 {
   "scanned_at": "2026-07-11T00:00:00+09:00",
-  "plugins_installed": ["sz", "sz-creative", "sz-commerce"],
+  "plugins_installed": ["gil", "gil-creative", "gil-commerce"],
   "skills_available": {
-    "blog": "sz-creative",
-    "ai-slop-reviewer": "sz",
-    "design-brief": "sz-creative"
+    "blog": "gil-creative",
+    "ai-slop-reviewer": "gil",
+    "design-brief": "gil-creative"
   },
-  "confidence": { "sz": "HIGH" }
+  "confidence": { "gil": "HIGH" }
 }
 ```
 
@@ -141,9 +144,9 @@ for f in ./.codex/agents/*.toml ~/.codex/agents/*.toml; do [ -f "$f" ] && basena
 | 제품·연구 | 코워커(spec/ux 스킬군), 튜터(education-* 스킬군) |
 | 이커머스 | 셀러(commerce-* 스킬군) |
 | 출판·원고·웹툰·IP | 작가(book-*), 스토리(story-*) |
-| 디자인 핸드오프·브랜드 | sz-creative(design-* 스킬군) |
+| 디자인 핸드오프·브랜드 | gil-creative(design-* 스킬군) |
 
-라우터 허브는 project 스킬(`/project` 진입). 실무·사무·전문직 도메인은 코어 `sz`로 수렴하며, 콘텐츠·창작·디자인은 `sz-creative`, 커머스는 `sz-commerce`로 분기된다. `ai-slop-reviewer`·`humanize-korean`·`korean-spell-check`는 코어 `sz` 소속으로 텍스트 후처리 체인에 항상 활용 가능하다.
+라우터 허브는 project 스킬(`/work` 진입). 실무·사무·전문직 도메인은 코어 `gil`로 수렴하며, 콘텐츠·창작·디자인은 `gil-creative`, 커머스는 `gil-commerce`로 분기된다. `ai-slop-reviewer`·`humanize-korean`·`korean-spell-check`는 코어 `gil` 소속으로 텍스트 후처리 체인에 항상 활용 가능하다.
 
 ---
 
@@ -189,14 +192,14 @@ for each skill in chain_skills:
 
 ### 4-2. 스킬 → 플러그인 매핑
 
-스킬 → 소속 번들 매핑은 **설치된 번들의 skills/ 실측을 정본으로 삼는다.** 참고 패턴: 커머스(`commerce-*`·`marketplace-*`·live-commerce 등) → `sz-commerce`; 콘텐츠·창작·미디어·디자인(blog·card-news·sns-content·book-*·story-*·design-*·higgsfield-*·threads-* 등) → `sz-creative`; 그 외 범용·전문직·오피스·데이터 → 코어 `sz`. `project`(PM 허브)는 코어 `sz` 소속.
+스킬 → 소속 번들 매핑은 **설치된 번들의 skills/ 실측을 정본으로 삼는다.** 참고 패턴: 커머스(`commerce-*`·`marketplace-*`·live-commerce 등) → `gil-commerce`; 콘텐츠·창작·미디어·디자인(blog·card-news·sns-content·book-*·story-*·design-*·higgsfield-*·threads-* 등) → `gil-creative`; 그 외 범용·전문직·오피스·데이터 → 코어 `gil`. `project`(PM 허브)는 코어 `gil` 소속.
 
 ### 4-3. 누락 발견 시 AskUserQuestion 4 옵션
 
 ```
 "체인에 필요한 스킬이 설치되지 않은 플러그인에 포함돼 있습니다."
 
-누락 스킬: [skill-A] → [sz-X] 번들 필요
+누락 스킬: [skill-A] → [gil-X] 번들 필요
 
 옵션:
   1. (권장) 설치 안내 받기 + 설치 후 재개
@@ -291,7 +294,7 @@ Phase 2에서 선택된 플러그인이 API 키를 요구하면 등록 안내.
 
 ### 복원 흐름
 
-1. `.sz/cache/init-progress.json` 존재 확인(없으면 "저장된 진행 상태가 없습니다. `/project`로 새로 시작하세요.")
+1. `.sz/cache/init-progress.json` 존재 확인(없으면 "저장된 진행 상태가 없습니다. `/work`로 새로 시작하세요.")
 2. `init-progress.json` 로드(Phase 1-3 결과 복원)
 3. Phase 2 Inventory 재실행(설치 확인)
 4. Phase 4 Gap Detection 재검증(여전히 누락 시 4옵션 재제시, 0건이면 Phase 5로 진행)

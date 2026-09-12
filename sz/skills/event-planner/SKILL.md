@@ -2,8 +2,7 @@
 name: event-planner
 description: |
   행사·이벤트·웨딩을 기획하고 준비 계획을 수립합니다 트리거: "결혼 준비 체크리스트 만들어줘", "사내 세미나 기획해줘", "워크샵 진행 방식 설계해줘"
-user-invocable: true
-version: 1.2.0
+version: 2.0.0
 ---
 ## 스킬 개요(상세)
 
@@ -90,7 +89,7 @@ version: 1.2.0
 이 스킬은 기획서·진행 순서표·MC 스크립트·품의서 같은 **글(텍스트) 산출물**을 만듭니다. 글 산출물은 발행 전 다음 체인으로 후처리하세요.
 
 ```
-event-planner → sz:ai-slop-reviewer → sz:humanize-korean
+event-planner → sz:ai-slop-reviewer → sz:humanize-korean → 최종 검수(◆최종본, humanize Phase 6)
 ```
 
 - **sz:ai-slop-reviewer**: AI 티 나는 표현·과장 어조를 검수하고 다듬습니다

@@ -2,8 +2,7 @@
 name: telegram-commerce
 description: |
   [한·UZ 듀얼] Telegram 기반 이커머스(채널·Bot·Shop) 운영 전담 스킬 트리거: "텔레그램 판매", "Telegram 채널 운영", "Telegram Bot 쇼핑몰"
-user-invocable: true
-version: 1.2.0
+version: 2.0.0
 ---
 ## 스킬 개요(상세)
 
@@ -63,7 +62,7 @@ Bot/Shop 모델에서 자동 결제로 연결, 채널 방송형은 수동 송금
 ## Telegram Ads
 
 - 1,000구독자+ 채널 대상 광고, 캠페인당 대략 $50~$500, 카테고리·언어·지역 타겟팅.
-- 인플루언서 채널 협업은 `sz:commerce-influencer-collab` 연동(표시광고 준수).
+- 인플루언서 채널 협업은 `commerce-influencer-collab(미포함)` 연동(표시광고 준수).
 
 ## 한국 셀러용 가이드
 
@@ -78,11 +77,11 @@ Bot/Shop 모델에서 자동 결제로 연결, 채널 방송형은 수동 송금
 ## 체이닝
 
 ```
-sz:copywriting  (러·우즈벡 카탈로그 카피)
-  → sz:gemini-3-image-prompt  (상품·카드 이미지)
+copywriting(미포함)  (러·우즈벡 카탈로그 카피)
+  → gemini-3-image-prompt(미포함)  (상품·카드 이미지)
   → telegram-commerce  (본 스킬: 채널·Bot·Shop 구축·운영)
-  → sz:commerce-influencer-collab  (인플루언서 채널 광고)
-  → sz:campaign-planner  (Telegram Ads)
+  → commerce-influencer-collab(미포함)  (인플루언서 채널 광고)
+  → campaign-planner(미포함)  (Telegram Ads)
 ```
 
 ## 참조

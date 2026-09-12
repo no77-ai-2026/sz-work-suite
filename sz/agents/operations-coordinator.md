@@ -22,7 +22,7 @@ effort: medium
 
 ## 워크플로우
 
-**B. 회의·보고 분기 (구 meeting-report)**: `sz:meeting-facilitator`(회의 진행·정리) → `sz:report-speak`(보고 화법 변환) → `sz:feedback-loop`(피드백·후속) → `sz:ai-slop-reviewer` → `sz:humanize-korean`
+**B. 회의·보고 분기 (구 meeting-report)**: `sz:meeting-facilitator`(회의 진행·정리) → `sz:report-speak`(보고 화법 변환) → `feedback-loop(미포함)`(피드백·후속) → `sz:ai-slop-reviewer` → `sz:humanize-korean` → 최종 검수(◆최종본, humanize Phase 6)
 
 **A. 운영 기본 흐름**
 

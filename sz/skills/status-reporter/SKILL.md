@@ -2,8 +2,7 @@
 name: status-reporter
 description: |
   KPI 대시보드와 운영 현황 보고서를 자동으로 생성합니다 트리거: "주간 보고서 작성해줘", "KPI 현황 정리해줘", "월간 성과 보고서 만들어줘"
-user-invocable: true
-version: 1.2.0
+version: 2.0.0
 ---
 ## 스킬 개요(상세)
 
@@ -11,7 +10,7 @@ KPI 대시보드와 운영 현황 보고서를 자동으로 생성합니다. "�
 
 # 운영 현황 보고자 (Status Reporter)
 
-> **타 번들 연계**: 본 문서의 `sz:*`·`sz:*` 참조는 해당 번들이 설치된 경우에만 체이닝합니다. 미설치 시 해당 단계를 생략하고 코어 스킬만으로 진행합니다.
+> **타 번들 연계**: 본 문서의 `gil-creative:*`·`gil-commerce:*` 참조는 해당 번들이 설치된 경우에만 체이닝합니다. 미설치 시 해당 단계를 생략하고 코어 스킬만으로 진행합니다.
 
 
 ## 개요
@@ -88,7 +87,7 @@ KPI 대시보드와 운영 현황 보고서를 자동으로 생성합니다. "�
 보고서의 **서술형 본문**(핵심 요약, 이슈·리스크 설명, 액션 아이템 등 산문 부분)은 다음 체인으로 마무리합니다.
 
 ```
-status-reporter → sz:ai-slop-reviewer → sz:humanize-korean
+status-reporter → sz:ai-slop-reviewer → sz:humanize-korean → 최종 검수(◆최종본, humanize Phase 6)
 ```
 
 - `sz:ai-slop-reviewer` — 서술형 본문의 AI 티 패턴을 검수·수정합니다.
@@ -117,4 +116,4 @@ KPI 달성 현황 표, 마일스톤 진행률, 이슈·리스크 매트릭스 �
 - **실제 ERP·BI 시스템 데이터 조회** → 해당 시스템에 직접 접속해야 합니다
 - **재무제표 공식 작성** → sz:financial-statements 스킬이 더 적합합니다
 - **인사 성과 평가 보고서** → sz:performance-review 스킬을 사용하세요
-- **마케팅 성과 분석** → sz:performance-report 스킬이 더 적합합니다
+- **마케팅 성과 분석** → performance-report(미포함) 스킬이 더 적합합니다

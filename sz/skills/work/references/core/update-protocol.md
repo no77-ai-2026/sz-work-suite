@@ -15,7 +15,7 @@ project 스킬 SKILL.md의 §Recursive Self-Improvement가 정의하는 `invento
 `update` 절차에 들어가기 전 반드시 확인한다.
 
 1. **프로젝트 존재 여부** — `./AGENTS.md`·`./CLAUDE.md`·`./.sz/config.json`이 모두 없으면 동기화 대상이 없다.
-   - 침묵 생성 금지. `AskUserQuestion`으로 `/project`(최초 셋업)로 안내한다.
+   - 침묵 생성 금지. `AskUserQuestion`으로 `/work`(최초 셋업)로 안내한다.
    - 옵션: `/work 시작으로 안내` / `update 중단`.
 2. **스냅샷 존재 여부** — `.sz/config.json`에 `plugins_installed` + `skills_available` 스냅샷이 없으면(최초 셋업 직후 미저장 등), 현재 인벤토리를 그대로 최초 스냅샷으로 저장하고 "이미 최신 상태"로 보고한다(비교 기준이 없으므로 diff는 공집합).
 3. **진입 발화 인자** — `/work update` 외 추가 자연어 지시가 있으면 1줄 요약으로 `context.md`에 누적한다(인터뷰는 생략 — `update`는 맥락 수집이 아니라 동기화가 목적).
@@ -32,7 +32,7 @@ project 스킬 SKILL.md의 §Recursive Self-Improvement가 정의하는 `invento
 
 ```bash
 # 소스 A: 디렉터리 스캔 — 플러그인 + 각 플러그인의 skills/ + plugin.json
-for dir in ~/.claude/plugins/sz*; do
+for dir in ~/.claude/plugins/gil*; do
   [ -d "$dir" ] && [ -f "$dir/.claude-plugin/plugin.json" ] || continue
   echo "### $(basename "$dir")"
   # 스킬: skills/*/SKILL.md 의 frontmatter name
@@ -42,11 +42,11 @@ for dir in ~/.claude/plugins/sz*; do
 done
 
 # 소스 B: MCP 정의 — 각 플러그인의 .mcp.json 또는 plugin.json 의 mcpServers
-for dir in ~/.claude/plugins/sz*; do
+for dir in ~/.claude/plugins/gil*; do
   [ -f "$dir/.mcp.json" ] && echo "MCP: $(basename "$dir")" && grep -oE '"[^"]+":' "$dir/.mcp.json"
 done
 
-# 소스 C: 현재 세션 system reminder의 "user-invocable skills" 목록(sz* 접두만)
+# 소스 C: 현재 세션 system reminder의 "user-invocable skills" 목록(gil* 접두만)
 ```
 
 3소스를 교차 검증해 `new_inventory`를 구성한다(신뢰도 HIGH = 2소스 이상 일치 / MEDIUM = 단일 소스).
@@ -106,9 +106,9 @@ diff에 맞춰 프로젝트 산출물을 갱신한다. **전면 재작성 금지
 ## 5. 스냅샷 갱신 + evolution-log
 
 1. **스냅샷 리셋** — `.sz/config.json`의 `plugins_installed` + `skills_available`을 `new_inventory`로 갱신. 이로써 `inventory drift`는 0이 된다(다음 drift 감지의 새 기준).
-2. **evolution-log 기록** — `AGENTS.md` 말미 `<!-- evolution-log -->`에 1줄 추가:
+2. **evolution-log 기록** — `.sz/evolution/log.md`(정본)에 1줄 추가. `AGENTS.md`에는 쓰지 않는다:
    - 형식: `inventory drift | update | <추가 N / 변경 N / 제거 N> | <신호-매칭 요지>`
-3. **evolution-log 큐레이션** — 최근 10건 유지, 초과분은 `.sz/evolution/log.md`로 이관(SKILL.md §Recursive Self-Improvement 큐레이션 규칙).
+3. **evolution-log 큐레이션** — `log.md` 상단에 최근 10건 요약을 유지하고 그 아래에 전체 이력을 누적(SKILL.md §Recursive Self-Improvement 큐레이션 규칙).
 
 ---
 
@@ -138,7 +138,7 @@ diff에 맞춰 프로젝트 산출물을 갱신한다. **전면 재작성 금지
 | `.sz/config.json` | `plugins_installed` + `skills_available` 스냅샷 — diff 비교 기준이자 갱신 대상 |
 | `.sz/context.md` | 프로젝트 맥락 — §3 세션 신호 분석 입력 |
 | `.sz/evolution/signals.md` | 누적 교정·체인 실패 신호 — §3 세션 신호 분석 입력 |
-| `.sz/evolution/log.md` | evolution-log 이관 대상(10건 초과분) |
+| `.sz/evolution/log.md` | 자가 개선 이력 **정본**(최근 10건 요약 + 전체 누적) |
 | `./AGENTS.md` | 워크플로우 표·HARD 블록 — §4-1 동기화 대상 |
 | `./CLAUDE.md` | `@AGENTS.md` 포인터 — 무결성만 점검, 내용 동기화 대상 아님 |
 | `./.claude/agents/*.md` | 스킬 체인 에이전트 — §4-2 동기화 대상 |

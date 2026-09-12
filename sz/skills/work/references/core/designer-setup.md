@@ -1,9 +1,9 @@
 # designer-setup.md — 디자이너 분기 (project 스킬 서브 프로토콜)
 
-> **타 번들 연계**: 본 문서의 `sz:*`·`sz:*` 참조는 해당 번들이 설치된 경우에만 체이닝합니다. 미설치 시 해당 단계를 생략하고 코어 스킬만으로 진행합니다.
+> **타 번들 연계**: 본 문서의 `gil-creative:*`·`gil-commerce:*` 참조는 해당 번들이 설치된 경우에만 체이닝합니다. 미설치 시 해당 단계를 생략하고 코어 스킬만으로 진행합니다.
 
 
-> **project 스킬(플러그인 패밀리 허브)의 디자이너 분기 정본.** 흩어진 브랜드 자산(로고·색·타이포·기존 사이트·PPTX)을 수집해 `.sz/work/brand/` 브랜드 컨텍스트와 Claude Design 업로드용 `DESIGN.md`를 합성한다. `sz-creative` 번들의 `design-system-prep` + `brand-identity` 체인으로 실행한다.
+> **project 스킬(플러그인 패밀리 허브)의 디자이너 분기 정본.** 흩어진 브랜드 자산(로고·색·타이포·기존 사이트·PPTX)을 수집해 `.sz/work/brand/` 브랜드 컨텍스트와 Claude Design 업로드용 `DESIGN.md`를 합성한다. `gil-creative` 번들의 `design-system-prep` + `brand-identity` 체인으로 실행한다.
 
 ---
 
@@ -27,7 +27,7 @@
 - **Claude Design 온보딩 준비** — `DESIGN.md` 업로드 또는 `/design-sync` 네이티브 경로 안내
 - **디자인 품질 루프** — GAN 루프(`design-iteration-loop`)로 시안 반복
 
-모든 스킬은 `sz-creative` 번들 소속이다.
+모든 스킬은 `gil-creative` 번들 소속이다.
 
 ---
 
@@ -57,11 +57,11 @@ Phase 1 자산 인터뷰 → Phase 2 designer 설치 확인 → Phase 3 DESIGN.m
 
 ### Phase 2: designer 설치 확인 (Gap Detection)
 
-`~/.claude/plugins/`에서 `sz-creative` 설치 여부 확인. 미설치 시 Cowork 설정 → 플러그인에서 sz-creative.plugin 업로드 안내 후 "이어서 진행"으로 재개.
+`~/.claude/plugins/`에서 `gil-creative` 설치 여부 확인. 미설치 시 Cowork 설정 → 플러그인에서 gil-creative.plugin 업로드 안내 후 "이어서 진행"으로 재개.
 
 ### Phase 3: DESIGN.md 합성 (`design-system-prep` 위임)
 
-수집된 자산을 `sz:design-system-prep`에 전달해 **DESIGN.md**를 합성한다. 깔끔한 코드 repo가 있으면 `/design-sync` 네이티브 경로가 가장 빠르며, 이 분기는 자산이 흩어져 있을 때 네이티브 경로를 보완한다(대체가 아니다).
+수집된 자산을 `design-system-prep(미포함)`에 전달해 **DESIGN.md**를 합성한다. 깔끔한 코드 repo가 있으면 `/design-sync` 네이티브 경로가 가장 빠르며, 이 분기는 자산이 흩어져 있을 때 네이티브 경로를 보완한다(대체가 아니다).
 
 ### Phase 4: brand 컨텍스트 스캐폴드
 
@@ -74,7 +74,7 @@ Phase 1 자산 인터뷰 → Phase 2 designer 설치 확인 → Phase 3 DESIGN.m
 
 ### Phase 5: Claude Design 온보딩 안내
 
-`DESIGN.md`를 claude.ai/design 온보딩에 업로드하거나, 깔끔한 코드 repo가 있으면 `/design-sync`로 코드베이스 직접 전송. 이후 project 스킬로 콘텐츠·실무 산출물 체인을 설계하고, 디자인 시안 품질 루프는 `sz:design-iteration-loop`로 반복한다.
+`DESIGN.md`를 claude.ai/design 온보딩에 업로드하거나, 깔끔한 코드 repo가 있으면 `/design-sync`로 코드베이스 직접 전송. 이후 project 스킬로 콘텐츠·실무 산출물 체인을 설계하고, 디자인 시안 품질 루프는 `design-iteration-loop(미포함)`로 반복한다.
 
 ---
 
@@ -103,7 +103,7 @@ Phase 1 자산 인터뷰 → Phase 2 designer 설치 확인 → Phase 3 DESIGN.m
 
 ## 4. 상세 레퍼런스
 
-| 주제 | 스킬 (`sz-creative`) |
+| 주제 | 스킬 (`gil-creative`) |
 |------|------|
 | DESIGN.md 합성 상세 | `design-system-prep` |
 | design-brief 작성 | `design-brief` |

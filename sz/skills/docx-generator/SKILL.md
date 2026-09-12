@@ -2,8 +2,7 @@
 name: docx-generator
 description: |
   편집 가능한 워드(.docx) 문서를 만들어 드립니다 트리거: "보고서 워드 파일로 만들어줘", "계약서 DOCX로 작성해줘", "공문서 양식대로 써줘"
-user-invocable: true
-version: 1.2.0
+version: 2.0.0
 ---
 ## 스킬 개요(상세)
 
@@ -21,7 +20,7 @@ Claude 브랜드 톤 기반 모던 디자인 시스템과 한국 공문서 표�
 
 # 워드 문서 생성기 (DOCX Generator)
 
-> **타 번들 연계**: 본 문서의 `sz:*`·`sz:*` 참조는 해당 번들이 설치된 경우에만 체이닝합니다. 미설치 시 해당 단계를 생략하고 코어 스킬만으로 진행합니다.
+> **타 번들 연계**: 본 문서의 `gil-creative:*`·`gil-commerce:*` 참조는 해당 번들이 설치된 경우에만 체이닝합니다. 미설치 시 해당 단계를 생략하고 코어 스킬만으로 진행합니다.
 
 
 ## 개요
@@ -158,7 +157,7 @@ for run in title.runs:
 7. 이미지 캡션 일관 (위치·형식)
 8. 단락 간 여백 일관 (수동 빈 줄 사용 금지)
 9. 표 셀 텍스트 줄바꿈 정상 (overflow 없음)
-10. AI 슬롭 표현 없음 (혁신적인·차세대·재정의하는 등 — `sz:design-slop-check` 체이닝 권장)
+10. AI 슬롭 표현 없음 (혁신적인·차세대·재정의하는 등 — `design-slop-check(미포함)` 체이닝 권장)
 
 ## 모던 디자인 패턴 6종
 
@@ -293,7 +292,7 @@ Orange 작은 도형 + Mid Gray 가로선 + 섹션 번호.
 | `sz:pdf-writer` | PDF 변환·다국어 PDF |
 | `sz:humanize-korean` | 카피 AI 슬롭 자연화 |
 | `sz:ai-slop-reviewer` | 텍스트 산출물 슬롭 검수 |
-| `sz:design-slop-check` | Claude Design 톤과 일관성 검수 |
+| `design-slop-check(미포함)` | Claude Design 톤과 일관성 검수 |
 
 ## 기술 참조
 

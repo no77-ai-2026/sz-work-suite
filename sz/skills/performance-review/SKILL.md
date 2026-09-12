@@ -2,8 +2,7 @@
 name: performance-review
 description: |
   성과평가 체계를 설계하고 실행을 도와주는 스킬입니다 트리거: "OKR 설정해줘", "성과 리뷰 템플릿 만들어줘", "피드백 면담 스크립트 써줘"
-user-invocable: true
-version: 1.2.0
+version: 2.0.0
 ---
 ## 스킬 개요(상세)
 
@@ -157,7 +156,7 @@ version: 1.2.0
 **텍스트 후처리 체인 (면담 스크립트·평가 보고서 서술 부분 등 산문 산출물)**:
 
 ```
-performance-review → sz:ai-slop-reviewer → sz:humanize-korean
+performance-review → sz:ai-slop-reviewer → sz:humanize-korean → 최종 검수(◆최종본, humanize Phase 6)
 ```
 
 - `sz:ai-slop-reviewer` — AI 티 패턴(기계적 어투, 상투적 피드백 표현) 검수·수정
@@ -191,4 +190,4 @@ performance-review → sz:ai-slop-reviewer → sz:humanize-korean
 - **법적 노동 분쟁 대응**: 평가 결과로 인한 해고, 징계, 임금 분쟁은 노무사에게 의뢰하세요.
 - **채용·온보딩 프로세스**: JD 작성, 면접 설계, 신입 온보딩은 `sz:employment-manager` 스킬이 더 적합합니다.
 - **오퍼 레터·연봉 협상 문서**: `sz:draft-offer` 스킬을 사용하세요.
-- **원격 근무 정책 수립**: 재택 정책, 협업 도구 선택은 `sz:people-operations` 스킬을 사용하세요.
+- **원격 근무 정책 수립**: 재택 정책, 협업 도구 선택은 `people-operations(미포함)` 스킬을 사용하세요.

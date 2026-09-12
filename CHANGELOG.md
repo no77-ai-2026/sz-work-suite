@@ -1,3 +1,14 @@
+# sz v2.0.0 (2026-09-12) — lean edition, GIL v2.3.1 rebase, risk-center, wiki
+
+- Rebased on GIL v2.3.1 (Apache-2.0): credential wiring via plugin.json `userConfig` + `${user_config.KEY}`, sz:work re-ported from gil:project v2.3.1 (8-lens interview, no-reply≠refusal, evolution log SSOT), QA chain order ai-slop → spell-check → humanize, `user-invocable` removed
+- Scope cut 213 → **67 skills** for daily work (core 28 · team 33 · UZ channels 3 · html-slide · design-system-library · wiki); 92+ personal/marketing/commerce skills dropped; refs to dropped skills marked "(미포함)"
+- Agents auto-pruned 21 → **6** (kept when ≥70% of referenced skills exist): core-text-qa · data-analysis · finance-report-assembler · hiring · legal-review · operations
+- MCP 5 → **2** (korean-law with userConfig KOREAN_LAW_OC, kordoc); dart/archhub/korean-stats removed
+- **RM alignment**: `risk-radar` now uses the 10-category risk register (Communication · Competitive/Market Disruption · Finance · Geo/Humanitarian · Human Capital · Legal · Operation · Product/Service · Security · Supply Chain) + 6-part delta briefing; new **`risk-center`** (init / update / report / doctor) with data-stripped dashboard template (per-category samples, `MODULES` switches), data schema, weekly sweep axes A–D with RU/EN auxiliary terms, report outline, verification-log format, RM AGENTS.md preset
+- New **`wiki`** (LLM-Wiki): compile / ingest / lint / init, operations constitution, page template, project wiring question in sz:work project setup
+- Build system: `sz-build/` manifest allowlist + `build-sz.py` one-command pipeline + `custom/` intake (template, 8-item checklist) + `masking.json` + `tools/strip-dashboard.py`; Windows runner `BUILD-SZ-v2.bat`
+- Gates PASS: dir==name · kebab · reserved · version 2.0.0 all points · missing refs 0 · gil/legacy refs 0 · forbidden terms 0 · non-ASCII paths 0 · zip 398 entries
+
 # sz v1.0.0 (2026-08-14)
 
 ## 최초 릴리스 — SZ Work Suite

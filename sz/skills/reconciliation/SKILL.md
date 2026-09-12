@@ -2,14 +2,14 @@
 name: reconciliation
 description: |
   계정 조정 — 총계정원장을 보조원장·은행 명세·외부 데이터와 대사해 차이를 식별·해소합니다 트리거: "은행 계정 조정해줘", "원장 대사", "이 차이 어디서 났는지 찾아줘"
-version: 1.2.0
+version: 2.0.0
 uz: references/uz-reconciliation.md
 origin: anthropics/knowledge-work-plugins@2cf4294 (finance/reconciliation, Apache-2.0)
 ---
 
 # reconciliation
 
-> **타 번들 연계**: 본 문서의 `sz:*`·`sz:*` 참조는 해당 번들이 설치된 경우에만 체이닝합니다. 미설치 시 해당 단계를 생략하고 코어 스킬만으로 진행합니다.
+> **타 번들 연계**: 본 문서의 `gil-creative:*`·`gil-commerce:*` 참조는 해당 번들이 설치된 경우에만 체이닝합니다. 미설치 시 해당 단계를 생략하고 코어 스킬만으로 진행합니다.
 
 
 ## 스킬 개요(상세)

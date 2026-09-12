@@ -2,8 +2,7 @@
 name: research-verify
 description: |
   [책임 경계] 증거 수집·사실검증 루프 전담 — 내부 자료 교차 분석과 외부 리서치를 출처 병기·[미검증] 태그 규율로 수행하고, 3중 검증(팩트·출처·논리)과 Red 반론을 거쳐 방어 가능한 조건부 결론을 만드는 스킬. 문제 정의·구조화는 sz:problem-solving이 담당 트리거: "출처 달아서 조사해줘", "팩트체크해줘", "3중 검증해줘"
-user-invocable: true
-version: 1.2.0
+version: 2.0.0
 ---
 
 # research-verify — 하네스형 리서치 실행·검증 스킬
@@ -19,9 +18,9 @@ version: 1.2.0
 | 담당 | 위임 |
 |---|---|
 | 내부 파일 교차 분석 + 외부 리서치 결합 | 문제 정의·이슈화·로직트리 → `sz:problem-solving` |
-| 3중 검증(팩트·출처·논리) + 태그 규율 | 심층 Devil's Advocate → `sz:devil-review` |
+| 3중 검증(팩트·출처·논리) + 태그 규율 | 심층 Devil's Advocate → `devil-review(미포함)` |
 | Red 반론 → 조건부 결론 | 데이터 분석 방법론 QA → `sz:validate-data` |
-| 미검증 항목 표·조치 방안 | 학습·기술 조사 → `sz:tutor-research` |
+| 미검증 항목 표·조치 방안 | 학습·기술 조사 → `tutor-research(미포함)` |
 
 ## 출력 규칙 (모든 산출물에 상시 적용)
 
@@ -68,7 +67,7 @@ version: 1.2.0
 
 - 결론을 무너뜨릴 **반론 3개**, 각각 요지 1문장 + 근거(내부 논리 허점 또는 외부 사실) + 이 반론이 맞다면 결론이 어떻게 달라지는가
 - **"더 조사가 필요하다" 같은 일반론은 반론으로 인정하지 않는다**
-- 더 깊은 반론이 필요하면 `sz:devil-review` 체이닝
+- 더 깊은 반론이 필요하면 `devil-review(미포함)` 체이닝
 
 ### 5단계. 사람 승인 게이트 → 조건부 결론
 
@@ -86,7 +85,7 @@ version: 1.2.0
 ## 체이닝
 
 - `sz:problem-solving`: Work Plan의 Evidence 목록을 받아 수집·검증 → 검증된 Fact를 회신해 가설 판정·스토리라인 갱신 지원
-- ◆최종본 텍스트 QA: `sz:ai-slop-reviewer` → `sz:humanize-korean` → `sz:korean-spell-check`
+- ◆최종본 텍스트 QA: `sz:ai-slop-reviewer` → `sz:korean-spell-check`(민감도 public 시) → `sz:humanize-korean`(마지막, Phase 6 최종 검수)
 - 문서화: `sz:docx-generator` · `sz:html-report`
 - 조사 심도: 소요 8분 초과가 예상되면 착수 전 ⚡Quick/◐Standard/◆Deep 소요를 1회 고지하고 사용자가 선택 (gil 공통 규칙과 정합)
 

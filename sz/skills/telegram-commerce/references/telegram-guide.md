@@ -83,6 +83,6 @@
 
 ## 후속 작업
 
-- 카피 → `sz:copywriting (러시아어·우즈벡어)`
-- 이미지 → `sz:gemini-3-image-prompt`
-- 마케팅 → `sz:campaign-planner (uz-marketing-channels)`
+- 카피 → `copywriting(미포함) (러시아어·우즈벡어)`
+- 이미지 → `gemini-3-image-prompt(미포함)`
+- 마케팅 → `campaign-planner(미포함) (uz-marketing-channels)`

@@ -2,8 +2,7 @@
 name: contract-review
 description: |
   계약서 검토, 이용약관, 개인정보처리방침 등 법률 문서를 분석하고 작성합니다
-user-invocable: true
-version: 1.2.0
+version: 2.0.0
 ---
 ## 스킬 개요(상세)
 
@@ -176,7 +175,7 @@ version: 1.2.0
 계약서 초안·수정 권고안·이용약관·개인정보처리방침·SLA 등 서술형 산출물은 작성 후 반드시 다음 체인으로 마무리합니다.
 
 ```
-contract-review → sz:ai-slop-reviewer → sz:humanize-korean
+contract-review → sz:ai-slop-reviewer → sz:humanize-korean → 최종 검수(◆최종본, humanize Phase 6)
 ```
 
 - **sz:ai-slop-reviewer**: AI 글쓰기 패턴(과장·상투구·획일적 구조) 검수
@@ -209,7 +208,7 @@ contract-review → sz:ai-slop-reviewer → sz:humanize-korean
 1. **유형 판별 → 프리셋 적용** — `references/contract-presets.md`에서 계약 유형(용역·공급/매매·투자·근로·라이선스)을 판별해 해당 체크포인트를 기본 검토 축으로 사용. 사용자가 "프리셋 사례로 추가해줘"라고 하면 해당 유형의 축적 사례에 3줄 형식(계약 개요·쟁점→처리·교훈)으로 append.
 2. **조항별 위험도 매트릭스** — 각 쟁점 조항을 [높음🔴/중간🟡/낮음🟢] 3등급 + 근거 1줄로 표 정리.
 3. **수정 문안 3단 제안** — 위험도 높음·중간 조항에는 수정안을 [보수(상대 수용 용이)/균형(권장)/공격(자사 최대 보호)] 3단으로 제시.
-4. **반론 검증 체이닝** — 검토 완료 후 `sz:devil-review`로 "이 검토가 놓친 리스크·과잉 지적"을 1회 교차 검증하고 결과를 반영.
+4. **반론 검증 체이닝** — 검토 완료 후 `devil-review(미포함)`로 "이 검토가 놓친 리스크·과잉 지적"을 1회 교차 검증하고 결과를 반영.
 5. **문서화** — 검토의견서 요청 시 `sz:docx-generator` 또는 `sz:html-report` 체인(디자인 게이트 적용). 마감은 ai-slop-reviewer → humanize-korean.
 
 

@@ -2,8 +2,7 @@
 name: korean-spell-check
 description: |
   국립국어원 계열 규칙을 반영한 바른한글(구 부산대 맞춤법/문법 검사기) 표면을 이용해 트리거: "이 한국어 문장 맞춤법 검사해줘", "띄어쓰기 검사", "README 한국어 문장 최종 검수"
-user-invocable: true
-version: 1.2.0
+version: 2.0.0
 ---
 ## 스킬 개요(상세)
 
@@ -21,7 +20,7 @@ ai-slop-reviewer가 AI 패턴을 검수한 뒤 마지막 단계에서 호출하�
 
 # 한국어 맞춤법·문법 검수
 
-> **타 번들 연계**: 본 문서의 `sz:*`·`sz:*` 참조는 해당 번들이 설치된 경우에만 체이닝합니다. 미설치 시 해당 단계를 생략하고 코어 스킬만으로 진행합니다.
+> **타 번들 연계**: 본 문서의 `gil-creative:*`·`gil-commerce:*` 참조는 해당 번들이 설치된 경우에만 체이닝합니다. 미설치 시 해당 단계를 생략하고 코어 스킬만으로 진행합니다.
 
 
 국립국어원 계열 규칙을 반영한 **바른한글(구 부산대 맞춤법/문법 검사기)** 표면을 이용해 한국어 문장을 최종 교정합니다. AI가 만들어낸 글의 마지막 검수 단계로 사용합니다.
@@ -100,7 +99,7 @@ helper는 `scripts/korean_spell_check.py`에 포함되어 있으며, 외부 의�
 {콘텐츠 생성 스킬} → ai-slop-reviewer → korean-spell-check → 사용자 최종 검토
 ```
 
-- **before**: `sz:blog`, `sz:newsletter`, `sz:copywriting`, `sz:sns-content`
+- **before**: `blog(미포함)`, `newsletter(미포함)`, `copywriting(미포함)`, `sns-content(미포함)`
 - **before**: `sz:ai-slop-reviewer` — AI 패턴(과한 형용사·반복·번역체) 먼저 검수
 - **after**: 사용자가 최종 문맥 검토 후 발행
 

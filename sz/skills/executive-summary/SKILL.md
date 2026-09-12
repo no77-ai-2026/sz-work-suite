@@ -2,8 +2,7 @@
 name: executive-summary
 description: |
   복잡한 분석·재무·운영 보고를 경영진 1페이지(≤500단어) 요약으로 변환합니다 트리거: "임원 보고용 1페이지 요약 만들어줘", "이사회 보고서 요약해줘", "경영진 브리핑 1장으로 정리해줘"
-user-invocable: true
-version: 1.2.0
+version: 2.0.0
 ---
 ## 스킬 개요(상세)
 
@@ -12,12 +11,12 @@ version: 1.2.0
 - "임원 보고용 1페이지 요약 만들어줘" / "이사회 보고서 요약해줘" / "경영진 브리핑 1장으로 정리해줘"
 - "이 리포트 핵심만 요약해줘" / "긴 보고서 1페이지로 줄여줘" / "C레벨 요약 작성해줘"
 - "What/So What/Now What 구조로 정리해줘" / "카톡·이메일로 보낼 단일 HTML 1pager 만들어줘"
-기본 출력은 sz:html-report로 단일 HTML(이미지·CSS·JS 인라인, 카톡·이메일 바로 공유)이며, pdf/docx/pptx/hwpx 변환은 옵션 체이닝. 입력 가능: sz:performance-report 출력 · sz:financial-statements · sz:variance-analysis · sz:weekly-report · 외부 보고서. 한국 임원/이사회 표준 What/So What/Now What + K-IFRS 재무 지표 우선.
-[책임 경계] vs sz:performance-report: executive-summary=임원 압축 요약(≤500단어), performance-report=마케팅 풀 리포트(전체).
+기본 출력은 sz:html-report로 단일 HTML(이미지·CSS·JS 인라인, 카톡·이메일 바로 공유)이며, pdf/docx/pptx/hwpx 변환은 옵션 체이닝. 입력 가능: performance-report(미포함) 출력 · sz:financial-statements · sz:variance-analysis · sz:weekly-report · 외부 보고서. 한국 임원/이사회 표준 What/So What/Now What + K-IFRS 재무 지표 우선.
+[책임 경계] vs performance-report(미포함): executive-summary=임원 압축 요약(≤500단어), performance-report=마케팅 풀 리포트(전체).
 
 # Executive Summary — 경영진 1페이지 요약
 
-> **타 번들 연계**: 본 문서의 `sz:*`·`sz:*` 참조는 해당 번들이 설치된 경우에만 체이닝합니다. 미설치 시 해당 단계를 생략하고 코어 스킬만으로 진행합니다.
+> **타 번들 연계**: 본 문서의 `gil-creative:*`·`gil-commerce:*` 참조는 해당 번들이 설치된 경우에만 체이닝합니다. 미설치 시 해당 단계를 생략하고 코어 스킬만으로 진행합니다.
 
 
 > gil-bi | What / So What / Now What 3-축 구조

@@ -2,8 +2,7 @@
 name: pptx-designer
 description: |
   발표용 파워포인트(.pptx) 슬라이드를 디자인해 바로 열리는 파일로 만들어 드립니다 트리거: "발표자료 PPT로 만들어줘", "파워포인트 슬라이드 디자인해줘", "보고서를 발표용 PPT로 만들어줘"
-user-invocable: true
-version: 1.2.0
+version: 2.0.0
 ---
 ## 스킬 개요(상세)
 
@@ -18,11 +17,11 @@ version: 1.2.0
 - "제품 데모 슬라이드 깔끔하게 디자인해줘"
 한국형 폰트·색 팔레트 디자인 시스템과 비즈니스 슬라이드 구성안을 적용해 슬라이드를 만들고, 카피는 AI 슬롭 검수로 다듬을 수 있습니다.
 발표자료를 .pptx 파일로 만들 때는 Claude 기본 생성 대신 이 스킬을 사용하세요.
-[책임 경계] vs sz:notebooklm-slide-prompt: 이 스킬=지금 바로 열리는 .pptx 파일, 저 스킬=NotebookLM에 넣을 슬라이드 생성 프롬프트.
+[책임 경계] vs notebooklm-slide-prompt(미포함): 이 스킬=지금 바로 열리는 .pptx 파일, 저 스킬=NotebookLM에 넣을 슬라이드 생성 프롬프트.
 
 # PPT 디자이너 (PPTX Designer)
 
-> **타 번들 연계**: 본 문서의 `sz:*`·`sz:*` 참조는 해당 번들이 설치된 경우에만 체이닝합니다. 미설치 시 해당 단계를 생략하고 코어 스킬만으로 진행합니다.
+> **타 번들 연계**: 본 문서의 `gil-creative:*`·`gil-commerce:*` 참조는 해당 번들이 설치된 경우에만 체이닝합니다. 미설치 시 해당 단계를 생략하고 코어 스킬만으로 진행합니다.
 
 
 ## 개요
@@ -180,7 +179,7 @@ titleSlide.addText("2026 Q1 사업 보고", {
 1. LibreOffice로 PDF/JPEG 변환 후 시각 확인
 2. 겹친 요소·잘린 텍스트·중첩 확인
 3. 색 일관성 (한 팔레트 안에서만)
-4. AI 슬롭 카피 검출 (`sz:design-slop-check` 체이닝)
+4. AI 슬롭 카피 검출 (`design-slop-check(미포함)` 체이닝)
 5. 청중·톤 적합성 (사람 검수)
 
 ### 6단계: 출력
@@ -283,11 +282,11 @@ Pretendard·맑은 고딕은 상용·배포 자유. 발표 PC에 폰트 미설�
 | `sz:hwpx-writer` | 한컴 한글 문서 |
 | `sz:xlsx-creator` | 엑셀 데이터 시트 (차트 데이터 소스) |
 | `sz:pdf-writer` | 다국어 PDF 변환 |
-| `sz:copywriting` | 슬라이드 카피 작성 |
+| `copywriting(미포함)` | 슬라이드 카피 작성 |
 | `sz:humanize-korean` | 한국어 카피 자연화 |
-| `sz:design-slop-check` | 슬라이드 카피 AI 슬롭 검수 |
-| `sz:design-prompt-builder` | Claude Design에 동시 시안 요청 시 |
-| `sz:gemini-3-image-prompt` | 슬라이드 일러스트·배경 이미지 프롬프트 |
+| `design-slop-check(미포함)` | 슬라이드 카피 AI 슬롭 검수 |
+| `design-prompt-builder(미포함)` | Claude Design에 동시 시안 요청 시 |
+| `gemini-3-image-prompt(미포함)` | 슬라이드 일러스트·배경 이미지 프롬프트 |
 
 ## 기술 참조
 

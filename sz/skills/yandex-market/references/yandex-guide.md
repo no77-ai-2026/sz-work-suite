@@ -57,6 +57,6 @@ Yandex Market — 러시아 최대 이커머스 + UZ Yandex 생태계.
 
 ## 후속 작업
 
-- 광고 → `sz:campaign-planner (uz-marketing-channels)`
-- SEO → `sz:seo-audit (uz-seo-yandex)`
-- 카피 (러시아어) → `sz:copywriting`
+- 광고 → `campaign-planner(미포함) (uz-marketing-channels)`
+- SEO → `seo-audit(미포함) (uz-seo-yandex)`
+- 카피 (러시아어) → `copywriting(미포함)`

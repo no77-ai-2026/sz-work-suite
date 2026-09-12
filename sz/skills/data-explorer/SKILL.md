@@ -2,8 +2,7 @@
 name: data-explorer
 description: |
   CSV·Excel 데이터의 프로파일링·품질 보고서를 만들어 드립니다 트리거: "이 데이터 분석해줘", "CSV 요약해줘", "이상값 찾아줘"
-user-invocable: true
-version: 1.2.0
+version: 2.0.0
 ---
 ## 스킬 개요(상세)
 
@@ -59,7 +58,7 @@ CSV/Excel 파일을 받아 데이터 프로파일링, 품질 검사, 기초 분�
 
 ## 이 스킬을 사용하지 말아야 할 때
 - **차트/그래프 생성** → sz:data-visualizer 사용
-- **공공데이터 조회** → sz:public-data 사용
+- **공공데이터 조회** → public-data(미포함) 사용
 - **PPT/Word 변환** → gil-office 플러그인 사용
 
 ## 흡수 방법론 (knowledge-work-plugins@2cf4294, Apache-2.0)

@@ -94,5 +94,5 @@ CPC 200~2,000 UZS ($0.015~$0.15)
 ## 후속 작업
 
 - 상세페이지 → `detail-page-image` (러시아어 우선)
-- 카피 → `sz:copywriting`
-- 광고 → `sz:campaign-planner (uz-marketing-channels)`
+- 카피 → `copywriting(미포함)`
+- 광고 → `campaign-planner(미포함) (uz-marketing-channels)`

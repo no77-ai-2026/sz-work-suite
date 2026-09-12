@@ -49,11 +49,11 @@
 ## 자주 사용하는 플러그인 (Top 5)
 
 ```
-1. sz-lifestyle (UZ 거주·여행)
-2. sz-business (UZ 시장)
-3. sz-content (트라이링구얼)
-4. sz-oda (KOICA·EDCF — 해당 시)
-5. sz-finance (UZ 세무·환율)
+1. gil-lifestyle (UZ 거주·여행)
+2. gil-business (UZ 시장)
+3. gil-content (트라이링구얼)
+4. gil-oda (KOICA·EDCF — 해당 시)
+5. gil-finance (UZ 세무·환율)
 ```
 
 ## API 키 사전 등록
@@ -98,7 +98,7 @@
 → 언어 환경 (러시아어 {russian_level}) 고려한 옵션 우선
 
 "UZ 출장 보고서"
-→ sz-business → sz:docx-generator
+→ gil-business → sz:docx-generator
 → 언어 자동 선택 (한국어 + 러시아어 — 본사 + UZ 자회사)
 → 통화 자동 (KRW + UZS + USD)
 ```

@@ -134,7 +134,7 @@ NDS 12% 의무 표기. soliq.uz 전자 인보이스 의무 (2022~).
 - 수출 (0%)
 - 교육·의료 일부 (0%)
 
-상세는 `sz:tax-helper`의 UZ 세제 가이드 참조.
+상세는 `tax-helper(미포함)`의 UZ 세제 가이드 참조.
 
 ---
 
@@ -445,7 +445,7 @@ doc.save(f'contract_{contract_number}.docx')
 | `sz:contract-review` | 계약서 법률 검토 |
 | `sz:nda-triage` | NDA 빠른 검토 |
 | `sz:compliance-check` | 규제 준수 |
-| `sz:tax-helper` | NDS·세무 검토 |
+| `tax-helper(미포함)` | NDS·세무 검토 |
 | KOTRA Tashkent | 한국 회사 무료 자문 |
 | 현지 변호사 | 법적 구속력 검수 (필수) |
 | 공증사무소 (Нотариус) | 공증 (해당 시) |

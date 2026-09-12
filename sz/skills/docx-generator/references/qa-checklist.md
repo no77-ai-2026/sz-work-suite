@@ -1,6 +1,6 @@
 # DOCX QA Checklist — 10단계 검수
 
-> **타 번들 연계**: 본 문서의 `sz:*`·`sz:*` 참조는 해당 번들이 설치된 경우에만 체이닝합니다. 미설치 시 해당 단계를 생략하고 코어 스킬만으로 진행합니다.
+> **타 번들 연계**: 본 문서의 `gil-creative:*`·`gil-commerce:*` 참조는 해당 번들이 설치된 경우에만 체이닝합니다. 미설치 시 해당 단계를 생략하고 코어 스킬만으로 진행합니다.
 
 
 DOCX 결과물 출력 직전 다음 10단계를 점검합니다. 자동 검수 + 시각 검수가 함께 진행됩니다.
@@ -160,7 +160,7 @@ for p in doc.paragraphs:
             print(f"⚠️ AI 슬롭 의심: '{re.search(pat, text).group()}' in '{text[:50]}...'")
 ```
 
-권장: 후속으로 `sz:design-slop-check` 또는 `sz:humanize-korean` 스킬 호출.
+권장: 후속으로 `design-slop-check(미포함)` 또는 `sz:humanize-korean` 스킬 호출.
 
 ---
 

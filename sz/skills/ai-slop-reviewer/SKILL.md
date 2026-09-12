@@ -2,9 +2,8 @@
 name: ai-slop-reviewer
 description: |
   AI가 생성한 텍스트에서 기계적 패턴(AI 슬롭)을 감지하고 인간적인 글쓰기로 수정하는 스킬 트리거: "AI 티 나는 부분 고쳐줘", "사람이 쓴 것처럼 수정해줘", "AI 슬롭 제거해줘"
-user-invocable: true
   - "AI 패턴 검사해줘", "기계적인 느낌 없애줘"
-version: 1.2.0
+version: 2.0.0
 ---
 ## 스킬 개요(상세)
 
@@ -20,7 +19,7 @@ AI가 생성한 텍스트에서 기계적 패턴(AI 슬롭)을 감지하고 인�
 
 # AI 슬롭 검수 및 인간화 스킬
 
-> **타 번들 연계**: 본 문서의 `sz:*`·`sz:*` 참조는 해당 번들이 설치된 경우에만 체이닝합니다. 미설치 시 해당 단계를 생략하고 코어 스킬만으로 진행합니다.
+> **타 번들 연계**: 본 문서의 `gil-creative:*`·`gil-commerce:*` 참조는 해당 번들이 설치된 경우에만 체이닝합니다. 미설치 시 해당 단계를 생략하고 코어 스킬만으로 진행합니다.
 
 
 AI가 생성한 텍스트는 내용은 정확하지만, 종종 기계적이고 예측 가능한 패턴으로 가득 차 있습니다. 이 스킬은 그 패턴을 체계적으로 찾아내고, 독자가 사람의 목소리로 느낄 수 있도록 글을 재구성합니다.
@@ -269,15 +268,15 @@ Most productivity tools promise to save you time. Most of them don't. But after 
 ## 관련 스킬
 
 ### 선행 스킬 (입력 생성)
-- `sz:blog` — 블로그 포스트 생성
-- `sz:landing-page` — 랜딩 페이지 카피라이팅
-- `sz:newsletter` — 뉴스레터 작성
-- `sz:copywriting` — 마케팅 카피 작성
+- `blog(미포함)` — 블로그 포스트 생성
+- `landing-page(미포함)` — 랜딩 페이지 카피라이팅
+- `newsletter(미포함)` — 뉴스레터 작성
+- `copywriting(미포함)` — 마케팅 카피 작성
 - `sz:docx-generator` — DOCX 문서 생성
 - `sz:pptx-designer` — PPTX 발표자료 생성
 
 ### 후속 스킬 (선택적)
-- `sz:gemini-3-image-prompt` — (선택) 블로그 발행 체인의 이미지 생성 단계
+- `gemini-3-image-prompt(미포함)` — (선택) 블로그 발행 체인의 이미지 생성 단계
 
 ### 통합 워크플로우
 이 스킬은 다음 체인의 **마지막 단계**로 호출됩니다:

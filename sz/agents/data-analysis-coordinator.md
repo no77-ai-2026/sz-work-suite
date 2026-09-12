@@ -22,7 +22,7 @@ effort: high
 
 1. `sz:data-explorer` — 데이터 탐색·요약 통계
 2. `sz:data-visualizer` — 차트·시각화
-3. `sz:public-data` — 공공데이터 보강 (필요 시)
+3. `public-data(미포함)` — 공공데이터 보강 (필요 시)
 4. (해설 텍스트) → `sz:ai-slop-reviewer`
 
 ## Cowork 환경 제약

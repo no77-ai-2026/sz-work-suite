@@ -1,9 +1,10 @@
 {
   "name": "sz",
-  "version": "1.2.0",
-  "description": "SZ Work Suite — 업무·경영지원 파트 공유 플러그인. 경영·재무·법무·HR·구매물류·영업·리스크·마케팅 213스킬 (GIL v2.2.0 기반 사내판 + SZ 특화 6종: uz-research·risk-radar·doc-formats·trade-logistics·sample-log·sales-verify) + 하네스층(sz:work 풀 오케스트레이터(프로젝트 스캐폴드·승인형 자가개선·커스텀 에이전트)·코디네이터 에이전트 21·산출물 등급제)",
+  "displayName": "SZ Work Suite",
+  "description": "SZ Work Suite v2.0.0 — 업무·경영지원 파트 공유 플러그인(67스킬). 하네스(sz:work 오케스트레이터·산출물 등급제·승인 게이트) + SZ 특화 9종(uz-research·risk-radar·risk-center 리스크 대시보드·doc-formats·trade-logistics·sample-log·sales-verify·wiki LLM-Wiki) + 문서·QA·보고·재무·법무·HR·세일즈서포트·운영·데이터·전략·UZ 채널. KO/EN/RU/UZ. GIL v2.3.1 기반(Apache-2.0).",
   "author": {
-    "name": "gil"
+    "name": "Caleb Roh",
+    "email": "no77show@gmail.com"
   },
   "keywords": [
     "sz",
@@ -15,7 +16,18 @@
     "logistics",
     "risk",
     "sales",
-    "korean"
+    "korean",
+    "english",
+    "russian"
   ],
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "version": "2.0.0",
+  "userConfig": {
+    "KOREAN_LAW_OC": {
+      "type": "string",
+      "title": "법제처 Open API OC 키",
+      "description": "law.go.kr 에서 무료로 발급받는 사용자별 키(OC)입니다.",
+      "sensitive": true
+    }
+  }
 }

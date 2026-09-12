@@ -2,8 +2,7 @@
 name: close-management
 description: |
   월말·분기·연간 결산을 도와주는 스킬입니다
-user-invocable: true
-version: 1.2.0
+version: 2.0.0
 ---
 ## 스킬 개요(상세)
 
@@ -37,7 +36,7 @@ K-IFRS 기준 계정 마감, 급여 정산, 세무 일정 관리, 결산 보고�
 
 **2026년 최저임금 및 4대보험 요율**
 
-> 2026년 최저임금·4대보험 요율표는 `sz:tax-helper` references/2026-rates.md 단일 SSOT를 참조한다.
+> 2026년 최저임금·4대보험 요율표는 `tax-helper(미포함)` references/2026-rates.md 단일 SSOT를 참조한다.
 
 **2026년 주요 변경사항:**
 - 국민연금: 1998년 이후 최초 요율 인상 (9% → 9.5%)
@@ -154,14 +153,14 @@ K-IFRS 기준 계정 마감, 급여 정산, 세무 일정 관리, 결산 보고�
 
 - **sz:financial-statements**: K-IFRS 재무제표 작성
 - **sz:variance-analysis**: 예산 대비 실적 분석
-- **sz:tax-helper**: 세금 신고, 홈택스 안내
+- **tax-helper(미포함)**: 세금 신고, 홈택스 안내
 
 ### 후처리 체인 (결산 보고서·경영진 요약 등 서술형 산출물)
 
 결산 보고서, 경영진 요약, 비용 분석 코멘트처럼 문장 산출물을 작성한 뒤에는 반드시 아래 체인으로 마무리한다.
 
 ```
-close-management → sz:ai-slop-reviewer → sz:humanize-korean
+close-management → sz:ai-slop-reviewer → sz:humanize-korean → 최종 검수(◆최종본, humanize Phase 6)
 ```
 
 - **sz:ai-slop-reviewer**: AI 티 나는 표현·과장·상투구 검수 및 수정
@@ -174,7 +173,7 @@ close-management → sz:ai-slop-reviewer → sz:humanize-korean
 - **실제 세금 신고·납부**: AI가 작성한 결산 초안을 그대로 세무서에 제출하지 마세요. 세무사에게 검토를 의뢰하세요.
 - **재무제표 공식 작성**: 외부 감사 또는 공시용 재무제표가 필요하면 `sz:financial-statements` 스킬과 공인회계사 검토를 함께 활용하세요.
 - **예산 대비 실적 분석**: 전략적 원가·수익 분산 분석은 `sz:variance-analysis` 스킬이 더 적합합니다.
-- **세무 상담**: 종합소득세·부가가치세 신고 방법 상담은 `sz:tax-helper` 스킬을 사용하세요.
+- **세무 상담**: 종합소득세·부가가치세 신고 방법 상담은 `tax-helper(미포함)` 스킬을 사용하세요.
 
 ## 흡수 방법론 (knowledge-work-plugins@2cf4294, Apache-2.0)
 

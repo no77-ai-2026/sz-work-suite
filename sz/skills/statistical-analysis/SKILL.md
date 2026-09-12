@@ -2,7 +2,7 @@
 name: statistical-analysis
 description: |
   기술통계·추세·이상치·가설검정 등 통계 기법을 데이터 분석에 적용합니다 트리거: "통계 분석해줘", "이 차이가 유의미한지 검정", "이상치 탐지"
-version: 1.2.0
+version: 2.0.0
 uz: references/uz-statistical-analysis.md
 origin: anthropics/knowledge-work-plugins@2cf4294 (data/statistical-analysis, Apache-2.0)
 ---
@@ -13,7 +13,7 @@ origin: anthropics/knowledge-work-plugins@2cf4294 (data/statistical-analysis, Ap
 
 기술통계·추세·이상치·가설검정 등 통계 기법을 데이터 분석에 적용합니다. 한국 표준 + UZ 듀얼 컨텍스트를 적용합니다.
 
-**한국화 노트**: [경계] 연구 방법론 설계는 sz:research-methodology·research-analysis — 이 스킬은 실무 데이터 통계 실행.
+**한국화 노트**: [경계] 연구 방법론 설계는 research-methodology(미포함)·research-analysis — 이 스킬은 실무 데이터 통계 실행.
 
 **도구 일반화**: 원문의 미국 SaaS 연동(QuickBooks·HubSpot·PayPal·Gusto 등)은 방법론으로만 계승한다 — 한국 실무에서는 스마트스토어·카페24 MCP(gil-commerce 설치 시), 엑셀/CSV 업로드, 사용자 제공 수치를 소스로 쓰고, 해당 커넥터가 연결된 경우에만 직접 조회한다.
 
