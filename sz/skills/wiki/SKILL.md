@@ -3,7 +3,7 @@ name: wiki
 description: |
   LLM-Wiki 중앙 지식 저장소 운영 — compile(현재 대화의 재사용 지식을 frontmatter 페이지로 증류해 _inbox에 저장) / ingest(인박스 배치·승격·중복·링크 제안 → 승인 후 실행) / lint(frontmatter·깨진 링크·고아·INDEX 점검) / init(위키 스캐폴드). 트리거: "위키로 컴파일", "이 대화 위키에 저장해줘", "인제스트 브리핑", "위키 정리", "위키 린트", "위키 세팅해줘"
   EN: Personal LLM-Wiki operations — compile chat knowledge into frontmatter pages (inbox), ingest briefing (placement/promotion proposals, approval-gated), lint, init scaffold. Triggers: "compile to wiki", "ingest briefing", "wiki lint", "set up my wiki"
-version: 2.0.0
+version: 2.1.0
 ---
 
 # sz:wiki — LLM-Wiki 중앙 지식 저장소 (개인 위키)

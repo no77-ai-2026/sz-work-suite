@@ -3,15 +3,17 @@ name: doc-formats
 description: |
   SZ 문서 양식 레이어 — 공문·품의서·회의록·주간보고·출장보고의 표준 골격과 필수 항목을 규정하고 파일 생성은 docx/pptx/xlsx 스킬에 위임. 트리거: "품의서 써줘", "공문 양식으로", "출장보고서 만들어줘"
   EN: SZ document format layer — official letters, approval requests, minutes, weekly and trip reports; delegates file creation to docx/pptx/xlsx. Triggers: "draft an approval request", "official letter format", "trip report"
-version: 2.0.0
+version: 2.1.0
 ---
 
 # sz:doc-formats — SZ 문서 양식 레이어
 
 사내 문서의 구조·톤·필수 항목을 규정하는 얇은 레이어. 실제 파일 생성은 내장 docx/pptx/xlsx 스킬 또는 `sz:docx-generator`·`sz:pptx-designer`에 위임한다.
 
+삼성 법인 1페이지 주간현안 상세보고서(□/-/· 4단 + 파란 주석 텍스트박스)는 본 레이어의 표준 골격과 별개 체계이므로 `sz:issue-report`에 위임한다.
+
 ## 사용 절차
-1. 문서 유형 판별(공문/품의/회의록/주간보고/출장보고).
+1. 문서 유형 판별(공문/품의/회의록/주간보고/출장보고). SEUZ 총괄 주간현안이면 여기서 멈추고 `sz:issue-report`로 넘긴다.
 2. **사내 실제 양식 파일이 있으면 먼저 업로드를 요청**하고 그 구조를 그대로 따른다. 없으면 `references/formats.md`의 표준 골격 사용.
 3. 초안 작성 → 필수 항목 누락 체크리스트 확인 → 산출.
 

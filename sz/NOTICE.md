@@ -1,4 +1,4 @@
-> **SZ 사내판**: 본 플러그인 `sz` v2.0.0은 GIL gil-bundles-v2.3.1-clean(Apache-2.0)에서 업무 스킬을 선별하고 SZ 특화 스킬을 추가한 사내 공유판입니다. 아래 원 저작물 고지를 보존합니다.
+> **SZ 사내판**: 본 플러그인 `sz` v2.1.0은 GIL gil-bundles-v2.3.1-clean(Apache-2.0)에서 업무 스킬을 선별하고 SZ 특화 스킬을 추가한 사내 공유판입니다. 아래 원 저작물 고지를 보존합니다.
 
 # GIL Third-Party Notices
 

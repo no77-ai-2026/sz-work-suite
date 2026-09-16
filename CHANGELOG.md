@@ -1,3 +1,17 @@
+# sz v2.1.0 (2026-09-16) — issue-report 편입
+
+- New **`issue-report`**: SEUZ 총괄 주간현안 1페이지 상세보고서(.docx). 독립 플러그인 `sz-repo`를 플러그인 내부 스킬로 편입 — 스킬 ID `sz:issue-report`
+  - 계열 4종(A 재무·여신·보험 / B1 규제·법령 / B2 대외·관계기관 / B3 출장·사건)으로 세분, 계열별 규칙 강도표
+  - CFO 확정본 3건(W36 채권 Top-up 보험 헷징 · W37 우즈벡 기업 규제 완화 · W37 주우 한국 대사관 CSR)에서 역산한 문체 규칙을 `references/cfo-review-log.md`에 축적
+  - `scripts/lint_report.py` 신규 — 문체 린터. ERROR(확정본 전수 교정) / WARN(계열별 상이) / INFO(1회 관찰, 승격 대기) 3단계
+  - `scripts/diff_review.py` 신규 — 초안·확정본 대조로 블록 구조·줄 단위·주석·용어 치환쌍 추출
+  - `scripts/build_report.py` — `title_notes`(제목 주석) 지원 추가, 줄넘침·주석넘침·분량초과 3종 자동 점검
+  - 승격 절차: diff → cfo-review-log 사례 기록 → **같은 지적 2회 반복 시** style-guide 규칙 승격 + 린터 검사 항목 추가
+- 트리거 충돌 차단: 편입 전 `sz-repo`의 광역 문구 4종("주간 보고 정리해줘" / "1페이지 보고서" / "이 내용 보고서 양식으로" / "총괄 보고서 만들어줘") 제거 — `weekly-report`·`executive-summary`·`docx-generator`·`status-reporter`와의 오발동 차단. description 말미에 `※` 배제 안내 추가
+- `doc-formats`: 삼성 법인 1페이지 주간현안은 `sz:issue-report`로 위임하도록 서두·사용 절차 1단계에 분기 명시
+- 버전: plugin.json · marketplace.json · 전 SKILL.md 68개 모두 2.1.0으로 일치
+- 스킬 67 → **68**
+
 # sz v2.0.0 (2026-09-12) — lean edition, GIL v2.3.1 rebase, risk-center, wiki
 
 - Rebased on GIL v2.3.1 (Apache-2.0): credential wiring via plugin.json `userConfig` + `${user_config.KEY}`, sz:work re-ported from gil:project v2.3.1 (8-lens interview, no-reply≠refusal, evolution log SSOT), QA chain order ai-slop → spell-check → humanize, `user-invocable` removed

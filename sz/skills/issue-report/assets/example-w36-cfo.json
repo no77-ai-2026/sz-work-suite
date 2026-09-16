@@ -1,0 +1,35 @@
+{
+  "_comment": "W36 채권 Top-up 보험 헷징 가입 — CFO 확정본 재현. 재무·여신·보험 계열 보고의 3블록 표준 예시.",
+  "title": "SEUZ, 채권 Top-up 보험 헷징 가입",
+  "title_notes": [{"text": "Atradius社"}],
+  "footer": "- 1 -",
+  "blocks": [
+    {"level":"head","text":"여신 현황"},
+    {"level":"dash","text":"총 여신 46M$ 운영中 (보험 43.8M$, Open Risk 2.1M$(4.7%))"},
+    {"level":"dot","text":"우즈벡은 高위험국으로 100% 헷징 원칙下 관리담당/법인장 전결로"},
+    {"level":"cont","text":"제한적 단기 Open Risk 사용中 (헷징 금액의 20%內)"},
+    {"level":"dash","text":"하반기 확판 목표 달성, 4분기 Seasonality 및 S26FE 신모델 론칭에"},
+    {"level":"cont","text":"따른 거래선 여신 부족 예상"},
+    {"level":"dot","text":"거래선 선수금 매출 유도 및 월중 매출 편중도 조정 등 감안시에도"},
+    {"level":"cont","text":"약 10M$ 여신 추가 필요"},
+    {"level":"dash","text":"기존 보험(Credendo社)外 Top-up(Atradius社)보험 활용 필요",
+     "notes":[{"anchor":"Credendo社","text":"매출액의 0.265%"}]},
+    {"level":"dot","text":"Top-up : 기존 보험 헷징에 추가분 Cover(채권 사고시 초과분 보상)"},
+
+    {"level":"head","text":"보험 조건 및 경과"},
+    {"level":"dash","text":"1차 협상 : 9.1M$, 보험료율 3.0%, 보험료 273K$ (7/21)",
+     "notes":[{"anchor":"1차 협상","text":"최초 요청 12.2M$"}]},
+    {"level":"dash","text":"최종 협상 : 7.9M$, 보험료율 2.85%, 보험료 225K$ (8/20)"},
+    {"level":"dot","text":"보험 기간 10개월, 보험료 187.5K$ 조건 확정 (8/26)",
+     "notes":[{"anchor":"보험 기간","text":"기존보험 기간(΄26.9∼΄27.6) 일치화 → 만기 이후 1개 보험사로 통합 전략"}]},
+    {"level":"dot","text":"Atradius社 보험 신청(8/28日), 세부 조건 확정(9/1日)",
+     "notes":[{"anchor":"Atradius社","text":"7개 거래선 7.9M$, ΄26.9月~"}]},
+
+    {"level":"head","text":"향후 운영 계획"},
+    {"level":"dash","text":"9월중 보험 증권 서명본 수령후 Top-up 개시(N-ERP 등록)"},
+    {"level":"dash","text":"보험 운영 실적 점검후 ΄27.6月 만기시 연장/재조정 여부 결정",
+     "notes":[{"anchor":"΄27.6月","text":"΄26.9 ~ ΄27.6月(10개월)"}]},
+    {"level":"dot","text":"Top-up 보험 이용율(=추가 매출액/10개월/7.9M$*100)"},
+    {"level":"dot","text":"2개 보험사 각 ΄27년도 제공 여신 규모 비교"}
+  ]
+}

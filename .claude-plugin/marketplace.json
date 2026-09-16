@@ -5,15 +5,15 @@
     "email": "no77show@gmail.com"
   },
   "metadata": {
-    "description": "SZ Work Suite v2.0.0 — 업무·경영지원 파트 공유 플러그인(67스킬). 하네스(sz:work 오케스트레이터·산출물 등급제·승인 게이트) + SZ 특화 9종(uz-research·risk-radar·risk-center 리스크 대시보드·doc-formats·trade-logistics·sample-log·sales-verify·wiki LLM-Wiki) + 문서·QA·보고·재무·법무·HR·세일즈서포트·운영·데이터·전략·UZ 채널. KO/EN/RU/UZ. GIL v2.3.1 기반(Apache-2.0).",
-    "version": "2.0.0",
+    "description": "SZ Work Suite v2.1.0 — 업무·경영지원 파트 공유 플러그인(68스킬). 하네스(sz:work 오케스트레이터·산출물 등급제·승인 게이트) + SZ 특화 10종(uz-research·risk-radar·risk-center 리스크 대시보드·doc-formats·issue-report 총괄 주간현안·trade-logistics·sample-log·sales-verify·wiki LLM-Wiki) + 문서·QA·보고·재무·법무·HR·세일즈서포트·운영·데이터·전략·UZ 채널. KO/EN/RU/UZ. GIL v2.3.1 기반(Apache-2.0).",
+    "version": "2.1.0",
     "language": "ko-en"
   },
   "plugins": [
     {
       "name": "sz",
       "source": "./sz",
-      "description": "SZ Work Suite v2.0.0 — 업무·경영지원 파트 공유 플러그인(67스킬). 하네스(sz:work 오케스트레이터·산출물 등급제·승인 게이트) + SZ 특화 9종(uz-research·risk-radar·risk-center 리스크 대시보드·doc-formats·trade-logistics·sample-log·sales-verify·wiki LLM-Wiki) + 문서·QA·보고·재무·법무·HR·세일즈서포트·운영·데이터·전략·UZ 채널. KO/EN/RU/UZ. GIL v2.3.1 기반(Apache-2.0)."
+      "description": "SZ Work Suite v2.1.0 — 업무·경영지원 파트 공유 플러그인(68스킬). 하네스(sz:work 오케스트레이터·산출물 등급제·승인 게이트) + SZ 특화 10종(uz-research·risk-radar·risk-center 리스크 대시보드·doc-formats·issue-report 총괄 주간현안·trade-logistics·sample-log·sales-verify·wiki LLM-Wiki) + 문서·QA·보고·재무·법무·HR·세일즈서포트·운영·데이터·전략·UZ 채널. KO/EN/RU/UZ. GIL v2.3.1 기반(Apache-2.0)."
     }
   ]
 }

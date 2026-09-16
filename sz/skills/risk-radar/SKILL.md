@@ -3,7 +3,7 @@ name: risk-radar
 description: |
   리스크 판정 엔진 — 리스크 레지스터 10카테고리(Communication·Competitive·Finance·Geo·Human Capital·Legal·Operation·Product·Security·Supply Chain) 분류, 상태 3등급(위기/주의/정상) 판정, 델타 브리핑 6항목, 임원 브리핑. 트리거: "이 이슈 리스크 등급 판정해줘", "리스크 브리핑 만들어줘", "이번 주 리스크 델타"
   EN: Risk grading engine — 10-category risk register classification, 3-level status (Crisis/Watch/Normal), 6-part delta briefing, executive brief. Triggers: "grade this risk", "risk briefing", "weekly risk delta"
-version: 2.0.0
+version: 2.1.0
 ---
 
 # sz:risk-radar — 리스크 판정 엔진 (리스크 매니지먼트)
