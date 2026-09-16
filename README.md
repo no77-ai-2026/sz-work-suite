@@ -1,6 +1,6 @@
-# SZ Work Suite (`sz`) — v2.0.0
+# SZ Work Suite (`sz`) — v2.1.0
 
-Claude Cowork plugin for SZ business & management support teams — **67 skills, 6 coordinator agents, 2 MCP servers**, one harness.
+Claude Cowork plugin for SZ business & management support teams — **68 skills, 6 coordinator agents, 2 MCP servers**, one harness.
 Lean by design: the everyday toolbox every team shares, plus the harness that keeps every session on the same rules. Team-specific workflows are added later as custom skills (see *Adding your own skills*).
 
 > Based on GIL v2.3.1 bundles (Apache-2.0 + MIT). Attributions preserved in `NOTICE.md`, `LICENSE`, `LICENSE.MIT`.
@@ -26,7 +26,7 @@ On first use the app asks for one optional key: `KOREAN_LAW_OC` (free, law.go.kr
 | Area | Skills |
 |---|---|
 | Harness | `work` (orchestrator, project scaffold, self-improvement, doctor) |
-| **SZ-specific** | `uz-research` · `risk-radar` · **`risk-center`** · `doc-formats` · `trade-logistics` · `sample-log` · `sales-verify` · **`wiki`** |
+| **SZ-specific** | `uz-research` · `risk-radar` · `risk-center` · `doc-formats` · **`issue-report`** · `trade-logistics` · `sample-log` · `sales-verify` · `wiki` |
 | Documents | docx · pptx · xlsx · hwpx · pdf · html-report · **html-slide** · doc-reader · **design-system-library** |
 | Text QA | ai-slop-reviewer · humanize-korean · korean-spell-check |
 | Reporting | weekly-report · executive-summary · meeting-facilitator · report-speak · stakeholder-update · status-reporter |
@@ -49,6 +49,13 @@ Rebuilds and runs the single-file HTML **risk-sensing dashboard** (Home / 10-cat
 - `doctor` — snapshot/version/i18n/archive consistency
 Data schema for skills that feed the dashboard: `sz/skills/risk-center/references/data-schema.md`.
 
+### Reporting: `sz:issue-report`
+The SEUZ weekly issue report (총괄 주간현안) in the Samsung house format — □/-/· four-tier hierarchy, noun-form endings with Chinese-character abbreviations, and floating blue 10pt annotation textboxes placed in the line gap below their anchor word. Four issue families (A finance · B1 regulation · B2 external relations · B3 trips) with different rule strengths.
+- `scripts/build_report.py` — JSON → .docx with line-overflow, annotation-overflow and page-overflow checks
+- `scripts/lint_report.py` — house-style linter (ERROR / WARN / INFO by how consistently the CFO corrected it)
+- `scripts/diff_review.py` — diff a draft against the CFO-approved version to harvest new rules
+Rules are back-derived from CFO-approved documents and logged in `references/cfo-review-log.md`; a correction seen twice is promoted into `references/style-guide.md` and the linter. Distinct from `weekly-report` (Korean-team WBR), `status-reporter` (KPI/ops) and `executive-summary` (exec one-pager).
+
 ### Knowledge: `sz:wiki`
 Personal LLM-Wiki kept apart from working folders — `compile` (chat → frontmatter page in `_inbox/`), `ingest` (placement/promotion proposals, approval-gated), `lint`, `init`. Projects can point at a wiki domain ("위키 기준으로") and skills offer to compile reusable lessons.
 
@@ -61,7 +68,7 @@ Drop a folder `custom/<skill-name>/SKILL.md` into the build tree (`sz-build/cust
 - `kordoc` MCP (HWP parsing) needs Node.js on the machine.
 
 ## 한국어 요약
-업무·경영지원 파트용 얇은 공용 도구함 67스킬 + 하네스. 설치 후 한국어로 요청하면 됩니다. 반복 프로젝트는 "프로젝트 세팅해줘" 1회, 리스크 대시보드는 "리스크 대시보드 프로젝트 세팅", 지식 축적은 "위키로 컴파일". 팀별 개별 스킬은 `sz-build/custom/`에 넣고 빌드하면 자동 포함됩니다.
+업무·경영지원 파트용 얇은 공용 도구함 68스킬 + 하네스. 설치 후 한국어로 요청하면 됩니다. 반복 프로젝트는 "프로젝트 세팅해줘" 1회, 리스크 대시보드는 "리스크 대시보드 프로젝트 세팅", 지식 축적은 "위키로 컴파일". 팀별 개별 스킬은 `sz-build/custom/`에 넣고 빌드하면 자동 포함됩니다.
 
 ## License
 Apache-2.0 (with MIT components). See `NOTICE.md`.

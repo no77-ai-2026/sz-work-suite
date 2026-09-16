@@ -3,7 +3,7 @@ name: risk-center
 description: |
   UZ 리스크 센싱 통합 대시보드(단일 HTML · 5뷰 홈/운영리스크/WTO/보세창고/보고서 아카이브) 운영 — init(프로젝트 세팅·템플릿 배치) / update(주간 전수 스윕·갱신·검증 로그·델타 브리핑) / report(심층 보고서·아카이브 내장) / doctor(정합 점검). 트리거: "리스크 대시보드 프로젝트 세팅", "대시보드 업데이트해줘", "환율 리스크 보고서", "대시보드 점검해줘"
   EN: Single-file HTML risk-sensing dashboard operations — init / weekly update (full sweep, verification log, delta briefing) / deep-dive report with archive embedding / doctor. Triggers: "set up the risk dashboard project", "update the dashboard", "risk report on ...", "check the dashboard"
-version: 2.0.0
+version: 2.1.0
 ---
 
 # sz:risk-center — 리스크 센싱 통합 대시보드 운영 (리스크 매니지먼트)

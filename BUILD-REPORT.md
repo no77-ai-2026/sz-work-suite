@@ -1,3 +1,25 @@
+# sz build report — v2.1.0
+
+- base: v2.0.0 (67 skills) + custom intake 1
+- custom skills: 1 ['issue-report'] — 독립 플러그인 `sz-repo`에서 편입, 폴더 구조(references/ scripts/ assets/) 무변경
+- skills total: **68**
+- agents: 6 (변동 없음) — core-text-qa · data-analysis · finance-report-assembler · hiring · legal-review · operations
+- mcp: ['korean-law', 'kordoc'] (변동 없음) | userConfig: ['KOREAN_LAW_OC']
+- version parity: plugin.json 2.1.0 · marketplace.json(metadata·plugins) 2.1.0 · SKILL.md 68/68 2.1.0
+- 수동 게이트 (샌드박스 미가동으로 스크립트 대신 수동 검사)
+  - dir==name: PASS (`skills/issue-report` ↔ `name: issue-report`)
+  - kebab-case: PASS
+  - reserved word: PASS
+  - 끊긴 스킬 참조: PASS — issue-report가 참조하는 sz:weekly-report · sz:status-reporter · sz:executive-summary · sz:docx-generator 4종 모두 존재
+  - 잔존 `sz-repo` 참조: 0건 (전 트리 grep)
+  - 비ASCII 경로: PASS
+- **미수행 (GIL PC에서 실행 필요)**
+  - 회귀 테스트: `lint_report.py assets/example-w36-cfo.json` → "문체 점검 이상 없음"
+  - 회귀 테스트: `build_report.py assets/example-w36-cfo.json /tmp/t.docx --md /dev/null` → "점검 사항 없음"
+  - zip 재패키징: `releases/sz.plugin` (예상 엔트리 398 → 407)
+
+---
+
 # sz build report — v2.0.0
 
 - GIL skills merged: 58
